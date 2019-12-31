@@ -1,0 +1,385 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Submitted form </h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Submitted form</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>View Request</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>View Request</h5>
+
+                </div>
+
+                <div class="ibox-content " id="ibox-content">
+                    <div class="row text">
+                        <div class="col-6">
+                            <h3 >Request ID : {{model.ID}} </h3>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Consumer Name :</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>{{model.ConsumerName}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Company Name :</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>{{model.CompanyName}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Consumer Type :</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>{{model.CompanyTypeName}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Consumer Country:</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>{{model.CompanyCountry}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Status :</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>{{model.StatusName}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Action Required :</p>
+                                </div>
+                                <div class="col-8">
+                                     <a *ngIf="model.StaffRequiredAction==2"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/request-documents/review', model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    &nbsp;
+                                    <a *ngIf="model.StaffRequiredAction==3"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/agreement/edit', model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==4"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/agreement/confirm',model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==5"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/payment/confirm',model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==19"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]=" ['/request/edit',model.ID]"> <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==6"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/request-documents/view',model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==7"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/audit-plan/create',model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==8"
+                                        class="btn btn-xs btn-primary margin-top-5 upload-notification"
+                                        [routerLink]="['/audit-plan/create',model.ID]">
+                                        <span class="label label-primary">
+                                            {{model.StaffRequiredActionName}}
+                                            <span class="badge badge-action badge-danger ">!</span>
+                                        </span>
+
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==9"
+                                        class="btn btn-xs btn-primary margin-top-5" data-toggle="modal"
+                                        (click)="showConfirmativeTemplate(model)">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==10"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/audit-plan/submit-ncr',model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==12"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/payment/confirm',model.ID]">
+                                        <span class="label label-primary">{{model.StaffRequiredActionName}}
+                                        </span>
+                                    </a>
+
+                                    <a *ngIf="model.StaffRequiredAction==13"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/audit-plan/view-audit-plan',model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==14"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/audit-plan/submit-audit-report-section1',model.ID]">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==15"
+                                        class="btn btn-xs btn-primary margin-top-5"
+                                        [routerLink]="['/audit-plan/decision-committee-confirm',model.ID]">
+                                        <span class="label label-primary"> Approve request</span>
+                                    </a>
+                                    <a *ngIf="model.StaffRequiredAction==18"
+                                        class="btn btn-xs btn-primary margin-top-5" data-toggle="modal"
+                                        (click)="showApproveConfirmation(model)">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+
+                                    <a *ngIf="model.StaffRequiredAction==16"
+                                        [routerLink]="['/certificate/upload',model.ID]"
+                                        class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+
+                                    <a *ngIf="model.StaffRequiredAction==17"
+                                        [routerLink]="['/certificate/view',model.ID]"
+                                        class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+
+                                    <a *ngIf="model.StaffRequiredAction==20"
+                                        [routerLink]="['/payment/confirm',model.ID]"
+                                        class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+
+                                    <a *ngIf="model.StaffRequiredAction==21"
+                                        [routerLink]="['/audit-plan/edit-ncr',model.ID]"
+                                        class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                                        <span
+                                            class="label label-primary">{{model.StaffRequiredActionName}}</span>
+                                    </a>
+                                        
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <h3 >Request type :  {{  model.CertificateTypeName}} </h3>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Submited Data : </p>
+                                </div>
+                                <div class="col-8">
+                                    <p>{{model.ApplicationDate | date :'dd/MM/yyyy'}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Phone Number :</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>{{model.TelephoneNumber}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Email Address :</p>
+                                </div>
+                                <div class="col-8">
+                                    <p>{{model.Email}} </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <ngb-tabset #t="ngbTabset">
+                        <ngb-tab id="tab-selectbyid1" class="tabss" title="Basic info">
+                            <ng-template ngbTabContent>
+                                <app-basic [requestID]="model.ID"></app-basic>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="tab-selectbyid2">
+                            <ng-template ngbTabTitle>Upload files</ng-template>
+                            <ng-template ngbTabContent>
+                                <app-upload-files></app-upload-files>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="tab-selectbyid3">
+                            <ng-template ngbTabTitle>Serivce of agreement</ng-template>
+                            <ng-template ngbTabContent>
+                                <app-agreements></app-agreements>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="tab-selectbyid4">
+                            <ng-template ngbTabTitle>Audit plan</ng-template>
+                            <ng-template ngbTabContent>
+                                <app-audit-plan> </app-audit-plan>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="tab-selectbyid5">
+                            <ng-template ngbTabTitle>Decision committee</ng-template>
+                            <ng-template ngbTabContent>
+                                <app-comittee></app-comittee>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="tab-selectbyid6">
+                            <ng-template ngbTabTitle>payments</ng-template>
+                            <ng-template ngbTabContent>
+                                <app-payments></app-payments>
+                            </ng-template>
+                        </ngb-tab>
+                        <ngb-tab id="tab-selectbyid7">
+                            <ng-template ngbTabTitle>certificate</ng-template>
+                            <ng-template ngbTabContent>
+                                <app-certifcate></app-certifcate>
+                            </ng-template>
+                        </ngb-tab>
+                    </ngb-tabset>
+
+
+
+
+                    <br />
+                    <br />
+
+
+                    <!-- <a (click)="save()" class="btn btn-lg btn-primary float-right" id="subbutton">&nbsp; &nbsp;&nbsp; &nbsp;
+                        submit &nbsp; &nbsp; &nbsp;&nbsp;</a> -->
+                    <!-- remove inmodal-->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #cancelTemplate>
+
+        <div class="modal-body text-center">
+            <p> {{'shared.cancel-confirmation.message'|translate}}<br> <strong
+                    *ngIf="selectedItem">{{selectedItem.CompanyName}}</strong></p>
+            <button type="button" *ngIf="selectedItem" class="btn btn-default"
+                (click)="cancel();modalRef.hide();">{{'shared.yes'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button>
+        </div>
+    </ng-template>
+    
+    
+    <ng-template #confirmativeTemplate>
+        <div class="confirmativeTemplate">
+            <div class="modal-header ">
+                <h4 class="modal-title pull-left">non-confirmative findings</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <p>Is there any non-confirmative findings ? </p>
+    
+                <label class="custom-radio-btn" (change)="onNonConfirmativeChaged();">&nbsp;<strong>Yes</strong>
+                    <input type="radio" value="true" [checked]="hasNonConfirmative" name="yes-no-1" />
+                    <span class="checkmark"></span>
+                </label>
+                <ngx-dropzone *ngIf="hasNonConfirmative" label="{{'shared.confirmative.upload-msg'|translate}}"
+                    class="offset-1 col-sm-10 agreement-dropzone" [accept]="'application/pdf'" [multiple]="false"
+                    (filesAdded)="uploadNCRFile($event)" #dropzone>
+                </ngx-dropzone>
+    
+                <div class="offset-1 col-sm-11 padding-top-20" *ngIf="NCRFile.FileName">
+                    <br>
+                    <span>
+                        <a>{{NCRFile.FileName}}</a>
+                    </span>
+                    &nbsp; &nbsp;
+                    <span>
+                        <i (click)="removeNCRFile()" class="fa fa-trash  custom-trash fa-lg"></i>
+                    </span>
+                </div>
+                <br>
+                <label class="custom-radio-btn" (change)="onNonConfirmativeChaged();">&nbsp;<strong>No</strong>
+                    <input type="radio" value="true" [checked]="!hasNonConfirmative" name="yes-no-1" />
+                    <span class="checkmark"></span>
+                </label>
+    
+            </div>
+            <div class="modal-footer text-center">
+                <button [disabled]="hasNonConfirmative && !NCRFile.FileName" type="button"
+                    class="btn  btn-primary margin-h-10" (click)="saveNCRFile();modalRef.hide();">&nbsp; &nbsp; &nbsp;
+                    Submit &nbsp; &nbsp;&nbsp;</button>
+    
+            </div>
+        </div>
+    </ng-template>
+    
+    
+    
+    <ng-template #approveTemplate>
+    
+    
+    
+        <div class="confirmativeTemplate">
+            <div class="modal-header ">
+                <h4 class="modal-title pull-left">Approve Application</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+    
+                    <div class="col-sm-12 ">
+                        <div class="form-group">
+                            <label>{{selectedItem.CustomerCancellationReasons}}</label></div>
+                    </div>
+    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--  <button class="btn btn-sm btn-primary float-right m-t-n-xs" onclick="$('#modal-form2').modal('hide');" type="submit"id="close"><strong>Close</strong></button>-->
+                <button type="button" class="btn btn-sm btn-outline  btn-primary float-right m-t-n-xs"
+                    (click)="modalRef.hide();" data-dismiss="modal"> &nbsp; &nbsp; &nbsp;Decline &nbsp; &nbsp;
+                    &nbsp;</button>
+                <button type="button" class="btn btn-sm btn-primary float-right m-t-n-xs"
+                    (click)="cancel();modalRef.hide();" data-dismiss="modal">&nbsp; &nbsp; &nbsp; Confirm &nbsp; &nbsp;
+                    &nbsp;</button>
+    
+            </div>
+        </div>
+    </ng-template>

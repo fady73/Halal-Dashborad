@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6 text-center mt-4 agree">
+        <h3>Halal certifcate </h3>
+        <span *ngIf="!item.CertificateFilePath">
+        <!-- <p> uploaded by consumer &nbsp;&nbsp; {{item.CertificateRejectionDate}}</p> -->
+        <p *ngIf="item.CertificateRejectionDate"> Reject by admin &nbsp;&nbsp; {{item.CertificateRejectionDate}}</p>
+        <p *ngIf="item.CertificateConfirmationDate"> Vaild till &nbsp;&nbsp; {{item.CertificateConfirmationDate}}</p>
+        <a class="btn btn-primary mb-3" *ngIf="item.CertificateFilePath" [href]="item.CertificateFilePath"
+            target="_blank"> <i class="fa fa-download text-white"></i>
+            <span class="text-white"> Download certifcate</span></a>
+        
+        </span>
+
+
+            <span *ngIf="!item.CertificateFilePath">
+                    <h4> There is no certifcate</h4>
+                    
+                        </span>
+
+    </div>
+    <div class="col-3"></div>
+</div>

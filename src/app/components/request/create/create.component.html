@@ -1,0 +1,1567 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Submitted form </h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item">
+                <a>Submitted form</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Comment on submitted form</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>View Submitted Forms</h5>
+
+                </div>
+                <div class="ibox-content " id="ibox-content">
+                    <div class="row">
+                        <div id="vertical-timeline" class="vertical-container light-timeline  new left-orientation ">
+
+                            <div class="vertical-timeline-block  ">
+
+                                <div class="detail">
+                                    <h3>Company details</h3>
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form"
+                                        (click)="getCompanyDetails()">View </a>
+
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[0].Confirmed" type="radio"
+                                                name="yes-no-section-1" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[0].Confirmed" type="radio"
+                                                name="yes-no-section-1" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg">
+                                    <h2>1</h2>
+                                </div>
+
+                                <div class="vertical-content m-t-n-10 ">
+                                    <!-- {{comments | json}} -->
+                                    <textarea [disabled]="comments[0].Confirmed || model.StaffRequiredAction == 5"
+                                        [(ngModel)]="comments[0].Comment" class="form-control rounded-0"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div>
+
+                            <div class="vertical-timeline-block  ">
+
+                                <div class="detail">
+                                    <h3>Certification (s)</h3>
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form2"
+                                        (click)="getCertificates()">View</a>
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[1].Confirmed" type="radio"
+                                                name="yes-no-section-2" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[1].Confirmed" type="radio"
+                                                name="yes-no-section-2" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg ">
+
+                                    <h2>2</h2>
+                                </div>
+
+                                <div class="vertical-content m-t-n-10 ">
+
+                                    <textarea [disabled]="comments[1].Confirmed || model.StaffRequiredAction == 5"
+                                        class="form-control rounded-0" [(ngModel)]="comments[1].Comment"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="vertical-timeline-block  "  >
+
+                                <div class="detail">
+                                    <h3>Process/scope</h3>
+                                    <a *ngIf="companyDetailsViewModel.CompanyType==1"  data-toggle="modal" class="btn btn-primary" href="#modal-form3Type2"
+                                        (click)="getScopeProcessesType2()">View</a>
+
+                                        <a *ngIf="companyDetailsViewModel.CompanyType==0"  data-toggle="modal" class="btn btn-primary" href="#modal-form3"
+                                        (click)="getScopeProcesses()">View</a>
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[2].Confirmed" type="radio"
+                                                name="yes-no-section-3" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[2].Confirmed" type="radio"
+                                                name="yes-no-section-3" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg ">
+
+                                    <h2>3</h2>
+                                </div>
+
+                                <div class="vertical-content m-t-n-10 ">
+
+                                    <textarea [disabled]="comments[2].Confirmed || model.StaffRequiredAction == 5"
+                                        class="form-control rounded-0" [(ngModel)]="comments[2].Comment"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                            <!-- <div class="vertical-timeline-block  " *ngIf="companyDetailsViewModel.CompanyType==0" >
+
+                                <div class="detail">
+                                    <h3>Process/scope</h3>
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form3"
+                                        (click)="getScopeProcesses()">View</a>
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[2].Confirmed" type="radio"
+                                                name="yes-no-section-3" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[2].Confirmed" type="radio"
+                                                name="yes-no-section-3" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg ">
+
+                                    <h2>3</h2>
+                                </div>
+
+                                <div class="vertical-content  ">
+
+                                    <textarea [disabled]="comments[2].Confirmed || model.StaffRequiredAction == 5"
+                                        class="form-control rounded-0" [(ngModel)]="comments[2].Comment"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div> -->
+                            <div class="vertical-timeline-block  ">
+
+                                <div class="detail">
+                                    <h3>Operations</h3>
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form4"
+                                        (click)="getOperations()">View</a>
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[3].Confirmed" type="radio"
+                                                name="yes-no-section-4" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[3].Confirmed" type="radio"
+                                                name="yes-no-section-4" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg ">
+
+                                    <h2>4</h2>
+                                </div>
+
+                                <div class="vertical-content m-t-n-10 ">
+
+                                    <textarea [disabled]="comments[3].Confirmed || model.StaffRequiredAction == 5"
+                                        class="form-control rounded-0" [(ngModel)]="comments[3].Comment"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div>
+                            <div class="vertical-timeline-block  " *ngIf="companyDetailsViewModel.CompanyType==0">
+
+                                <div class="detail">
+                                    <h3>Sales</h3>
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form5"
+                                        (click)="getSales()">View</a>
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[4].Confirmed" type="radio"
+                                                name="yes-no-section-5" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[4].Confirmed" type="radio"
+                                                name="yes-no-section-5" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg ">
+
+                                    <h2>5</h2>
+                                </div>
+
+                                <div class="vertical-content m-t-n-10 ">
+
+                                    <textarea [disabled]="comments[4].Confirmed || model.StaffRequiredAction == 5"
+                                        class="form-control rounded-0" [(ngModel)]="comments[4].Comment"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div>
+<!-- 
+                            <div class="vertical-timeline-block ">
+
+                                <div class="detail">
+                                    <h3>Visit cost</h3>
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form6"
+                                        (click)="getVisitCost()">View</a>
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[5].Confirmed" type="radio"
+                                                name="yes-no-section-6" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[5].Confirmed" type="radio"
+                                                name="yes-no-section-6" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg ">
+
+                                    <h2>6</h2>
+                                </div>
+
+                                <div class="vertical-content  ">
+
+                                    <textarea [disabled]="comments[5].Confirmed || model.StaffRequiredAction == 5"
+                                        class="form-control rounded-0" [(ngModel)]="comments[5].Comment"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div> -->
+
+                            <div class="vertical-timeline-block "  >
+
+                                <div class="detail">
+                                    <h3>Appendix1</h3>
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form7">View</a>
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[6].Confirmed" type="radio"
+                                                name="yes-no-section-7" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[6].Confirmed" type="radio"
+                                                name="yes-no-section-7" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg " >
+
+                                    <h2 *ngIf="companyDetailsViewModel.CompanyType==0" >6</h2>
+                                    <h2 *ngIf="companyDetailsViewModel.CompanyType==1">5</h2>
+
+                                </div>
+
+                                <div class="vertical-content m-t-n-10 ">
+
+                                    <textarea [disabled]="comments[6].Confirmed || model.StaffRequiredAction == 5"
+                                        class="form-control rounded-0" [(ngModel)]="comments[6].Comment"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div>
+                            
+
+                            <div class="vertical-timeline-block " *ngIf="companyDetailsViewModel.CompanyType==0">
+
+                                <div class="detail">
+
+                                    <h3>Appendix2</h3>
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-form8">View</a>
+                                    <div class="row padding-top-10">
+                                        <label class="custom-radio-btn col-12">Confirm section
+                                            <input [value]="true" [(ngModel)]="comments[7].Confirmed" type="radio"
+                                                name="yes-no-section-8" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="custom-radio-btn col-12">Write comment
+                                            <input [value]="false" [(ngModel)]="comments[7].Confirmed" type="radio"
+                                                name="yes-no-section-8" />
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="vertical-timeline-icon navy-bg ">
+
+                                    <h2>7</h2>
+                                </div>
+
+                                <div class="vertical-content m-t-n-10 ">
+
+                                    <textarea [disabled]="comments[7].Confirmed || model.StaffRequiredAction == 5"
+                                        class="form-control rounded-0" [(ngModel)]="comments[7].Comment"
+                                        rows="5"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <div class="row  justify-content-end">
+                        <!-- [disabled]="model.ConsumerRequiredAction == 6" -->
+                        <button (click)="save()" class="btn btn-lg btn-primary float-right"> &nbsp; &nbsp;&nbsp; &nbsp;
+                            submit &nbsp; &nbsp; &nbsp;&nbsp;</button>
+                    </div>
+
+                    <!-- <a (click)="save()" class="btn btn-lg btn-primary float-right" id="subbutton">&nbsp; &nbsp;&nbsp; &nbsp;
+                        submit &nbsp; &nbsp; &nbsp;&nbsp;</a> -->
+                    <!-- remove inmodal-->
+                    <div id="modal-form" class="modal  fade" aria-hidden="true" role="dialog">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">Company / Organization Details</h3>
+                                            <h1 align="center" *ngIf="!isCompanyDetailsModalLoaded"> <i
+                                                    class=" blue fa fa-refresh fa-spin"></i>
+                                            </h1>
+                                            <form role="form" *ngIf="isCompanyDetailsModalLoaded">
+                                                <div class="form-group"><label class="col-sm-6">Company name </label>
+                                                    <label class="col-sm-6">{{companyDetailsViewModel.CompanyName}}
+                                                    </label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6">Company address</label>
+                                                    <label
+                                                        class="col-sm-6">{{companyDetailsViewModel.CompanyAddress}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6">Address for
+                                                        invoice</label>
+                                                    <label
+                                                        class="col-sm-6">{{companyDetailsViewModel.InvoiceAddress}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6">Trade license
+                                                        number</label>
+                                                    <label
+                                                        class="col-sm-6">{{companyDetailsViewModel.TradelicenseNumber}}</label>
+                                                </div>
+
+                                                <div class="form-group" *ngIf="companyDetailsViewModel.IsPartGroup">
+                                                    <label class="col-sm-6">Group Name</label>
+                                                    <label
+                                                        class="col-sm-6">{{companyDetailsViewModel.GroupName}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group" *ngIf="!companyDetailsViewModel.IsPartGroup">
+                                                    <label class="col-sm-6">Group Name</label>
+                                                    <label class="col-sm-6">Not part of group</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6">Management
+                                                        representative</label>
+                                                    <label
+                                                        class="col-sm-6">{{companyDetailsViewModel.ManagmentRepresentative}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6">Position</label>
+                                                    <label class="col-sm-6">{{companyDetailsViewModel.Position}}</label>
+                                                </div>
+                                                <!-- <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6">Food safety
+                                                        manager</label>
+                                                    <label
+                                                        class="col-sm-6">{{companyDetailsViewModel.FoodSafetyManager}}</label>
+                                                </div> -->
+                                                <div class="hr-line-dashed"></div>
+                                                <!-- <div class="form-group"><label class="col-sm-6"> Application date
+                                                    </label>
+                                                    <label
+                                                        class="col-sm-6">{{companyDetailsViewModel.ApplicationDate}}</label>
+                                                </div> -->
+                                                <!-- <div class="form-group"><label class="col-sm-6">Company email</label>
+                                                    <label class="col-sm-6">{{companyDetailsViewModel.Email}}</label>
+                                                </div> -->
+                                                <div class="form-group"><label class="col-sm-6">Phone number</label>
+                                                    <label
+                                                        class="col-sm-6">{{companyDetailsViewModel.TelephoneNumber}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6">Company email</label>
+                                                    <label class="col-sm-6">{{companyDetailsViewModel.Email}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"
+                                                        onclick="$('#modal-form').modal('hide');">Close</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="modal-form2" class="modal  fade" role="dialog" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">Certification (s) Required </h3>
+                                            <h1 align="center" *ngIf="!isCertifictionsModalLoaded"> <i
+                                                    class=" blue fa fa-refresh fa-spin"></i>
+                                            </h1>
+                                            <form role="form" *ngIf="isCertifictionsModalLoaded">
+                                                <div class="form-group">
+                                                    <label class="col-sm-6">Certificates
+                                                    </label>
+                                                    <label
+                                                        class="col-sm-6">{{certificationsViewModel.CertificateTypeName}}
+                                                    </label>
+                                                </div>
+                                                <!-- <div class="form-group"
+                                                    *ngIf="certificationsViewModel.CompanyCertifications.length > 0">
+                                                    <label class="col-sm-12"> Certificates </label>
+                                                    <label class="col-sm-6"> Name </label>
+                                                    <label class="col-sm-6"> Body </label>
+                                                    <div class="row"
+                                                        *ngFor="let certificate of certificationsViewModel.CompanyCertifications">
+                                                        <label class="col-sm-6 padding-left-30">
+                                                            {{certificate.CertificateCompanyName}}
+                                                        </label>
+                                                        <label class="col-sm-6">
+                                                            {{certificate.CertificationBody}}
+                                                        </label>
+                                                    </div>
+
+                                                </div> -->
+
+                                                <!-- <div class="form-group"
+                                                    *ngIf="certificationsViewModel.CompanyCertifications.length == 0">
+                                                    <label class="col-sm-6"> Certificates </label>
+                                                    <label class="col-sm-6">
+                                                        None
+                                                    </label>
+                                                </div> -->
+                                                <!-- <div class="hr-line-dashed"></div> -->
+                                                <!-- <div class="form-group"><label class="col-sm-6">Certification body
+                                                    </label>
+                                                    <label
+                                                        class="col-sm-6">{{certificationsViewModel.CertificationBody}}</label>
+                                                </div> -->
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6">certificate
+                                                        description</label>
+                                                    <label
+                                                        class="col-sm-6">{{certificationsViewModel.CertificateDescription}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"><label class="col-sm-6"> Already have third
+                                                        party certification ? </label>
+                                                    <label class="col-sm-6">
+                                                        {{certificationsViewModel.CompanyCertified?'Yes':'No'}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group"
+                                                    *ngIf="certificationsViewModel.CompanyCertifications.length > 0">
+                                                    <label class="col-sm-12"> Company certificates </label>
+                                                    <!-- <label class="col-sm-6"> Name </label> -->
+                                                    <!-- <label class="col-sm-6"> Body </label> -->
+                                                    <div class="row"
+                                                        *ngFor="let certificate of certificationsViewModel.CompanyCertifications">
+                                                        <label class="col-sm-6 padding-left-30">
+                                                            {{certificate.CertificateCompanyName}}
+                                                        </label>
+                                                        <label class="col-sm-6">
+                                                            {{certificate.CertificationBody}}
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="hr-line-dashed"
+                                                    *ngIf="certificationsViewModel.CompanyCertifications.length > 0">
+                                                </div>
+
+                                                <!-- <div class="form-group"><label class="col-sm-6">Certification type
+                                                    </label>
+                                                    <label class="col-sm-6">
+                                                        {{certificationsViewModel.CertificateType}}</label>
+                                                </div> -->
+                                                <div class="form-group row">
+                                                    <label class="col-sm-6 col-form-label">Previous
+                                                        Halal's
+                                                        audit(s)
+                                                    </label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="certificationsViewModel.PreviousAudit"></textarea>
+                                                    </label>
+                                                    <!-- </div> -->
+                                                </div>
+
+                                                <div class="form-group"
+                                                    *ngIf="certificationsViewModel.PreviousAuditAttachments.length > 0">
+                                                    <label class="col-sm-12"> Previous audit attachments </label>
+                                                    <div class="offset-sm-1 col-sm-11">
+                                                        <b class="text-navy">{{'shared.uploaded-files'|translate}}</b>
+                                                        <br />
+                                                        <div class="row"
+                                                            *ngFor="let item of certificationsViewModel.PreviousAuditAttachments;let i=index;">
+                                                            <span class="col-sm-1">
+                                                                <i class="fa fa-file"></i>
+                                                            </span>
+                                                            <a target="_blank" class="col-sm-9"
+                                                                [href]="item.FilePath">{{item.FileName}}</a>
+                                                            <!-- <span class="col-sm-9">
+                                                                {{item.FileName}}
+                                                            </span> -->
+                                                            <!-- <span class="col-sm-1">
+                                                                <i (click)="removeAttachment(i)"
+                                                                    class="fa fa-trash"></i>
+                                                            </span> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group"
+                                                    *ngIf="certificationsViewModel.PreviousAuditAttachments.length == 0">
+                                                    <label class="col-sm-6"> Previous audit attachments </label>
+                                                    <label class="col-sm-6">
+                                                        None
+                                                    </label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div>
+
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"
+                                                        onclick="$('#modal-form2').modal('hide');">Close</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="modal-form3Type2" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">Scope/Processes </h3>
+                                            <h1 align="center" *ngIf="!isProcesses2ModalLoaded"> <i
+                                                    class=" blue fa fa-refresh fa-spin"></i>
+                                            </h1>
+
+                                            <form role="form" *ngIf="isProcesses2ModalLoaded">
+                                                <div class="form-group row"><label class="col-sm-6 col-form-label">The
+                                                        scope
+                                                        of registration </label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="RecognitionRequestCreateViewMode.RegistrationScope"></textarea>
+                                                    </label>
+                                                  
+                                                  
+                                                </div>
+
+                                               
+                                                
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row"><label
+                                                        class="col-sm-6 col-form-label">Exclusions </label>
+                                                <label *ngIf="RecognitionRequestCreateViewMode.Exclusions==null" class="col-sm-6">no
+                                                    </label> 
+                                                    <label *ngIf="RecognitionRequestCreateViewMode.Exclusions!=null" class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="RecognitionRequestCreateViewMode.Exclusions"></textarea>
+                                                    </label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6 col-form-label">
+                                                    Outsourced Specialist Operations </label>
+                                                <label class="col-sm-6 col-form-label">
+                                                    <textarea class="form-control border-none " rows="3"
+                                                        readonly="true"
+                                                        [innerHTML]="RecognitionRequestCreateViewMode.SpecialistOperations"></textarea>
+                                                </label>
+                                                <!-- <label
+                                                    class="col-sm-6">{{scopeProcessesViewModel.ConsultancyRelatingDetails}}</label> -->
+                                            </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6 col-form-label">
+                                                        Consultancy relating details </label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="RecognitionRequestCreateViewMode.ConsultancyRelatingDetails"></textarea>
+                                                    </label>
+                                                    <!-- <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.ConsultancyRelatingDetails}}</label> -->
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+            
+                                                <div class="form-group row"><label class="col-sm-6">Total Employees Number </label>
+                                                    <label
+                                                        class="col-sm-6">{{RecognitionRequestCreateViewMode.TotalEmployeesNumber}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Total Contractual Employees Number </label>
+                                                    <label
+                                                        class="col-sm-6">{{RecognitionRequestCreateViewMode.TotalContractualEmployeesNumber}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Certifications Count</label>
+                                                    <label
+                                                        class="col-sm-6">{{RecognitionRequestCreateViewMode.CertificationsCount}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Total Annual Revenue</label>
+                                                    <label
+                                                        class="col-sm-6">{{RecognitionRequestCreateViewMode.TotalAnnualRevenue}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Country Name</label>
+                                                    <label *ngFor="let country of RecognitionRequestCreateViewMode.CertificateCountries"
+                                                        class="col-sm-4">{{country.CountryName}}</label>
+                                                </div>
+                                                
+                                                <div>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"
+                                                        onclick="$('#modal-form3Type2').modal('hide');">Close</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="modal-form3" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">Scope/Processes </h3>
+                                            <h1 align="center" *ngIf="!isProcessesModalLoaded"> <i
+                                                    class=" blue fa fa-refresh fa-spin"></i>
+                                            </h1>
+
+                                            <form role="form" *ngIf="isProcessesModalLoaded">
+                                                <div class="form-group row"><label class="col-sm-6 col-form-label">The
+                                                        scope
+                                                        of registration </label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="scopeProcessesViewModel.RegistrationScope"></textarea>
+                                                    </label>
+                                                    <!-- <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.RegistrationScope}}
+                                                    </label> -->
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"
+                                                    *ngIf="scopeProcessesViewModel.ScopeAttachments.length > 0">
+                                                    <label class="col-sm-12"> Scope attachments </label>
+                                                    <div class="offset-sm-1 col-sm-11">
+                                                        <b class="text-navy">{{'shared.uploaded-files'|translate}}</b>
+                                                        <br />
+                                                        <div class="row"
+                                                            *ngFor="let item of scopeProcessesViewModel.ScopeAttachments;let i=index;">
+                                                            <span class="col-sm-1">
+                                                                <i class="fa fa-file"></i>
+                                                            </span>
+                                                            <a target="_blank" class="col-sm-9"
+                                                                [href]="item.FilePath">{{item.FileName}}</a>
+                                                            <!-- <span class="col-sm-9">
+                                                                {{item.FileName}}
+                                                            </span> -->
+                                                            <!-- <span class="col-sm-1">
+                                                            <i (click)="removeAttachment(i)"
+                                                                class="fa fa-trash"></i>
+                                                        </span> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row"
+                                                    *ngIf="scopeProcessesViewModel.ScopeAttachments.length== 0">
+                                                    <label class="col-sm-6"> Scope attachments </label>
+                                                    <label class="col-sm-6">
+                                                        None
+                                                    </label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row"><label
+                                                        class="col-sm-6 col-form-label">Exclusions </label>
+                                                    <label  *ngIf="scopeProcessesViewModel.Exclusions==null" class="col-sm-6"> no
+                                                    </label> 
+                                                    <label *ngIf="scopeProcessesViewModel.Exclusions!=null" class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="scopeProcessesViewModel.Exclusions"></textarea>
+                                                    </label>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row "><label class="col-sm-6 col-form-label">
+                                                        Specialist
+                                                        operations</label>
+                                                    <!-- <label class="col-sm-6">
+                                                        {{scopeProcessesViewModel.SpecialistOperations}}
+                                                    </label> -->
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="scopeProcessesViewModel.SpecialistOperations"></textarea>
+                                                    </label>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6 col-form-label">
+                                                        Consultancy relating details </label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="scopeProcessesViewModel.ConsultancyRelatingDetails"></textarea>
+                                                    </label>
+                                                    <!-- <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.ConsultancyRelatingDetails}}</label> -->
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Product family(ies)
+                                                        and
+                                                        product types*</label>
+                                                    <label *ngIf="scopeProcessesViewModel.ProductFamilies.length == 0 "
+                                                        class="col-sm-6">None</label>
+                                                </div>
+                                                <div class="form-group"
+                                                    *ngIf="scopeProcessesViewModel.ProductFamilies.length > 0 ">
+                                                    <label class="col-sm-6 listProduct"
+                                                        *ngFor="let item of scopeProcessesViewModel.ProductFamilies">
+                                                        <div class="productHeader">{{item.Name}}</div>
+                                                        <div *ngFor="let type of item.ProductTypes;let i=index">
+                                                            <div *ngIf="i % 2 == 0 " class="productEven">
+                                                                {{type.Name}}
+                                                            </div>
+                                                            <div *ngIf="i % 2 != 0 " class="productOdd">
+                                                                {{type.Name}}
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+
+
+                                                <!-- <div class="form-group"><label class="col-sm-12">Product family(ies) and
+                                                        product types*</label>
+                                                    <label class="col-sm-6" class="listProduct">
+                                                        <div class="productHeader">Enter product family</div>
+                                                        <div class="productOdd">mmmmm</div>
+                                                        <div class="productEven">mmmmm</div>
+                                                        <div class="productOdd">mmmmmmmm</div>
+                                                        <div class="productEven">mmmmmmmm</div>
+
+                                                    </label>
+                                                </div> -->
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Total number of
+                                                        production lines </label>
+                                                    <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.TotalProductionLinesNumber}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label
+                                                        class="col-sm-6 col-form-label">Number and type of
+                                                        HACCP
+                                                        study</label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="scopeProcessesViewModel.HACCPStudyTypeAndNumber"></textarea>
+                                                    </label>
+                                                    <!-- <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.HACCPStudyTypeAndNumber}}</label> -->
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">List of row
+                                                        materials</label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="scopeProcessesViewModel.RawMaterials"></textarea>
+                                                    </label>
+                                                    <!-- <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.RawMaterials}}</label> -->
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Business conditions
+                                                    </label>
+                                                    <label class="col-sm-6"
+                                                        [hidden]="scopeProcessesViewModel.BusinessConditions.length == 0">
+                                                        {{scopeProcessesViewModel.BusinessConditions[0].BusinessConditionName}}
+                                                    </label>
+                                                    <label class="offset-sm-6 col-sm-6"
+                                                        [hidden]="scopeProcessesViewModel.BusinessConditions.length == 0 || i == 0"
+                                                        *ngFor="let item of scopeProcessesViewModel.BusinessConditions;let i=index">
+                                                        {{item.BusinessConditionName}}
+                                                    </label>
+                                                    <!-- <label class="col-sm-6"
+                                                        [hidden]="scopeProcessesViewModel.BusinessConditions.length == 0"
+                                                        *ngFor="let item of scopeProcessesViewModel.BusinessConditions">
+                                                        {{item.BusinessConditionName}}
+                                                    </label> -->
+
+                                                    <label class="col-sm-6"
+                                                        [hidden]="scopeProcessesViewModel.BusinessConditions.length > 0">
+                                                        None
+                                                    </label>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6 col-form-label">Any
+                                                        other
+                                                        information on
+                                                        production lines</label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="scopeProcessesViewModel.OtherProductionLinesInformation"></textarea>
+                                                    </label>
+                                                    <!-- <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.OtherProductionLinesInformation}}</label> -->
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Time scale(s)
+                                                    </label>
+                                                    <label class="col-sm-6"
+                                                        [hidden]="scopeProcessesViewModel.TimeScales.length == 0">
+                                                        {{scopeProcessesViewModel.TimeScales[0].TimeScaleName}}
+                                                    </label>
+                                                    <label class="offset-sm-6 col-sm-6"
+                                                        [hidden]="scopeProcessesViewModel.TimeScales.length == 0 || i == 0"
+                                                        *ngFor="let item of scopeProcessesViewModel.TimeScales;let i=index">
+                                                        {{item.TimeScaleName}}
+                                                    </label>
+
+                                                    <label class="col-sm-6"
+                                                        [hidden]="scopeProcessesViewModel.TimeScales.length > 0">
+                                                        None
+                                                    </label>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Total number of
+                                                        employees (working on production lines of Halal products
+                                                        only)
+                                                    </label>
+                                                    <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.TotalEmployeesNumber}}</label>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Permanent
+                                                        employees</label>
+                                                    <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.PermanentEmployeesCount}}</label>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"><label class="col-sm-6">Temporary
+                                                        employees</label>
+                                                    <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.TemporaryEmployeesCount}}</label>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row"><label class="col-sm-6">No. of Shifts
+                                                        *</label>
+                                                    <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.ShiftsNumber}}</label>
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row"><label
+                                                        class="col-sm-6 col-form-label">Seasonal Product
+                                                        Information</label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="scopeProcessesViewModel.SeasonalProductInformation"></textarea>
+                                                    </label>
+                                                    <!-- <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.SeasonalProductInformation}}</label> -->
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row"><label class="col-sm-6">Production floor
+                                                        area
+                                                    </label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.ProductionFloorArea==0">
+                                                        &lt;107,000 ft<sup _ngcontent-qfa-c7="">2</sup></label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.ProductionFloorArea==1">108,000 -
+                                                        323K ft <sup _ngcontent-qfa-c7="">2</sup></label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.ProductionFloorArea==2">324,000 -
+                                                        538K ft<sup _ngcontent-qfa-c7="">2</sup></label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.ProductionFloorArea==3">
+                                                        &gt;538,000 ft<sup _ngcontent-qfa-c7="">2</sup></label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.ProductionFloorArea==4">&lt;10,000
+                                                        m<sup _ngcontent-qfa-c7="">2</sup></label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.ProductionFloorArea==5">10,001-
+                                                        30,000 m<sup _ngcontent-qfa-c7="">2</sup></label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.ProductionFloorArea==6">30,001-
+                                                        50,000 m<sup _ngcontent-qfa-c7="">2</sup></label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.ProductionFloorArea==7">&gt;50,000
+                                                        m<sup _ngcontent-qfa-c7="">2</sup></label>
+
+
+
+                                                </div>
+
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row"><label class="col-sm-6">Gross annual
+                                                        turnover
+                                                        (Revenue) of your business (Required for SQF applicants only
+                                                        )($) </label>
+                                                    <label
+                                                        class="col-sm-6">{{scopeProcessesViewModel.GrossAnnualTurnover}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+
+                                                <div class="form-group row"><label class="col-sm-6">Additional sites
+                                                        details </label>
+                                                    <label class="col-sm-6"
+                                                        *ngIf="scopeProcessesViewModel.AdditionalSites.length == 0">
+                                                        None
+                                                    </label>
+                                                </div>
+
+                                                <!-- <div class="hr-line-dashed"></div> -->
+                                                <div class="form-group row">
+                                                    <label class="col-sm-12"
+                                                        *ngIf="scopeProcessesViewModel.AdditionalSites.length > 0">
+                                                        <table class="table table-bordered">
+                                                            <thead class="additionalSitesHead">
+                                                                <tr>
+                                                                    <th>{{'request.scope-processes.site-name'|translate}}
+                                                                        *
+                                                                    </th>
+                                                                    <th>{{'request.scope-processes.address'|translate}}
+                                                                        *
+                                                                    </th>
+                                                                    <th>{{'request.scope-processes.products' | translate}}
+                                                                        *</th>
+                                                                    <th>{{'request.scope-processes.num-staff'|translate}}
+                                                                        *
+                                                                    </th>
+                                                                    <th>{{'request.scope-processes.documentation'|translate}}
+                                                                        *</th>
+                                                                    <th>{{'request.scope-processes.same-system'|translate}}
+                                                                        *</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let item of scopeProcessesViewModel.AdditionalSites">
+                                                                    <td>{{item.CompanyName}}</td>
+                                                                    <td>{{item.CompanyAddress}}</td>
+                                                                    <td>{{item.Activities}}</td>
+                                                                    <td>{{item.StaffCount}}</td>
+
+                                                                    <td>
+                                                                        <label class="custom-check-box">
+                                                                        <input  type="checkbox" [checked]="item.DocumentationSimilar" disabled="true">
+                                                                        <span class="checkmark appendcheck" id="IsActive"></span>
+                                                                        </label>
+                                                                    </td>
+                                                                    
+                                                                    <td>
+                                                                            <label class="custom-check-box">
+                                                                                    <input  type="checkbox" [checked]="item.DocumentationFollowSameSystem" disabled="true">
+                                                                                    <span class="checkmark appendcheck" id="IsActive"></span>
+                                                                                    </label>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </label>
+
+                                                </div>
+                                                <div>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"
+                                                        onclick="$('#modal-form3').modal('hide');">Close</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="modal-form4" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">Operations </h3>
+                                            <h1 align="center" *ngIf="!isOperationsModalLoaded"> <i
+                                                    class=" blue fa fa-refresh fa-spin"></i>
+                                            </h1>
+
+                                            <form role="form" *ngIf="isOperationsModalLoaded">
+                                                <div class="form-group row"><label class="col-sm-6 col-form-label">
+                                                        Operation Details
+                                                    </label>
+                                                    <label class="col-sm-6 col-form-label">
+                                                        <textarea class="form-control border-none " rows="3"
+                                                            readonly="true"
+                                                            [innerHTML]="operationsViewModel.OperationsDetails"></textarea>
+                                                    </label>
+                                                </div>
+                                                <!-- <div class="form-group"><label
+                                                        class="col-sm-12 padding-h-30">{{operationsViewModel.OperationsDetails}}</label>
+                                                </div> -->
+                                                <div class="hr-line-dashed"></div>
+                                                <div class="form-group row"
+                                                    *ngIf="operationsViewModel.Attachments.length > 0">
+                                                    <label class="col-sm-12"> Attachments </label>
+                                                    <div class="offset-sm-1 col-sm-11">
+                                                        <b class="text-navy">{{'shared.uploaded-files'|translate}}</b>
+                                                        <br />
+                                                        <div class="row"
+                                                            *ngFor="let item of operationsViewModel.Attachments;let i=index;">
+                                                            <span class="col-sm-1">
+                                                                <i class="fa fa-file"></i>
+                                                            </span>
+                                                            <a target="_blank" class="col-sm-9"
+                                                                [href]="item.FilePath">{{item.FileName}}</a>
+                                                            <!-- <span class="col-sm-9">
+                                                                {{item.FileName}}
+                                                            </span> -->
+                                                            <!-- <span class="col-sm-1">
+                                                                <i (click)="removeAttachment(i)"
+                                                                    class="fa fa-trash"></i>
+                                                            </span> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="form-group"
+                                                    *ngIf="operationsViewModel.Attachments.length > 0">
+                                                    <label class="col-sm-6">Attachments </label>
+                                                    <label class="col-sm-12 padding-h-30"
+                                                        *ngFor="let attachment of operationsViewModel.Attachments">
+                                                        <a target="_blank"
+                                                            (click)="openNewTab(attachment.FilePath)">{{attachment.FileName}}</a>
+                                                    </label>
+                                                </div> -->
+                                                <div class="form-group"
+                                                    *ngIf="operationsViewModel.Attachments.length== 0">
+                                                    <label class="col-sm-6"> Attachments </label>
+                                                    <label class="col-sm-6">
+                                                        None
+                                                    </label>
+                                                </div>
+
+                                                <div>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"
+                                                        onclick="$('#modal-form4').modal('hide');">Close</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="modal-form5" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">Sales </h3>
+
+                                            <h1 align="center" *ngIf="!isSalesModalLoaded"> <i
+                                                    class=" blue fa fa-refresh fa-spin"></i>
+                                            </h1>
+
+                                            <form role="form" *ngIf="isSalesModalLoaded">
+                                                <div class="form-group">
+                                                    <label> Countries for marketing and sales</label>
+                                                    <label class="col-sm-12 padding-h-30"
+                                                        *ngFor="let item of SalesViewModel">
+                                                        {{item.CountryName}}
+                                                    </label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <!-- <div class="form-group"><label>Company address</label> </div> -->
+                                                <!-- <div class="form-group"><label>الكويت</label> </div> -->
+                                                <div>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"
+                                                        onclick="$('#modal-form5').modal('hide');">Close</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="modal-form6" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">Visit cost </h3>
+                                            <h1 align="center" *ngIf="!isVisitCostModalLoaded"> <i
+                                                    class=" blue fa fa-refresh fa-spin"></i>
+                                            </h1>
+
+                                            <form role="form" *ngIf="isVisitCostModalLoaded">
+                                                <div class="form-group">
+                                                    <label class="col-sm-12">Technical team visit costs Arrangements
+                                                    </label>
+                                                    <label
+                                                        class="col-sm-12 padding-h-30">{{visitCostViewModel.VisitCost?'YES':'NO'}}</label>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div>
+                                                    <button type="button"
+                                                        class="btn btn-sm btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"
+                                                        onclick="$('#modal-form6').modal('hide');">Close</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="modal-form7" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">Appendix 1 </h3>
+
+
+                                            <form role="form">
+                                                <div class="form-group">
+                                                    <div class="text-center ">
+                                                        <h2>Classification of Hala product/service categories</h2>
+                                                    </div>
+                                                    <div class="text-center ">
+                                                        <h3><small>Please indicate with tick products (Internal use only
+                                                                if indicate in proposal work sheet no need to submit tis
+                                                                part)</small></h3>
+                                                    </div>
+
+
+                                                    <div class="table-responsive col-11 align-items-center">
+                                                        <table class="table table-striped  subtable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Category codes</th>
+                                                                    <th>Categories</th>
+                                                                    <th>Example of sector</th>
+                                                                    <th>Tick</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor="let item of appendixI">
+                                                                    <td>{{item.CategoryCode}}</td>
+                                                                    <td>{{item.CategoryName}}</td>
+                                                                    <td>
+                                                                        {{item.Scope}}
+                                                                    </td>
+                                                                    <td><label class="custom-check-box" for="Active"
+                                                                            disabled>
+
+                                                                            <input [checked]="item.IsSelected"
+                                                                                type="checkbox" id="Active" disabled />
+
+                                                                            <span class="checkmark appendcheck"
+                                                                                id="ch"></span>
+
+                                                                        </label></td>
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                                <div class="hr-line-dashed"></div>
+                                                <div>
+                                                    <button type="button"
+                                                        class="btn .btn-lg btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"> &nbsp; &nbsp; &nbsp; &nbsp;
+                                                        &nbsp; &nbsp; &nbsp; Close &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                                        &nbsp; &nbsp;</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="modal-form8" class="modal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-sm-12 ">
+                                            <h3 class="m-t-none m-b">
+                                                Appendix2 </h3>
+
+
+                                            <form role="form">
+                                                <div class="form-group">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped subtable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th colspan="4">
+                                                                        In
+                                                                        case
+                                                                        of
+                                                                        primary
+                                                                        sector
+                                                                        ,
+                                                                        please
+                                                                        indicate
+                                                                        the
+                                                                        following
+                                                                        information:
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="4">
+                                                                        <h4>Cattle
+                                                                            Breeding
+                                                                        </h4>
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Type
+                                                                        of
+                                                                        cattle
+                                                                    </th>
+                                                                    <th>N of
+                                                                        producers
+                                                                    </th>
+                                                                    <th>N of
+                                                                        animals
+                                                                    </th>
+                                                                    <th>Activity
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let item of regularRequestViewModel.CattleBreedings; let i=index">
+                                                                    <td><input type="text" [value]="item.CattleType"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+                                                                    <td><input type="number"
+                                                                            [value]="item.NumberOfProcedures"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+                                                                    <td><input type="number"
+                                                                            [value]="item.NumberOfAnimals" class="w-100"
+                                                                            disabled>
+                                                                    </td>
+                                                                    <td><input type="text" [value]="item.Activity"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+                                                                </tr>
+
+
+
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+
+                                                    <div class="hr-line-dashed">
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped subtable">
+                                                            <thead>
+
+                                                                <tr>
+                                                                    <th colspan="2">
+                                                                        <h2>Poultry
+                                                                        </h2>
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th width="22%">
+                                                                        No
+                                                                        of
+                                                                        house
+                                                                    </th>
+                                                                    <th>Activity
+                                                                    </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let item of regularRequestViewModel.Poultries; let i=index">
+                                                                    <td><input type="text" [value]="item.NumberOfHouse"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+                                                                    <td><input type="text" [value]="item.Activity"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="hr-line-dashed">
+                                                    </div>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped subtable">
+                                                            <thead>
+
+                                                                <tr>
+                                                                    <th colspan="4">
+                                                                        <h2>Vegetables
+                                                                            Producer
+                                                                        </h2>
+                                                                    </th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Type
+                                                                        of
+                                                                        Vegetables
+                                                                    </th>
+                                                                    <th>N of
+                                                                        producers
+                                                                    </th>
+                                                                    <th>Surface
+                                                                    </th>
+                                                                    <th>Activity
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr
+                                                                    *ngFor="let item of regularRequestViewModel.VegetablesProducers; let i=index">
+                                                                    <td><input type="text" [value]="item.VegetableType"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+                                                                    <td><input type="number"
+                                                                            [value]="item.NumberOfProcedures"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+
+                                                                    <td><input type="text" [value]="item.Surface"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+                                                                    <td><input type="text" [value]="item.Activity"
+                                                                            class="w-100" disabled>
+                                                                    </td>
+                                                                </tr>
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
+                                                <div></div>
+                                                <div>
+                                                    <button type="button"
+                                                        class="btn .btn-lg btn-primary float-right m-t-n-xs"
+                                                        data-dismiss="modal" id="close"> &nbsp;
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        Close &nbsp; &nbsp;
+                                                        &nbsp; &nbsp; &nbsp;
+                                                        &nbsp;
+                                                        &nbsp;</button>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

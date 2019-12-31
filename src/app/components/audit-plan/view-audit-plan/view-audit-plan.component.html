@@ -1,0 +1,1008 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Audit Plan</h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>view audit plan</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content" *ngIf="page.isPageLoaded">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>view audit plan</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary collbtn " data-toggle="collapse"
+                                aria-expanded="true" data-target="#demo">
+                                <h2 class="float-left">Audit plan</h2>
+                                <i class="fa fa-angle-down fa-2x rotate-icon float-right"></i> <br><br>
+                                <h3 class="float-left widgefont">Here you can view the submitted audit plan</h3>
+                            </button>
+                            <div id="demo" class="collapse">
+                                <br>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3 "> Application title * </label>
+
+                                    <input class="form-control col-sm-8" value="Hala audit Plan" type="text"
+                                        readOnly="true">
+                                </div>
+
+                                <div class="form-group row ">
+                                    <label class="control-label col-sm-3">Consumer name * </label>
+                                    <input class="form-control col-sm-8" [(ngModel)]="auditPlanViewModel.ConsumerName"
+                                        type="text" readOnly="true">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Address * </label>
+                                    <input class="form-control col-sm-8" [(ngModel)]="auditPlanViewModel.Address"
+                                        type="text" readOnly="true">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Visit number * </label>
+                                    <input class="form-control col-sm-8" [(ngModel)]="auditPlanViewModel.VisitNumber"
+                                        type="text" readOnly="true">
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Audit date * </label>
+                                    <input class="form-control col-sm-8"
+                                        [ngModel]="auditPlanViewModel.SubmissionDate | date:'dd/MM/yyyy '" type="text"
+                                        readOnly="true">
+                                </div>
+
+                                <br>
+                                <!--   <div class="form-group row">
+                                                                <label class="control-label col-sm-3">Assessment dates</label>
+                                                                <div class="col-sm-8">
+                                                                
+                                                                <span class="widget style1 navy-bg  ">7/4/2019 </span> 
+                                                                &nbsp; <span class="widget style1 navy-bg ">30/9/2019</span>
+                                                            </div>
+                                                            </div>-->
+
+
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Lead auditor * </label>
+
+                                    <div class="col-sm-8 widgeline">
+                                        <div class="row">
+                                            <span class="col-sm-2 widget style1 navy-bg margin-h-5 "
+                                                *ngFor="let leadAuditor of auditPlanViewModel.LeadAuditors">{{leadAuditor.EmployeeName}}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Team member * </label>
+
+                                    <div class="col-sm-8 widgeline">
+                                        <div class="row">
+                                            <span class="col-sm-2 widget style1 navy-bg margin-h-5 "
+                                                *ngFor="let teamMember of auditPlanViewModel.TeamMembers">{{teamMember.EmployeeName}}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Halal islamic affairs expert * </label>
+
+                                    <div class="col-sm-8 widgeline">
+                                        <div class="row">
+                                            <span class="col-sm-2 widget style1 navy-bg margin-h-5"
+                                                *ngFor="let affairsExpert of auditPlanViewModel.AffairsExperts">{{affairsExpert.EmployeeName}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Additional Attendees and Roles (optional)
+                                        *
+                                    </label>
+                                    <div class="col-sm-8" [hidden]="i>0"
+                                        *ngFor="let additionalAttendee of auditPlanViewModel.AdditionalAttendees;let i=index">
+                                        <label class="col-sm-4">
+                                            <span class="form-control">{{additionalAttendee.EmployeeName}}</span>
+                                        </label>
+                                        <label class="col-sm-4">
+                                            <span class="form-control">{{additionalAttendee.Role}}</span>
+                                        </label>
+                                    </div>
+                                    <div class="offset-sm-3 col-sm-8" [hidden]="i==0"
+                                        *ngFor="let additionalAttendee of auditPlanViewModel.AdditionalAttendees;let i=index">
+                                        <label class="col-sm-4">
+                                            <span class="form-control">{{additionalAttendee.EmployeeName}}</span>
+                                        </label>
+                                        <label class="col-sm-4">
+                                            <span class="form-control">{{additionalAttendee.Role}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Audit Language * </label>
+
+
+                                    <!-- <div class="col-sm-3"> -->
+                                    <p class="col-sm-8 widgeline">
+                                        {{auditPlanViewModel.AuditLanguageName}}
+                                    </p>
+                                    <p class="col-sm-8 widgeline">
+                                        English
+                                    </p>
+                                    <!-- <label class="control-label col-12"
+                                            *ngIf="auditPlanViewModel.AuditLanguage == 0">
+                                        </label>
+
+                                        <label class="control-label col-12"
+                                            *ngIf="auditPlanViewModel.AuditLanguage == 1">English
+                                        </label> -->
+                                    <!-- </div> -->
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Standards * </label>
+
+                                    <p class="col-sm-8 widgeline">{{auditPlanViewModel.Standards}}
+                                    </p>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Audit scope * </label>
+
+                                    <p class="col-sm-8 widgeline">{{auditPlanViewModel.Scope}}
+
+                                    </p>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Audit objective * </label>
+
+                                    <p class="col-sm-8 widgeline">{{auditPlanViewModel.Objectives}}
+
+                                    </p>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-sm-10">
+                                        <div class="table-responsive">
+                                            <table class="table  table-bordered audittabel">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Date
+                                                        </th>
+                                                        <th>Time
+                                                        </th>
+                                                        <th>Auditor
+                                                        </th>
+                                                        <th>Organizational and Functional Units / Processes and
+                                                            Activities
+                                                        </th>
+                                                        <th>Key contacts
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let visit of auditPlanViewModel.Visits">
+                                                        <td>{{visit.Date | date:'dd/MM/yyyy'}}</td>
+                                                        <td>
+                                                            {{visit.Date | date:'HH:mm'}}
+                                                        </td>
+
+                                                        <td>
+                                                            {{visit.AuditorName}}
+                                                        </td>
+
+                                                        <td>
+                                                            {{visit.Activities}}
+                                                        </td>
+
+                                                        <td>
+                                                            {{visit.KeyContacts}}
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary collbtn " data-toggle="collapse"
+                                aria-expanded="true" data-target="#demo1">
+                                <h2 class="float-left widgefonth2">Non-confirmative report</h2><i
+                                    class="fa fa-angle-down fa-2x rotate-icon float-right"></i> <br><br>
+                                <h3 class="float-left widgefont">Here you can find the non-confirmative report</h3>
+                            </button>
+                            <div id="demo1" class="collapse">
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3 "> Main title </label>
+
+                                    <input class="form-control col-sm-8" value="On-site Assement informations"
+                                        type="text" readOnly="true">
+                                </div>
+
+                                <div class="form-group row ">
+                                    <label class="control-label col-sm-3">Title 2 </label>
+                                    <input class="form-control col-sm-8" value="Initial assement GSO.2055.1" type="text"
+                                        readOnly="true">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">No.of Application </label>
+                                    <input class="form-control col-sm-8" value="12345" type="text" readOnly="true">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Name of Company </label>
+                                    <input class="form-control col-sm-8" [value]="ncrViewModel.CompanyName" type="text"
+                                        readOnly="true">
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Company Address </label>
+                                    <input class="form-control col-sm-8" [value]="ncrViewModel.CompanyAddress"
+                                        type="text" readOnly="true">
+                                </div>
+
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Assessment dates</label>
+                                    <div class="col-sm-8 widgeline">
+                                        <div class="row">
+                                            <span class="col-sm-2 widget style1 navy-bg margin-h-5"
+                                                *ngFor="let date of ncrViewModel.AssessmentDates">{{date |date:'dd/MM/yyyy'}}</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Lead auditor </label>
+
+                                    <div class="col-sm-8 widgeline">
+                                        <div class="row">
+                                            <span class="col-sm-2 widget style1 navy-bg margin-h-5"
+                                                *ngFor="let leadAuditor of ncrViewModel.LeadAuditors">{{leadAuditor.EmployeeName}}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Technical auditor </label>
+
+                                    <div class="col-sm-8 widgeline">
+                                        <div class="row">
+                                            <span class="col-sm-2 widget style1 navy-bg margin-h-5"
+                                                *ngFor="let technicalAuditor of ncrViewModel.TechnicalAuditors">{{technicalAuditor.EmployeeName}}
+                                            </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Halal islamic affairs expert </label>
+                                    <div class="col-sm-8 widgeline">
+                                        <div class="row">
+                                            <span class="col-sm-2 widget style1 navy-bg  margin-h-5"
+                                                *ngFor="let affairsExpert of ncrViewModel.AffairsExperts">{{affairsExpert.EmployeeName}}
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Technical expert </label>
+
+                                    <div class="col-sm-8 widgeline">
+                                        <div class="row">
+                                            <span class="col-sm-2 widget style1 navy-bg  margin-h-5"
+                                                *ngFor="let technicalExpert of ncrViewModel.TechnicalExperts">{{technicalExpert.EmployeeName}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Reminder for Assessment Team (optional)
+                                    </label>
+
+                                    <p class="col-sm-8 widgeline">{{ncrViewModel.AssessmentTeam}}
+                                    </p>
+                                </div>
+
+
+                                <div class="row" [formGroup]="page.form">
+                                    <div class="col-sm-12">
+                                        <div class="table-responsive">
+                                            <table class="table  table-bordered audittabel">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="10%" class=" text-center ">#
+                                                        </th>
+                                                        <th width="50%">Descriptipn of non-confirmity
+                                                        </th>
+                                                        <th width="20%" class="text-center" *ngIf="hasCAB">Next
+                                                            Assesment</th>
+                                                        <th width="20%" class="text-center" *ngIf="hasCAB">Final
+                                                            comment
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody formArrayName="NCSsForm">
+                                                    <!-- *ngFor="let NCS of ncrViewModel.NCSs;let i=index" -->
+                                                    <ng-template ngFor let-NCS [ngForOf]="ncrViewModel.NCSs"
+                                                        let-i="index" let-NCSForm [ngForOf]="NCSsForm.controls">
+                                                        <!-- <ng-template  ngFor let-i="index"> -->
+                                                        <tr formGroupName={{i}}>
+                                                            <td class="padding-top-15" (click)="toggle(i)"
+                                                                *ngIf="!NCS.expanded">
+                                                                <i class="fa fa-chevron-right fa-lg"></i>
+                                                                &nbsp;
+                                                                {{i+1}}
+                                                            </td>
+                                                            <td class="padding-top-15" (click)="toggle(i)"
+                                                                *ngIf="NCS.expanded">
+                                                                <i class="fa fa-chevron-down fa-lg"></i>
+                                                                &nbsp;
+                                                                {{i+1}}
+                                                            </td>
+                                                            <td class="padding-top-15">
+                                                                {{NCS.Description}}
+                                                            </td>
+                                                            <td *ngIf="hasCAB"> <input type="text"
+                                                                    formControlName="NextAssessment"
+                                                                    class="form-control"
+                                                                    placeholder="write your comments...">
+                                                            </td>
+                                                            <td *ngIf="hasCAB"> <input type="text"
+                                                                    formControlName="FinalComment" class="form-control"
+                                                                    *ngIf="hasCAB" placeholder="write your comments...">
+                                                            </td>
+                                                        </tr>
+                                                        <tr></tr>
+                                                        <tr *ngIf="NCS.expanded && !hasCAB">
+                                                            <td></td>
+                                                            <td>
+                                                                <table class="table-borderless">
+
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>{{NCS.Date | date:'dd/MM/yyyy'}}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                auditor
+                                                                            </td>
+                                                                            <td>{{NCS.AssessorName}}</td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Standard Clause (s)</td>
+                                                                            <td>{{NCS.StandardClause}}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Analysis of the extent / effect</td>
+                                                                            <td>{{NCS.Analysis}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="NCS.expanded && hasCAB">
+                                                            <td></td>
+                                                            <td colspan="3">
+                                                                <table class="table-borderless">
+
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>{{NCS.Date | date:'dd/MM/yyyy'}}
+                                                                            </td>
+                                                                            <td>
+                                                                                auditor
+                                                                            </td>
+                                                                            <td>{{NCS.AssessorName}}</td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Standard Clause (s)</td>
+                                                                            <td>{{NCS.StandardClause}}</td>
+                                                                            <td>Analysis of the extent / effect</td>
+                                                                            <td>{{NCS.Analysis}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr *ngIf="hasCAB"></tr>
+                                                        <tr *ngIf="NCS.expanded && hasCAB">
+                                                            <td colspan="6">
+                                                                <div class="table-responsive table-outlined">
+                                                                    <table class="table table-borderless "
+                                                                        id="customers">
+
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>proposed Implementation period
+                                                                                </th>
+                                                                                <th>Correction/ corrective action
+                                                                                </th>
+                                                                                <th>Supplied documents</th>
+                                                                                <th>Evaluation of the corrective
+                                                                                    action
+                                                                                </th>
+                                                                                <th width="15%">NC closing</th>
+                                                                                <th>Action required</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr></tr>
+                                                                            <tr formGroupName={{i}}>
+                                                                                <td class="padding-top-15">
+                                                                                    {{NCS.ImplementationPeriod | date:'dd/MM/yyyy'}}
+                                                                                    <!-- {{NCS.ImplementationPeriod |date:'dd/MM/yyyy' }} -->
+                                                                                </td>
+                                                                                <td class="padding-top-15">
+                                                                                    {{NCS.CorrectiveAction}}</td>
+                                                                                <td class="padding-top-15">
+                                                                                    <div
+                                                                                        *ngFor="let i of NCS.SuppliedDocuments ">
+                                                                                        <a class="text-muted"
+                                                                                            href="{{i.FilePath}}">
+                                                                                            {{i.FileName}}</a></div>
+                                                                                </td>
+                                                                                <td><input type="text"
+                                                                                        formControlName="CorrectiveActionEvaluation"
+                                                                                        class="form-control"
+                                                                                        placeholder="write your comments...">
+                                                                                </td>
+                                                                                <td>
+                                                                                    <select class="form-control"
+                                                                                        formControlName="NCCloseStatus">
+                                                                                        <option
+                                                                                            *ngFor="let item of  closingStatus"
+                                                                                            [value]="item.ID">
+                                                                                            {{item.Name}}</option>
+                                                                                    </select>
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    <div class="btn-group">
+                                                                                        <button *ngIf="NCS.Status == 0 "
+                                                                                            class="btn btn-transparent">
+                                                                                            <a data-toggle="modal"
+                                                                                                (click)="showApproveConfirmation(NCS)">
+                                                                                                <i
+                                                                                                    class="fa fa-check text-navy1"></i>
+                                                                                                <div class="text-navy1">
+                                                                                                    confirm</div>
+                                                                                            </a>
+                                                                                        </button>
+                                                                                        <button *ngIf="NCS.Status == 0 "
+                                                                                            class="btn btn-transparent">
+                                                                                            <a data-toggle="modal"
+                                                                                                (click)="showDeclineConfirmation(NCS)">
+                                                                                                <i
+                                                                                                    class="fa fa-times text-danger"></i>
+                                                                                                <div
+                                                                                                    class="text-danger">
+                                                                                                    Decline</div>
+                                                                                            </a>
+                                                                                        </button>
+
+                                                                                        <button  *ngIf="NCS.Status == 1 "
+                                                                                            [disabled]="NCS.Status == 1"
+                                                                                            class="btn btn-transparent padding-top-5">
+                                                                                            <i
+                                                                                                class="fa fa-check text-navy"></i>
+                                                                                            <span class="text-navy">
+                                                                                                Confirmed</span>
+                                                                                        </button>
+
+                                                                                        <button 
+                                                                                            *ngIf="NCS.Status == 2  "
+                                                                                            [disabled]="NCS.Status == 2"
+                                                                                            class="btn btn-transparent padding-top-5">
+                                                                                            <i
+                                                                                                class="fa fa-times text-danger"></i>
+                                                                                            <span class="text-danger">
+                                                                                                Declined </span>
+                                                                                        </button>
+
+                                                                                    </div>
+                                                                                </td>
+                                                                            </tr>
+
+
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <!-- </ng-template> -->
+                                                    </ng-template>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- <div class="row">
+                                    <div class="col-sm-10">
+                                        <div class="table-responsive">
+                                            <table class="table  table-bordered audittabel">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="10%" class=" text-center ">#
+                                                        </th>
+                                                        <th width="50%">Descriptipn of non-confirmity
+                                                        </th>
+                                                        <th width="10%" class="text-center">CAB</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <ng-template ngFor let-NCS [ngForOf]="ncsAcceptanceViewModel"
+                                                        let-i="index">
+                                                        <tr>
+                                                            <td (click)="toggle(i)" *ngIf="!NCS.expanded">
+                                                                <i class="fa fa-chevron-right fa-lg"></i>
+                                                                &nbsp;
+                                                                {{i+1}}
+                                                            </td>
+                                                            <td (click)="toggle(i)" *ngIf="NCS.expanded">
+                                                                <i class="fa fa-chevron-down fa-lg"></i>
+                                                                &nbsp;
+                                                                {{i+1}}
+                                                            </td>
+                                                            <td>
+                                                                {{NCS.Description}}
+                                                            </td>
+                                                            <td>{{NCS.CABAcceptance}}
+                                                                <i class="fa fa-pencil text-navy"
+                                                                    *ngIf="!NCS.CABAcceptance"></i>
+                                                            </td>
+                                                        </tr>
+                                                        <tr></tr>
+                                                        <tr *ngIf="NCS.expanded">
+                                                            <td></td>
+                                                            <td>
+                                                                <table class="table-borderless">
+
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Date</td>
+                                                                            <td>{{NCS.Date | date:'dd/MM/yyyy'}}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Assessor
+                                                                            </td>
+                                                                            <td>{{NCS.AssessorName}}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Standard Clause (s)</td>
+                                                                            <td>{{NCS.StandardClause}}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Analysis of the extent / effect</td>
+                                                                            <td>{{NCS.Analysis}}</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+
+                                                    </ng-template>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </div> -->
+
+
+                                <!-- <div class="row">
+                                    <div class="col-sm-10">
+                                        <div class="table-responsive">
+                                            <table class="table  table-bordered audittabel">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="10%" class=" text-center ">#
+                                                        </th>
+                                                        <th width="50%">Descriptipn of non-confirmity
+                                                        </th>
+                                                        <th width="20%" class="text-center">Next Assesment</th>
+                                                        <th width="20%" class="text-center">Final comment</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+
+                                                        <td>
+                                                            <i class="fa fa-chevron-right fa-lg"></i>
+                                                            <i class="fa fa-chevron-down fa-lg"></i>
+                                                            &nbsp;
+
+                                                            1
+
+                                                        </td>
+                                                        <td>
+                                                            Think for yourself” means your thoughts should be your
+                                                            own—not what someone else has said or told you to think.
+
+                                                            By adding the phrase “aloud” at the end, the quote means
+                                                            it is brave to have your own thoughts and to say them to
+                                                            others.s
+                                                        </td>
+                                                        <td> <input type="text" formControlName="NextAssesment"
+                                                                class="form-control" placeholder="write your comment..">
+                                                        </td>
+                                                        <td> <input type="text" formControlName="Finalcomment"
+                                                                class="form-control" placeholder="write your comment..">
+                                                        </td>
+
+
+
+                                                    </tr>
+                                                    <tr></tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td>
+                                                            <table class="table-borderless">
+
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td colspan="4">Date</td>
+                                                                        <td colspan="4">15/11/2019</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td colspan="5">
+                                                                            Assessor
+                                                                        </td>
+                                                                        <td colspan="5">MAhmoud Ahmed</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Standard Clause (s)</td>
+                                                                        <td>mrloscnonspmd;m;</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Analysis of the extent / effect</td>
+                                                                        <td>n,xknlz;kdsj;ojdnsogjoadjf;onjondfjljfdlsj
+                                                                            'akv;k;dSAKLSDJl</td>
+                                                                    </tr>
+
+
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+
+
+                                                    </tr>
+
+                                                    <tr></tr>
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-stripped table-borderless "
+                                                                    id="customers">
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>proposed Implementation period</th>
+                                                                            <th>Correction/ corrective action</th>
+                                                                            <th>Supplied documents</th>
+                                                                            <th>Evaluation of the corrective action
+                                                                            </th>
+                                                                            <th width="15%">NC closing</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr></tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                7/4/2019
+                                                                            </td>
+                                                                            <td>sknlksnlknflaklkmlfml;knakfonrk</td>
+                                                                            <td>png.jpg jkj.jpg klnlmn.jpg</td>
+                                                                            <td> <input type="text"
+                                                                                    formControlName="CompanyAddress"
+                                                                                    class="form-control"
+                                                                                    placeholder="write comment">
+                                                                            </td>
+                                                                            <td>
+                                                                                <select class="form-control">
+                                                                                    <option selected>closed</option>
+                                                                                    <option>2</option>
+
+                                                                                </select>
+                                                                            </td>
+                                                                        </tr>
+
+
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            <i class="fa fa-chevron-right fa-lg"></i>
+                                                            <i class="fa fa-chevron-down fa-lg"></i>
+                                                            &nbsp;
+
+                                                            2
+
+                                                        </td>
+                                                        <td>
+                                                            Think for yourself” means your thoughts should be your
+                                                            own—not what someone else has said or told you to think.
+
+                                                            By adding the phrase “aloud” at the end, the quote means
+                                                            it is brave to have your own thoughts and to say them to
+                                                            others.s
+                                                        </td>
+                                                        <td> <input type="text" formControlName="NextAssesment"
+                                                                class="form-control" placeholder="write your comment..">
+                                                        </td>
+                                                        <td> <input type="text" formControlName="Finalcomment"
+                                                                class="form-control" placeholder="write your comment..">
+                                                        </td>
+
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+                                </div> -->
+
+
+
+
+                                <!-- <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="table-responsive">
+                                            <table class="table  table-bordered audittabel">
+                                                <thead>
+                                                    <tr>
+                                                        <th class=" text-center ">#
+                                                        </th>
+                                                        <th class=" text-center ">Date
+                                                        </th>
+                                                        <th class=" text-center ">Assessor
+                                                        </th>
+                                                        <th class=" text-center ">Standard Clause (s)
+                                                        </th>
+                                                        <th>Descriptipn of non-confirmity
+                                                        </th>
+                                                        <th class="text-center">Analaysis of the extent/ effect</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+
+                                                        <td>
+                                                            <i class="fa fa-chevron-right fa-lg"></i>
+                                                            <i class="fa fa-chevron-down fa-lg"></i>
+                                                            &nbsp;
+
+                                                            1
+
+                                                        </td>
+                                                        <td>7/4/2019</td>
+                                                        <td>Mahmoud Ahmed</td>
+                                                        <td>kjkllakjlklkk</td>
+                                                        <td>
+                                                            Think for yourself” means your thoughts should be your
+                                                            own—not what someone else has said or told you to think.
+
+
+                                                        </td>
+                                                        <td> jlj;lj;l lkja;ljkj ljl;kj</td>
+
+
+
+
+                                                    </tr>
+                                                    <tr></tr>
+
+
+
+                                                    <tr>
+                                                        <td colspan="6">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-stripped table-borderless "
+                                                                    id="customers">
+
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>proposed Implementation period</th>
+                                                                            <th>Correction/ corrective action</th>
+                                                                            <th>Supplied documents</th>
+                                                                            <th>Evaluation of the corrective action
+                                                                            </th>
+                                                                            <th width="15%">NC closing</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr></tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                7/4/2019
+                                                                            </td>
+                                                                            <td>sknlksnlknflaklkmlfml;knakfonrk</td>
+                                                                            <td>png.jpg jkj.jpg klnlmn.jpg</td>
+                                                                            <td> jkljhnjl;jl; </td>
+                                                                            <td>
+                                                                                Closed
+                                                                            </td>
+                                                                        </tr>
+
+
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            <i class="fa fa-chevron-right fa-lg"></i>
+                                                            <i class="fa fa-chevron-down fa-lg"></i>
+                                                            &nbsp;
+
+                                                            2
+
+                                                        </td>
+                                                        <td>30/9/2019</td>
+                                                        <td>Reem Mohamed</td>
+                                                        <td>ddddddddd</td>
+                                                        <td>
+                                                            Think for yourself” means your thoughts should be your
+                                                            own—not what someone else has said or told you to think.
+
+
+                                                        </td>
+                                                        <td> kjljljljlkljla</td>
+
+                                                        <td class="custom-th ">
+
+                                                            <a class="btn btn-transparent">
+                                                                <i class="fa  fa-trash text-navy fa-2x "></i>
+
+                                                            </a>
+                                                        </td>
+                                                        <td class="custom-th ">
+                                                            <button type="button"
+                                                                class="btn btn-primary1 btn-circle-primary btn-add">
+                                                                <i class="fa fa-plus"></i>
+                                                            </button>
+
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 mt-5">
+                            <button type="submit" (click)="save()" class="btn btn-primary float-right margin-h-10 ">
+                                &nbsp; &nbsp; &nbsp;
+                                &nbsp; &nbsp; &nbsp; Submit &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #approveTemplate>
+    <div class="approveTemplate">
+        <div class="modal-header ">
+            <h4 class="modal-title pull-left">Corrective action approve </h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body ">
+            <p>Are you sure you want to approve on this corrective action ? </p>
+
+        </div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn btn-outline btn-primary" (click)="modalRef.hide()">&nbsp; &nbsp;&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;No, Cancel &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;</button>
+            <button type="button" *ngIf="selectedItem" class="btn  btn-primary margin-h-10 "
+                (click)="approve(selectedItem);modalRef.hide();"> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;Yes, Approve&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+
+        </div>
+    </div>
+</ng-template>
+<ng-template #declineTemplate>
+    <div class="declineTemplate">
+        <div class="modal-header ">
+            <h4 class="modal-title pull-left">Corrective action Decline</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body ">
+            <p> Are you sure you want to decline this corrective action ? </p>
+            <textarea cols="50" rows="5" placeholder=" Write your reasons here........"
+                [(ngModel)]="selectedItem.DeclineReason"></textarea>
+        </div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn btn-outline btn-danger" (click)="modalRef.hide()"> &nbsp; &nbsp;&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;No, Cancel &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;</button>
+            <button type="button" *ngIf="selectedItem" class="btn  btn-danger margin-h-10 "
+                (click)="decline(selectedItem);modalRef.hide();"> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;Yes, Decline&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+
+        </div>
+    </div>
+</ng-template>

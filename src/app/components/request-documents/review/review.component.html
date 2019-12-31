@@ -1,0 +1,176 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-6">
+        <h3>Submit initial review internal form</h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Submit initial review internal form</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="padding-top-5">Document review</h5>
+                        
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group row">
+                        <label class="control-label offset-sm-1 col-sm-2">Application number * </label>
+                        <input [(ngModel)]="request.ID" class="form-control col-sm-8" [readonly]="true"
+                            name="Company name" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label offset-sm-1 col-sm-2">Consumer name * </label>
+                        <input [(ngModel)]="request.CompanyName" class="form-control col-sm-8" [readonly]="true"
+                            name="Company name" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label offset-sm-1 col-sm-2">Address * </label>
+                        <input [(ngModel)]="request.CompanyAddress" class="form-control col-sm-8" [readonly]="true"
+                            name="Company name" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label offset-sm-1 col-sm-2">Phone number* </label>
+                        <input [(ngModel)]="request.TelephoneNumber" class="form-control col-sm-8" [readonly]="true"
+                            name="Company name" type="text">
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label offset-sm-1 col-sm-2">E-mail address * </label>
+                        <input [(ngModel)]="request.Email" class="form-control col-sm-8" [readonly]="true"
+                            name="Company name" type="text">
+                    </div>
+                    <div class="row">
+                            <div class="col-9">
+                              
+                                <h5 class="float-right">
+                                    <label class="custom-radio-btn">
+                                        <input [checked]="validAll" (click)="onValidAllChanged()" type="radio"
+                                            name="yes-no-all" />Approve all
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </h5>
+                            </div>
+                        </div>
+
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-striped" id="documents">
+                                <thead>
+                                    <tr>
+                                        <th>Document name </th>
+                                        <th>Download files</th>
+                                        <th>
+
+                                            Valid
+                                        </th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="request-document">
+                                    <tr *ngIf="!isPageLoaded">
+                                        <td colspan="4">
+                                            <h4 class="text-center ">Sorry no documents found</h4>
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let item of model.Documents">
+                                        <td style="width:50%" class="padding-top-15">
+                                            {{item.RequiredDocumentID}} - {{item.RequiredDocumentName}}
+                                        </td>
+                                        <td class="padding-top-5">
+                                            <div *ngFor="let file of item.Attachments">
+                                                <a target="_blank" (click)="openNewTab(file.FilePath)"><i
+                                                        class="fa fa-download">
+                                                    </i>
+                                                    Download file
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td *ngIf="CompanyDetailsModalType==0">
+                                            <label class="custom-radio-btn"
+                                                (change)="onValidChanged(true ,item.RequiredDocumentID-1)">{{'shared.yes'|translate}}
+                                                <input [checked]="item.Valid" type="radio"
+                                                    name="yes-no-{{item.RequiredDocumentID-1}}" />
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="custom-radio-btn"
+                                                (change)="onValidChanged(false ,item.RequiredDocumentID-1)">{{'shared.no'|translate}}
+                                                <input [checked]="!item.Valid" type="radio"
+                                                    name="yes-no-{{item.RequiredDocumentID-1}}" />
+                                                <span class="checkmark"></span>
+                                            </label>
+
+                                        </td>
+                                        <td *ngIf="CompanyDetailsModalType==1">
+                                            <label class="custom-radio-btn"
+                                                (change)="onValidChanged(true ,item.RequiredDocumentID-17)">{{'shared.yes'|translate}}
+                                                <input [checked]="item.Valid" type="radio"
+                                                    name="yes-no-{{item.RequiredDocumentID-17}}" />
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="custom-radio-btn"
+                                                (change)="onValidChanged(false ,item.RequiredDocumentID-17)">{{'shared.no'|translate}}
+                                                <input [checked]="!item.Valid" type="radio"
+                                                    name="yes-no-{{item.RequiredDocumentID-17}}" />
+                                                <span class="checkmark"></span>
+                                            </label>
+
+                                        </td>
+                                        <td>
+                                            <input [(ngModel)]="item.Notes" [readOnly]="item.Valid" type="text"
+                                                class="form-control notes" placeholder="Add note here ...">
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <div class="custom-control custom-checkbox">
+                        <label class="custom-check-box" for="final-notes">
+                            <input [checked]="model.IsFinalNoteSelected"
+                                (change)="model.IsFinalNoteSelected=!model.IsFinalNoteSelected;" type="checkbox"
+                                id="final-notes" class="custom-control-input" />
+                            <span class="checkmark appendcheck" id="IsActive"></span>
+                            <span> Add final notes</span>
+                        </label>
+                    </div>
+
+
+
+                    <div class="form-group row" *ngIf="model.IsFinalNoteSelected">
+                        <div class="offset-sm-1 col-sm-7">
+                            <textarea [(ngModel)]="model.Notes" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" (click)="save()" [disabled]="isSaving"
+                                class="btn btn-primary float-right margin-h-10 "> &nbsp;&nbsp; Submit &nbsp;&nbsp;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

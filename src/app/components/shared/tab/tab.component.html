@@ -1,0 +1,17 @@
+<ul class="nav nav-tabs tabs-detils" role="tablist">
+    <li [class.active]="activeTab == 'shippingRate'">
+        <a [routerLink]="['/catalog/shipping-rate']">
+            <span> {{'menu.shipping-rate'|translate}} </span>
+        </a>
+    </li>
+    <li [class.active]="activeTab == 'shippingRegion'">
+        <a [routerLink]="['/catalog/shipping-region']">
+            <span>{{'menu.shipping-region'|translate}}</span>
+        </a>
+    </li>
+    <li [class.active]="activeTab == 'shippingZone'">
+        <a [routerLink]="['/catalog/shipping-zone']">
+            <span>{{'shipping-zone.title'|translate}}</span>
+        </a>
+    </li>
+</ul>

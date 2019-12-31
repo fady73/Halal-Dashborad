@@ -1,0 +1,149 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Halal logo request</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Submitted form</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Halal logo request</a>
+            </li>
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+        <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h5 class="padding-top-5">Halal logo request</h5>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <h2 class="padding-top-5"> Product Information:(attach copies of the listing of the items and products you wish to have ahalal label ) </h2>
+                                <table class="table table-stripped table-borderless col-sm-5" id="customers">
+
+                                        <thead>
+                                            <tr>
+                                                <th>Number</th>
+                                                <th>Product name</th>
+                                                <th>Product image </th>
+                                                <th>Note </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                                <tr *ngFor="let item of ProductViewModel">
+                                                        <td>
+                                                                {{item.ID}}
+                                                            </td>
+                                                            <td> {{item.ProductTypeName}}</td>
+                                                            <td><a [href]="item.ImageURL"  target="_blank">{{item.ImageURL}}</a></td>
+                                                            <!-- <td> <img [src]="item.ImageURL" class="img-responsive col-sm-6" ></td> -->
+                                                            <td> {{item.Notes}} </td>
+
+                                                </tr>
+
+                                      </tbody>
+                                      </table>
+                                      <div class="row">
+                                          <div class="col-sm-6">
+                                              
+                                          </div>
+                                          
+                                          <div class="col-sm-6 row text-right">
+                                                <span class="col-sm-4 ourBtn"  (click)="acceptModel()">
+                                                        <i class="fa fa-check text-navy1" aria-hidden="true"></i>
+
+                                                        <div class=" text-navy1">Approve</div>                                                </span>
+                                                <span class="col-sm-4 ourBtn" (click)="rejectModel()">
+                                                        <i class="fa fa-close text-danger" aria-hidden="true"></i>
+
+                                                        <div class="text-danger" >Reject</div> 
+                                                     </span>
+                                            </div>
+                                      </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+
+
+<ng-template #cancelTemplate>
+    <div class="cancelTemplate">
+        <div class="modal-content">
+            <div class="modal-header head-reject our-model-header">
+                <!-- <h4 class="modal-title pull-left">{{'shared.cancel-confirmation.title'|translate}}</h4> -->
+                <h4 class="modal-title pull-left" style="color:white !important;">Cancel Halal request</h4>
+                <button type="button" class="close pull-right textwhite" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true" class="textwhite">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <p class="col-sm-12 our-text"> write your reasons
+                    </p>
+
+                    <textarea cols="50" rows="5" class=" col-sm-12 "
+                        placeholder="Write your reasons here........"
+                        [(ngModel)]="Model.RejectionReason"></textarea>
+                   
+                </div>
+            </div>
+            <div class="modal-footer reject">
+                 <button type="button" class="btn second-btn modalbtn btn-danger col-xs-5 col-sm-4 col-md-3"
+                    (click)="modalRef.hide()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                    <button type="button" 
+                    class="btn modalbtn first-btn col-xs-5 btn-danger col-sm-4 col-md-3"
+                    (click)="Reject();modalRef.hide();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reject&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+             
+                </div>
+        </div>
+    </div>
+</ng-template>
+
+
+
+
+<ng-template #acceptTemplate>
+    <div class="acceptTemplate">
+        <div class="modal-content">
+            <div class="modal-header  head-accept our-model-header">
+                <!-- <h4 class="modal-title pull-left">{{'shared.cancel-confirmation.title'|translate}}</h4> -->
+                <h4 class="modal-title pull-left" style="color:white !important;">Cancel Halal request</h4>
+                <button type="button" class="close pull-right textwhite" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true" class="textwhite">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <p class=" col-sm-12 our-text"> write your fees
+                    </p>
+
+                    <input type="number"  class="col-sm-12 " 
+                        [(ngModel)]="Model.Fees">
+                   
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+                <button type="button" class="btn second-btn modalbtn btn-danger col-xs-5 col-sm-4 col-md-3"
+                    (click)="modalRef.hide()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cancel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                    <button type="button" 
+                    class="btn modalbtn first-btn col-xs-5 btn-danger col-sm-4 col-md-3"
+                    (click)="accept();modalRef.hide();">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;confirm&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </div>
+        </div>
+    </div>
+</ng-template>

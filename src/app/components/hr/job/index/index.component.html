@@ -1,0 +1,148 @@
+<div class="col-md-12 customRow">
+  <div class="panel panel-default">
+    <div class="box-header">
+      <h2 class="blue"><i class="fa-fw fa fa-money"></i>
+        {{'job.title'|translate}}
+      </h2>
+      <div class="box-icon">
+        <ul class="btn-tasks">
+          <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon fa fa-tasks tip"
+                data-placement="left" title=" {{'shared.actions'|translate}} "></i></a>
+            <ul class="dropdown-menu pull-right tasks-menus" role="menu" aria-labelledby="dLabel">
+              <li *ngIf="canAdd()">
+                <a [routerLink]="['/hr/job/create']">
+                  <i class="fa fa-plus-circle"></i> &nbsp; {{'shared.add'|translate}} (shift+n) </a>
+              </li>
+              <li *ngIf="canEdit()">
+                <a (click)="changeActivationStatusForAll(true)">
+                  <i class="fa fa-check-circle"></i> &nbsp; {{'shared.activate-selected-items'|translate}} (shift+a)</a>
+              </li>
+              <li *ngIf="canEdit()">
+                <a (click)="changeActivationStatusForAll(false)">
+                  <i class="fa fa-times-circle"></i> &nbsp; {{'shared.deActivate-selected-items'|translate}}
+                  (shift+x)</a>
+              </li>
+              <li *ngIf="canDelete()">
+                <a (click)="showDeleteAllConfirmation()">
+                  <i class="fa fa-trash"></i> &nbsp; {{'shared.delete-selected-items'|translate}} (shift+d)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="table-responsive tbl">
+            <table class="table table-striped table-bordered table-list">
+              <thead class="tblHead">
+                <tr>
+                  <th><input type="checkbox" (change)="selectAll();"></th>
+                  <th class="hidden-xs">#</th>
+                  <th *ngFor="let column of page.columns">
+                    <span class="d-inline-block colHeader" (click)='onSortClicked(column.Name)'>
+                      <span>{{column.Title |translate}}</span>
+                      <span class="sortingIcon">
+                        <span class="sortingUp"><i [style.opacity]="isColumnSelected(column.Name)==2?0.3:1"
+                            class="fa fa-angle-up"></i></span>
+                        <span class="sortingDown"><i [style.opacity]="isColumnSelected(column.Name)==1?0.3:1"
+                            class="fa fa-angle-down"></i></span>
+                      </span>
+                    </span>
+                  </th>
+                  <th><em class="fa fa-cog"></em></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr [hidden]="page.isSearching || items.length>0">
+                  <td colspan="6">
+                    <span>{{'shared.no-data-found'|translate}}</span>
+                  </td>
+                </tr>
+                <tr [hidden]="!page.isSearching">
+                  <td colspan="6">
+                    <h1><i class="blue fa fa-refresh fa-spin"></i></h1>
+                  </td>
+                </tr>
+                <tr *ngFor="let item of items | paginate : page.options;let i=index;">
+                  <td><input type="checkbox" [checked]="item.IsSelected" (change)="item.IsSelected=!item.IsSelected">
+                  </td>
+                  <td class="hidden-xs" align="center">{{page.options.itemsPerPage*(page.options.currentPage-1)+ i+1}}
+                  </td>
+                  <td>{{item.Code}}</td>
+                  <td>{{item.Name}}</td>
+                  <td>
+                    <ui-switch [disabled]="!canEdit()" [(ngModel)]="item.IsActive" size="small" checkedLabel="on"
+                      defaultBgColor="red" (change)="changeActivationStatus(item)"></ui-switch>
+                  </td>
+                  <td align="center">
+                    <!--
+                   -->
+                    <ul class="row-btn-tasks">
+                      <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon fa fa-tasks tip"
+                            data-placement="center" title=" {{'shared.actions'|translate}} "></i></a>
+                        <ul class="dropdown-menu pull-right dropdown-menu-right" role="menu" aria-labelledby="dLabel">
+                          <li>
+                            <a *ngIf="canEdit()" [routerLink]="['/hr/job/edit/',item.ID]"
+                              class="btn btn-default btn-xs">
+                              <i class="fa fa-edit" title="{{'shared.edit'|translate}}"></i>
+                              &nbsp; {{'shared.edit'|translate}}
+                            </a>
+                          </li>
+                          <li class="text-center">
+                            <button [disabled]="item.IsDeleting" *ngIf="canDelete()"
+                              (click)="showDeleteConfirmation(item)" class="btn btn-default btn-xs">
+                              <i *ngIf=" !item.IsDeleting" class="fa fa-trash-o"
+                                title="{{'shared.delete'|translate}}"></i>
+                              &nbsp; {{'shared.delete'|translate}}
+                              <i *ngIf="item.IsDeleting" class="fa fa-refresh fa-spin"
+                                title="{{'shared.delete'|translate}}"></i>
+                            </button>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <div class="row" *ngIf="page.options.totalItems>0">
+        <div class="col col-xs-4">{{'shared.page'|translate}} {{page.options.currentPage}} {{'shared.of'|translate}}
+          {{page.options.totalPages}}
+          - {{'shared.total-items'|translate}} : {{page.options.totalItems}}
+        </div>
+        <div class="col col-xs-8">
+          <div class="col-xs-12 text-center margin-top-15" *ngIf="page.options.totalItems>0">
+            <pagination-controls (pageChange)="getNextPrevData($event)" id='Pagination' maxSize="10"
+              directionLinks="true" autohide="true" previousLabel="{{ 'shared.previous' | translate}}"
+              nextLabel="{{ 'shared.next' | translate}}">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<ng-template #deleteTemplate>
+  <div class="modal-body text-center">
+    <p> {{'shared.delete-confirmation.message'|translate}}<br> <strong
+        *ngIf="selectedItem">{{selectedItem.Name}}</strong></p>
+    <button type="button" *ngIf="selectedItem" class="btn btn-default"
+      (click)="remove();modalRef.hide();">{{'shared.delete-confirmation.yes'|translate}}</button>
+    <button type="button" *ngIf="!selectedItem" class="btn btn-default"
+      (click)="removeAll();modalRef.hide();">{{'shared.delete-confirmation.yes'|translate}}</button>
+    <button type="button" class="btn btn-primary"
+      (click)="modalRef.hide()">{{'shared.delete-confirmation.cancel'|translate}}</button>
+  </div>
+</ng-template>

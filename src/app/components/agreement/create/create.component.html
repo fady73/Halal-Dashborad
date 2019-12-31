@@ -1,0 +1,164 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-4">
+        <h3>Create new agreement</h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item ">
+                <a>Service of agreement</a>
+            </li>
+            <li class="breadcrumb-item ">
+                <a><strong>Create new agreement</strong></a>
+            </li>
+
+        </ol>
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="padding-top-5">Create new agreement</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div *ngIf="!page.isPageLoaded" class="row text-center">
+                        <h1 class="col-lg-12 text-center"><i class="blue fa fa-refresh fa-spin"></i></h1>
+                    </div>
+
+
+                    <form role="form" *ngIf="page.isPageLoaded" [formGroup]="page.form" (ngSubmit)="save()">
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Date of today (submission day) * </label>
+                            <input class="form-control col-sm-8" placeholder="Current date" [value]="SubmissionDay"
+                                type="text" readOnly="true">
+                        </div>
+
+                        <div class="form-group row ">
+                            <label class="control-label col-sm-3">Company name * </label>
+                            <input class="form-control col-sm-8" placeholder="Halal Center" [value]="model.CompanyName"
+                                type="text" readOnly="true">
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Company country * </label>
+                            <input class="form-control col-sm-8" placeholder="Suadi Arabia" [value]="model.CountryName"
+                                type="text" readOnly="true">
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Company address * </label>
+                            <input class="form-control col-sm-8" placeholder="5 St.,wild street,Jeddah"
+                                [value]="model.CompayAddress" type="text" readOnly="true">
+                        </div>
+
+                        <div class="row">
+                            <div class="article col-lg-12 mt-2 mb-2">
+                                <p>This agreement is made in two copies signed in English each party received a copy to
+                                    work
+                                    under it, and when using another<br>
+                                    language other than Arabic version shall prevail as the basis and reference.</p>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 mb-2">
+                                <h3 class="padding-top-5">The remuneration for service</h3>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                        <label class="control-label col-sm-4">  {{'shared.FeesDaily'|translate}} </label>
+                        <input class="form-control col-sm-4" value="2500" disabled>
+                     
+                    </div>
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['NumberOfAuditDays'].valid && page.form.controls['NumberOfAuditDays'].touched">
+                            <label class="control-label col-sm-4">number of audit's day * </label>
+                            <input class="form-control col-sm-4" placeholder="E.g 5 days"
+                                formControlName="NumberOfAuditDays" (keyup)="CalcRemuneration();CalcTotalOffer()" type="text">
+                            <div class="text text-danger offset-sm-4 col-sm-10 padding-none"
+                                *ngIf="!page.form.controls['NumberOfAuditDays'].valid && page.form.controls['NumberOfAuditDays'].touched">
+                                <p *ngIf="page.form.controls['NumberOfAuditDays'].hasError('required')">
+                                    {{'shared.validation.required'|translate}}</p>
+                                    <p *ngIf="page.form.controls['NumberOfAuditDays'].hasError('pattern')">
+                                        {{'shared.validation.number-only'|translate}}</p>
+                                <p *ngIf="page.form.controls['NumberOfAuditDays'].hasError('min')">
+                                    {{'shared.validation.min'|translate}}</p>
+                                <p *ngIf="page.form.controls['NumberOfAuditDays'].hasError('maxlength')">
+                                    {{'shared.validation.max-100-char'|translate}}</p>
+                            </div>
+                        </div>
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['NumberOfAuditors'].valid && page.form.controls['NumberOfAuditors'].touched">
+                            <label class="control-label col-sm-4">number of auditors * </label>
+                            <input class="form-control col-sm-4" placeholder="E.g 3 auditors"
+                                formControlName="NumberOfAuditors" (keyup)="CalcRemuneration();CalcTotalOffer()"
+                                type="text">
+                            <div class="text text-danger offset-sm-4 col-sm-10 padding-none"
+                                *ngIf="!page.form.controls['NumberOfAuditors'].valid && page.form.controls['NumberOfAuditors'].touched">
+                                <p *ngIf="page.form.controls['NumberOfAuditors'].hasError('required')">
+                                    {{'shared.validation.required'|translate}}</p>
+                                    
+                                        <p *ngIf="page.form.controls['NumberOfAuditors'].hasError('pattern')">
+                                            {{'shared.validation.number-only'|translate}}</p>
+                                <p *ngIf="page.form.controls['NumberOfAuditors'].hasError('min')">
+                                    {{'shared.validation.min'|translate}}</p>
+                                <p *ngIf="page.form.controls['NumberOfAuditors'].hasError('maxLength')">
+                                    {{'shared.validation.max-100-char'|translate}}</p>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row">
+                            <label class="control-label col-sm-4">Fee and technical team visit (optional)<br>
+                                <a class="team-members">&nbsp;<small>(tickets + transportation +
+                                        accommodation)</small></a>
+                            </label>
+                            <input class="form-control col-sm-4" (keyup)="CalcRemuneration();CalcTotalOffer()"
+                                placeholder="E.g 100,000 SAR" formControlName="TechnicalTeamVisitFee" type="number" min="0">
+                        </div> -->
+
+                        <!-- <div class="form-group row">
+                            <label class="control-label col-sm-4">Total of the remuneration for services </label>
+                            <input class="form-control col-sm-4" placeholder="100,000 SAR"
+                                formControlName="TotalRemuneration" type="number" [readOnly]="true">
+                        </div> -->
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4">The total value of the service offer </label>
+                            <input class="form-control col-sm-4" placeholder="" formControlName="TotalOffer"
+                                [readOnly]="true" type="text">
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4">The total value of Surveillance 1</label>
+                            <input class="form-control col-sm-4" placeholder="" formControlName="Surveillance1"
+                                [readOnly]="true" type="text">
+                        </div>
+                        
+                        <div class="form-group row">
+                            <label class="control-label col-sm-4">The total value of Surveillance 2 </label>
+                            <input class="form-control col-sm-4" placeholder="" formControlName="Surveillance2"
+                                [readOnly]="true" type="text">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 mt-5">
+                                <button type="submit" [disabled]="disabledSubmit()"
+                                    class="btn btn-primary float-right margin-h-10 ">Save and download
+                                    agreement </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

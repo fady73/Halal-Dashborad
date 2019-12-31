@@ -1,0 +1,39 @@
+.fa{
+    font-size: 25px;
+    cursor: pointer;
+
+}
+.ourBtn{
+    cursor: pointer;
+    font-size: 25px;
+    text-align: center;
+}
+.ourBtn div {
+    text-align: center;
+}
+.head-accept{
+background-color: #3a8b7b !important;
+}
+.modalbtn{
+    background-color: #3a8b7b !important;
+
+}
+.second-btn{
+    background-color: transparent !important;
+    border: 1px solid #3a8b7b !important;
+    color:#3a8b7b !important;
+}
+
+.reject .first-btn{
+    background-color: #ec4758 !important;
+
+}
+
+.reject .second-btn{
+    background-color: transparent !important;
+    border: 1px solid #ec4758 !important;
+    color:#ec4758 !important;
+}
+.head-reject{
+    background-color: #ec4758 !important;
+    }

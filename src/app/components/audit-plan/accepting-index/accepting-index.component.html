@@ -1,0 +1,412 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Submit NCR</h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Submit NCR</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row" *ngIf="isPageLoaded">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Submit NCR</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-12" id="audit-content">
+
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3 "> Main title </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" value="On-site Assement informations" type="text"
+                                        readOnly="true">
+                                </div>
+                            </div>
+
+                            <div class="form-group row ">
+                                <label class="control-label col-sm-3">Title 2 </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control " value="Initial assement GSO.2055.1" type="text"
+                                        readOnly="true">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">No.of Application </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" [value]="model.Number" type="text" readOnly="true">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">Name of Company </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" [value]="model.CompanyName" type="text" readOnly="true">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">Company Address </label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" [value]="model.CompanyAddress" type="text"
+                                        readOnly="true">
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">Assessment dates</label>
+
+                                <div class="col-sm-8">
+                                    <!-- <span class="label label-primary label-large "
+                                        *ngFor="let item of model.AssessmentDates; let i=index"> &nbsp;&nbsp;
+                                        {{item | date:'dd/MM/yyyy'}} &nbsp;&nbsp;</span> -->
+                                    <div class="btn-group" *ngFor="let item of model.AssessmentDates; let i=index">
+                                        <span class="label label-primary label-large padding-top-5"> &nbsp;
+                                            {{item | date:'dd/MM/yyyy'}} &nbsp;</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">Lead auditor </label>
+
+                                <div class="col-sm-8">
+                                    <div class="btn-group" *ngFor="let item of model.LeadAuditors; let i=index">
+                                        <span class="label label-primary label-large padding-top-5"> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">Technical auditor </label>
+
+                                <div class="col-sm-8">
+                                    <div class="btn-group" *ngFor="let item of model.TechnicalAuditors; let i=index">
+                                        <span class="label label-primary label-large padding-top-10">
+                                            &nbsp;{{item.EmployeeName}} &nbsp;</span>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">Halal islamic affairs expert </label>
+                                <div class="col-sm-8">
+                                    <div class="btn-group" *ngFor="let item of model.AffairsExperts; let i=index">
+                                        <span class="label label-primary label-large padding-top-10"> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="control-label col-sm-3">Technical expert </label>
+
+                                <div class="col-sm-8">
+                                    <div class="btn-group" *ngFor="let item of model.TechnicalExperts; let i=index">
+                                        <span class="label label-primary label-large padding-top-10"> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                            <!-- <div class="form-group row">
+                                <div class="table-responsive col-sm-12" id="corectiveTable">
+                                    <table class="table  table-bordered audittabel">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>Date
+                                                </th>
+                                                <th>auditor
+                                                </th>
+                                                <th>standard Clause(s)
+                                                </th>
+                                                <th>Description of non-conformity
+                                                </th>
+                                                <th>Analysis of the extent/ effect
+                                                </th> -->
+                                                <!-- <th>
+                                                    CAB
+                                                    <br>
+                                                    <small>acceptance at the closing meeting</small>
+                                                </th> -->
+
+                                                <!-- <th class="custom-th">
+                                                    <button type="button"
+                                                        class="btn btn-primary1 btn-circle-primary btn-add"
+                                                        (click)="addNCS()">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </th> -->
+
+
+                                            <!-- </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr *ngFor="let item of model.NCSs; let i=index">
+                                                <td> -->
+                                                    <!-- {{item.Date | date:'dd/MM/yyyy'}} -->
+                                                    <!-- <input type="date" [ngModel]="item.Date | date:'yyyy-MM-dd'"
+                                                        required [ngModelOptions]="{standalone: true}"
+                                                        (ngModelChange)="item.Date = $event" class="form-control">
+
+
+                                                </td>
+                                                
+                                                <td>
+                                                    <select class="form-control" [(ngModel)]="item.AssessorID"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                        <option *ngFor="let items of employees" [value]="items.ID">
+                                                            {{items.Name}}</option>
+
+                                                    </select>
+                                                </td>
+                                                <td> -->
+                                                    <!-- {{item.StandardClause}} -->
+                                                    <!-- <input type="text" [(ngModel)]="item.StandardClause"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+
+                                                <td> -->
+                                                    <!-- {{item.Description}} -->
+                                                    <!-- <input type="text" [(ngModel)]="item.Description"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+
+                                                <td> -->
+                                                    <!-- {{item.Analysis}} -->
+                                                    <!-- <input type="text" [(ngModel)]="item.Analysis"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td> -->
+
+                                                <!-- <td>
+                                                    <div class="col-sm-3">
+                                                        <fieldset [disabled]="true">
+                                                            <label class="custom-radio-btn ">Yes
+                                                                <input [checked]="item.CABAcceptance" value="true"
+                                                                    type="radio" name="yes-no-section-{{i}}" />
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </fieldset>
+                                                        <fieldset [disabled]="true">
+
+                                                            <label class="custom-radio-btn ">No
+                                                                <input [checked]="!item.CABAcceptance" value="false"
+                                                                    type="radio" name="yes-no-section-{{i}}" />
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </fieldset>
+                                                    </div>
+                                                </td> -->
+                                                <!-- <td class="custom-th ">
+                                                    <a (click)="removeNCS(i)" class="btn btn-transparent">
+                                                        <i class="fa  fa-trash text-navy fa-2x "></i>
+                                                    </a>
+                                                </td> -->
+<!-- 
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+ -->
+
+
+
+
+
+
+
+                            <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table  table-bordered audittabel">
+                                        <thead>
+                                            <tr>
+                                                <th>Date
+                                                </th>
+                                                <th>auditor
+                                                </th>
+                                                <th>standard Clause(s)
+                                                </th>
+                                                <th>Description of non-conformity
+                                                </th>
+                                                <th>Analysis of the extent/ effect
+                                                </th>
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+
+                                                    <input type="date" [ngModel]="NCSItem.Date | date:'yyyy-MM-dd'"
+                                                        required [ngModelOptions]="{standalone: true}"
+                                                        (ngModelChange)="NCSItem.Date = $event" class="form-control">
+
+                                                        <!-- <input type="date" [ngModel]="visit.Date | date:'yyyy-MM-dd'"
+                                                        required [ngModelOptions]="{standalone: true}"
+                                                        (ngModelChange)="visit.Date = $event"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        class="form-control"> -->
+
+                                                </td>
+
+
+                                                <td>
+                                                    <select class="form-control" [(ngModel)]="NCSItem.AssessorID"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                        <option *ngFor="let item of employees" [value]="item.ID">
+                                                            {{item.Name}}</option>
+
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="NCSItem.StandardClause"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="NCSItem.Description"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="text" [(ngModel)]="NCSItem.Analysis"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+                                                <td class="custom-th ">
+                                                    <button type="button" (click)="addNCS()"
+                                                        
+                                                        class="btn btn-primary1 btn-circle-primary btn-add">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                    <br>
+                                                    <br>
+                                                    <span class="text-black" style="white-space: nowrap;">Click To Add</span>
+                                                </td>
+                                                
+
+                                            </tr>
+                                            <tr *ngFor="let visit of model.NCSs; let i=index">
+                                                <td>
+
+                                                    <input type="date" [ngModel]="visit.Date | date:'yyyy-MM-dd'"
+                                                        required [ngModelOptions]="{standalone: true}"
+                                                        (ngModelChange)="visit.Date = $event" class="form-control">
+
+                                                </td>
+
+
+                                                <td>
+                                                    <select class="form-control" [(ngModel)]="visit.AssessorID"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                        <option *ngFor="let item of employees" [value]="item.ID">
+                                                            {{item.Name}}</option>
+
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.StandardClause"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.Description"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.Analysis"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+
+                                                <td class="custom-th ">
+                                                    <a (click)="removeNCS(i)" class="btn btn-transparent">
+                                                        <i class="fa  fa-trash text-navy fa-2x "></i>
+                                                    </a>
+                                                </td>
+                                                <!-- <td class="custom-th " *ngIf="i == model.NCSs.length - 1 ">
+                                                    <button type="button" (click)="addNCS()"
+                                                        class="btn btn-primary1 btn-circle-primary btn-add margin-top-5">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                    <br>
+                                                   
+                                                    <span class="text-black">Click To Add</span>
+                                                   
+                                                </td> -->
+                                         
+                                             
+
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-12 mt-5">
+                            <button type="submit" (click)="save()" class="btn btn-primary float-right margin-h-10 ">
+                                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Submit &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                &nbsp;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

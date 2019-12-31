@@ -1,0 +1,256 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Audit plans </h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Audit plans</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Audit plans</h5>
+
+                </div>
+
+                <div class="ibox-content">
+                    <div class="form" [formGroup]="page.seachForm">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label " for="date_added">Country</label>
+                                    <select class=" form-control" formControlName="CountryID">
+                                        <option value="null">All</option>
+                                        <option *ngFor="let item of countries" [value]="item.ID">{{item.Name}}</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label " for="date_added">Company</label>
+                                    <select class=" form-control" formControlName="CompanyID" required>
+                                        <option value="null" disabled selected>Enter company name :</option>
+                                        <option *ngFor="let item of companies" [value]="item.ID">{{item.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label " for="date_added">Request Type</label>
+                                    <select class=" form-control" formControlName="TypeID">
+                                        <option value="null">All</option>
+                                        <option *ngFor="let item of requestTypes" [value]="item.ID">{{item.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label label1" for="status">Request Status</label>
+                                    <select class=" form-control status" formControlName="StatusID">
+                                        <option value="null">All</option>
+                                        <option *ngFor="let item of requestStatus" [value]="item.ID">{{item.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group" id="data_1">
+                                    <label class="col-form-label label1" for="date_added">From date</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                            bsDatepicker type="text" formControlName="FromDate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label label1" for="date_modified"> To date</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input bsDatepicker type="text" formControlName="ToDate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row filter">
+                            <div class="col-sm-12">
+                                <button type="button" (click)="onSearchClicked()" class="btn btn-primary float-right">
+                                    <i class="fa fa-filter"></i>
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="table-responsive">
+
+                            <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15"
+                                id="customers">
+                                <thead>
+                                    <tr>
+
+                                        <!-- <th data-hide="id">#</th> -->
+                                        <th>Request ID</th>
+                                        <!-- <th data-hide="id">Request ID</th> -->
+                                        <th>Submission date</th>
+                                        <th>Company name</th>
+                                        <th>Company country</th>
+                                        <th>Request type</th>
+                                        <th *ngIf="haveNCRFile">NCR reports</th>
+                                        <th>Actions</th>
+                                        <!-- <th data-hide="id">Cancel</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr *ngFor="let item of items; let i=index">
+
+                                        <td class="padding-top-15">#{{item.RequestID}}</td>
+
+
+
+                                        <td class="padding-top-15">{{item.SubmissionDate | date:'dd-MM-yyyy'}} </td>
+                                        <td class="padding-top-15">{{item.CompnayName}}</td>
+                                        <td class="padding-top-15">{{item.CountryName}}</td>
+                                        <td class="padding-top-15">{{item.RequestType}}</td>
+                                        <td *ngIf="haveNCRFile" class="padding-top-15"><a class="text-muted"
+                                                [href]="item.NCRFilePath" target="_blank">{{item.NCRFileName}}</a>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <!-- <span class="view"><a [routerLink]="['/request/edit/',item.ID]"><i
+                                                            class="fa fa-eye"></i>
+                                                        <div>View</div>
+                                                    </a></span> -->
+
+
+                                                <button [routerLink]="['/audit-plan/create',item.RequestID]"
+                                                    [disabled]="item.Status!=1" class="btn  btn-transparent ">
+                                                    <i class="fa fa-pencil text-navy "
+                                                        [class.text-diabled]="item.Status!=1" title="Edit"></i>
+                                                    <div>
+                                                        <span class="text-navy" [class.text-diabled]="item.Status!=1">
+                                                            Edit</span>
+                                                    </div>
+                                                </button>
+                                                <button class="btn  btn-transparent "
+                                                    [routerLink]="['/audit-plan/view',item.RequestID]">
+                                                    <i class="fa fa-eye text-navy" title="View"></i>
+                                                    <div>
+                                                        <span class="text-navy">
+                                                            View</span>
+                                                    </div>
+
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!------------------------------------------------------------------------>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #employeeTemplate>
+    <div class="modal-header approveTemplate">
+        <h4 class="modal-title pull-left">{{'shared.assign-task-to-employee'|translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body text-center">
+        <div class="form-group row">
+            <!-- {{selectedItem.AssignedEmployeeID}} -->
+            <label class="col-sm-3 control-label padding-less">Member name * </label>
+            <select [(ngModel)]="selectedItem.AssignedEmployeeID" class=" form-control col-sm-8">
+                <option *ngFor="let item of employees" [value]="item.ID">{{item.Name}}</option>
+            </select>
+        </div>
+
+        <br />
+        <button type="button" *ngIf="selectedItem" class="btn btn-primary margin-h-10 pull-right"
+            (click)="assign(selectedItem);modalRef.hide();">{{'shared.assign'|translate}}</button>
+        <!-- <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button> -->
+    </div>
+</ng-template>
+<ng-template #cancelTemplate>
+    <div class="modal-body text-center">
+        <p> {{'shared.cancel-confirmation.message'|translate}}<br> <strong
+                *ngIf="selectedItem">{{selectedItem.CompanyName}}</strong></p>
+        <button type="button" *ngIf="selectedItem" class="btn btn-default"
+            (click)="cancel();modalRef.hide();">{{'shared.yes'|translate}}</button>
+        <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button>
+    </div>
+</ng-template>
+
+
+<ng-template #confirmativeTemplate>
+    <div class="confirmativeTemplate">
+        <div class="modal-header ">
+            <h4 class="modal-title pull-left">non-confirmative findings</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body ">
+            <p>Is there any non-confirmative findings ? </p>
+
+            <label class="custom-radio-btn" (change)="showtoggle();">&nbsp;<strong>Yes</strong>
+                <input [checked]="item.Valid" type="radio" name="yes-no-1" />
+                <span class="checkmark"></span>
+            </label>
+            <form id="file-upload-form" action="" *ngIf='showUploadFile'>
+                <input id="file-upload" type="file" name="fileUpload" />
+                <label for="file-upload" id="file-drag">
+                    <div style="text-align: center"><i class="icon-cloud-upload" style="font-size: 40px;"></i></div>
+                    <h5 style="font-weight: bold">Drop files here or click to upload</h5>
+                    <p id="file-upload-btn">(This is just a demo dropzone .Selected files are not actually uploaded)</p>
+                    <p>Maximum file size is 5 MB</p>
+
+
+                </label>
+
+            </form>
+
+            <label class="custom-radio-btn" (change)="hidetoggle();">&nbsp;<strong>No</strong>
+                <input [checked]="item.Valid" type="radio" name="yes-no-1" />
+                <span class="checkmark"></span>
+            </label>
+
+        </div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn  btn-primary margin-h-10" (click)="modalRef.hide();">&nbsp; &nbsp; &nbsp;
+                Submit &nbsp; &nbsp;&nbsp;</button>
+
+        </div>
+    </div>
+</ng-template>

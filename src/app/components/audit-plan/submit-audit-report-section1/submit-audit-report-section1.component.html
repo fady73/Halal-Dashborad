@@ -1,0 +1,304 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-sm-4">
+    <h2>Submitted Audit report</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a>Admin</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a>Submit Audit report</a>
+      </li>
+
+    </ol>
+  </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox ">
+        <div class="ibox-title">
+          <div class="row">
+            <div class="col-lg-12">
+              <h5 class="padding-top-5">Halal Aduit report</h5>
+            </div>
+          </div>
+        </div>
+        <div class="ibox-content">
+
+          <div class="wizard text-center ">
+
+            <label class="widget style1 navy-bg col-sm-3 text-center margin-left-30 widgetresponsive ">Section 1
+            </label>
+            <label class=" widget style1 gray-bg col-sm-3 text-center margin-left-30 widgetresponsive">Section 2
+            </label>
+            <label class=" widget style1 gray-bg col-sm-3 text-center margin-left-30 widgetresponsive">Section 3
+            </label>
+
+          </div>
+
+
+          <br>
+          <br>
+
+          <form role="form" [formGroup]="page.form" *ngIf="page.isPageLoaded">
+            <div class="form-group row margin-left-30 ">
+              <label class="control-label col-sm-3"> Auditor name </label>
+              <input class="form-control col-sm-8" [value]="model.AuditorName" type="text" readOnly="true">
+            </div>
+
+            <div class="form-group row margin-left-30 ">
+              <label class="control-label col-sm-3">company name </label>
+              <input class="form-control col-sm-8" [value]="model.CompanyName" type="text" readOnly="true">
+            </div>
+            <div class="form-group row margin-left-30 ">
+              <label class="control-label col-sm-3">Date of report </label>
+              <input class="form-control col-sm-8" [value]="model.ReportDate | date:'dd/MM/yyyy'" type="text"
+                readOnly="true">
+            </div>
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">Company address </label>
+              <input class="form-control col-sm-8" [value]="model.CompanyAddress" type="text" readOnly="true">
+            </div>
+
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">Company country </label>
+              <input class="form-control col-sm-8" [value]="model.CompanyCountry" type="text" readOnly="true">
+            </div>
+
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">Email address </label>
+              <input class="form-control col-sm-8" [value]="model.Email" type="text" readOnly="true">
+            </div>
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">Specifications </label>
+              <input class="form-control col-sm-8" [value]="model.CertificateTypeName" type="text" readOnly="true">
+            </div>
+            <div class="hr-line-dashed-space"></div>
+            <div class="form-group row  margin-left-30">
+              <label class="control-label col-sm-3">Other Specifications (optional) </label>
+              <input class="form-control col-sm-8" placeholder="Other Specifications" type="text"
+                formControlName="OtherSpecifications">
+            </div>
+            <div class="form-group row  margin-left-30">
+              <label class="control-label col-sm-3">Audit Address (optional) </label>
+              <input class="form-control col-sm-8" type="text" formControlName="AuditAddress">
+            </div>
+
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['ApprovalAuthority'].valid && page.form.controls['ApprovalAuthority'].touched">
+              <label class="control-label col-sm-3">Approval authority *</label>
+              <input class="form-control col-sm-8" type="text" formControlName="ApprovalAuthority">
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['ApprovalAuthority'].valid && page.form.controls['ApprovalAuthority'].touched">
+                <p *ngIf="page.form.controls['ApprovalAuthority'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+
+            </div>
+
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['AuditType'].valid && page.form.controls['AuditType'].touched">
+              <label class="control-label col-sm-3">Type of audit * </label>
+              <input class="form-control col-sm-8" type="text" formControlName="AuditType">
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['AuditType'].valid && page.form.controls['AuditType'].touched">
+                <p *ngIf="page.form.controls['AuditType'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['LastAuditType'].valid && page.form.controls['LastAuditType'].touched">
+              <label class="control-label col-sm-3"> Last audit Type *</label>
+              <input type="text" formControlName="LastAuditType" class="form-control col-sm-8">
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['LastAuditType'].valid && page.form.controls['LastAuditType'].touched">
+                <p *ngIf="page.form.controls['LastAuditType'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['LastAuditDate'].valid && page.form.controls['LastAuditDate'].touched">
+              <label class="control-label col-sm-3" for="date_modified"> Last audit date *</label>
+              <input bsDatepicker type="text" formControlName="LastAuditDate" class="form-control col-sm-4"
+                placeholder="7/4/2020">
+              <span class="col-sm-2 m-t-5"><i class="fa fa-calendar  fa-2x text-navy"></i></span>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['LastAuditDate'].valid && page.form.controls['LastAuditDate'].touched">
+                <p *ngIf="page.form.controls['LastAuditDate'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+
+            </div>
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['CertificateExpirationDate'].valid && page.form.controls['CertificateExpirationDate'].touched">
+              <label class="control-label col-sm-3" for="date_modified"> Certificate expiration date *</label>
+              <input bsDatepicker type="text" formControlName="CertificateExpirationDate" class="form-control col-sm-4"
+                placeholder="7/4/2020">
+              <span class="col-sm-2 m-t-5"><i class="fa fa-calendar  fa-2x text-navy"></i></span>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['CertificateExpirationDate'].valid && page.form.controls['CertificateExpirationDate'].touched">
+                <p *ngIf="page.form.controls['CertificateExpirationDate'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['AuditTimeJustification'].valid && page.form.controls['AuditTimeJustification'].touched">
+              <label class="control-label col-sm-3" for="date_modified"> On site audit time justification *</label>
+              <input bsDatepicker type="text" formControlName="AuditTimeJustification" class="form-control col-sm-4"
+                placeholder="7/4/2020">
+              <span class="col-sm-2 m-t-5"><i class="fa fa-calendar  fa-2x text-navy"></i></span>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['AuditTimeJustification'].valid && page.form.controls['AuditTimeJustification'].touched">
+                <p *ngIf="page.form.controls['AuditTimeJustification'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['NumberOfEmployees'].valid && page.form.controls['NumberOfEmployees'].touched">
+              <label class="control-label col-sm-3">Number of employee </label>
+              <input class="form-control col-sm-4" formControlName="NumberOfEmployees" type="number">
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['NumberOfEmployees'].valid && page.form.controls['NumberOfEmployees'].touched">
+                <p *ngIf="page.form.controls['NumberOfEmployees'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+                  <p *ngIf="page.form.controls['NumberOfEmployees'].hasError('min')">
+                    {{'shared.validation.min'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['NumberOfShifts'].valid && page.form.controls['NumberOfShifts'].touched">
+              <label class="control-label col-sm-3">Number of shifts </label>
+              <input class="form-control col-sm-4" formControlName="NumberOfShifts" type="number">
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['NumberOfShifts'].valid && page.form.controls['NumberOfShifts'].touched">
+                <p *ngIf="page.form.controls['NumberOfShifts'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+                  <p *ngIf="page.form.controls['NumberOfShifts'].hasError('min')">
+                    {{'shared.validation.min'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['NumberOfProductionLines'].valid && page.form.controls['NumberOfProductionLines'].touched">
+              <label class="control-label col-sm-3">Number of Production lines </label>
+              <input class="form-control col-sm-4" formControlName="NumberOfProductionLines" type="number">
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['NumberOfProductionLines'].valid && page.form.controls['NumberOfProductionLines'].touched">
+                <p *ngIf="page.form.controls['NumberOfProductionLines'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+                  <p *ngIf="page.form.controls['NumberOfProductionLines'].hasError('min')">
+                    {{'shared.validation.min'|translate}}</p>
+              </div>
+            </div>
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['HCCPLinesNumber'].valid && page.form.controls['HCCPLinesNumber'].touched">
+              <label class="control-label col-sm-3">Number of HCCP lines </label>
+              <input class="form-control col-sm-4" formControlName="HCCPLinesNumber" type="number">
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['HCCPLinesNumber'].valid && page.form.controls['HCCPLinesNumber'].touched">
+                <p *ngIf="page.form.controls['HCCPLinesNumber'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+                  <p *ngIf="page.form.controls['HCCPLinesNumber'].hasError('min')">
+                    {{'shared.validation.min'|translate}}</p>
+              </div>
+            </div>
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['CategoryID'].valid && page.form.controls['CategoryID'].touched">
+              <label class="control-label col-sm-3">Hala Product / Service Category * </label>
+              <select class="form-control col-sm-8" formControlName="CategoryID">
+                <option *ngFor="let item of productCategory" [value]="item.ID">{{item.Name}}</option>
+              </select>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['CategoryID'].valid && page.form.controls['CategoryID'].touched">
+                <p *ngIf="page.form.controls['CategoryID'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['AuditTeamLeaderID'].valid && page.form.controls['AuditTeamLeaderID'].touched">
+              <label class="control-label col-sm-3">Head of Audit Team * </label>
+              <select class="form-control col-sm-8" formControlName="AuditTeamLeaderID">
+                <option *ngFor="let item of model.LeadAuditors" [value]="item.EmployeeID">{{item.EmployeeName}}</option>
+              </select>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['AuditTeamLeaderID'].valid && page.form.controls['AuditTeamLeaderID'].touched">
+                <p *ngIf="page.form.controls['AuditTeamLeaderID'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['IslamicAffairsExpertID'].valid && page.form.controls['IslamicAffairsExpertID'].touched">
+              <label class="control-label col-sm-3"> islamic affairs expert * </label>
+              <select class="form-control col-sm-8" formControlName="IslamicAffairsExpertID">
+                <option *ngFor="let item of model.AffairsExperts" [value]="item.EmployeeID">{{item.EmployeeName}}
+                </option>
+              </select>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['IslamicAffairsExpertID'].valid && page.form.controls['IslamicAffairsExpertID'].touched">
+                <p *ngIf="page.form.controls['IslamicAffairsExpertID'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+
+            <div class="form-group row  margin-left-30"
+              [class.has-error]="!page.form.controls['AdditionalAttendees'].valid && page.form.controls['AdditionalAttendees'].touched">
+              <label class="control-label col-sm-3">Additional Attendees and Roles * </label>
+              <input class="form-control col-sm-4" type="text" formControlName="AdditionalAttendees">
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['AdditionalAttendees'].valid && page.form.controls['AdditionalAttendees'].touched">
+                <p *ngIf="page.form.controls['AdditionalAttendees'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+
+            <div class="form-group row margin-left-30" >
+              <label class="control-label col-sm-3">Any deviation from audit plan and its reasons (optional) </label>
+
+              <textarea class="form-control col-sm-8 rounded-0" rows="5" formControlName="Deviation"></textarea>
+            </div>
+
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">Scope of the Certificate (optional) </label>
+              <textarea class="form-control col-sm-8 rounded-0" rows="5" formControlName="CertificateScope"></textarea>
+            </div>
+
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">Exceptions from the scope (optional) </label>
+              <textarea class="form-control col-sm-8 rounded-0" rows="5" formControlName="ScopeExceptions"></textarea>
+            </div>
+
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">Description of organization (optional) </label>
+              <textarea class="form-control col-sm-8 rounded-0" rows="5"
+                formControlName="OrganizationDescription"></textarea>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 mt-5">
+                <button type="submit" (click)="save()" [disabled]="disableSubmit()"
+                  class="btn btn-primary float-right margin-h-10 "> &nbsp; &nbsp;
+                  &nbsp; &nbsp;
+                  &nbsp; Save & continue &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,205 @@
+<!--<simple-notifications></simple-notifications>-->
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <!-- <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <div class="logo-img text-center">
+                            <img alt="image" src="assets/img/logo2_1.png" class="img-fluid" />
+                        </div>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="block m-t-xs font-bold">Full name</span>
+                            <span class="block m-t-xs font-blod small">Company name <b class="caret"></b></span>
+                            <span class="block m-t-xs font-blod small">Admin <b class="caret"></b></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
+                            <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html">Logout</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        H+
+                    </div>
+                </li> -->
+
+                <li>
+                    <div class="logo-img text-center">
+                        <img alt="image" src="assets/img/logo2_1.png" class="img-fluid" />
+                    </div>
+                </li>
+                <li class="nav-header" *ngIf="user">
+                    <div class="dropdown profile-element">
+                        <i class="fa fa-user-circle fa-5x"></i>
+                        <!-- <img alt="image" class="rounded-circle" src="assets/img/no-photo.png" /> -->
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="block m-t-xs font-bold">{{user.Email}}</span>
+                            <span class="text-muted text-xs block">{{user.Name}} <b class="caret"></b></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a routerLink="/user/change-password" class="dropdown-item">{{'change-password.title'|translate}}</a></li>
+                                <li class="dropdown-divider"></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" (click)="signOut()">{{'shared.log-out'|translate}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        Halal Center
+                    </div>
+                </li>
+
+
+                <!-- <li class="active">
+                <a href="#"><i class="fa fa-user-plus"></i> <span class="nav-label">Add staff member</span></a>
+
+            </li> -->
+                <!-- <li class="active">
+              <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Pending consumers' accounts </span> </a>
+
+          </li> -->
+                <!-- <li class="active">
+
+              <a href="#"><i class="fa fa-group"></i> <span class="nav-label">Consumers' account</span></a>
+
+          </li> -->
+                <!-- <li class="active">
+
+              <a href="#"><i class="fa fa-file-text-o"></i> <span class="nav-label">Roles & Premissions</span></a>
+
+          </li> -->
+                <li>
+
+                    <a [routerLink]="['/request/index']" routerLinkActive="router-link-active"><i
+                            class="fa fa-file-text"></i> <span class="nav-label">Submitted forms</span></a>
+
+                </li>
+
+                <li>
+                    <a [routerLink]="['/admin/country']" routerLinkActive="router-link-active"><i
+                            class="fa fa-flag"></i> <span class="nav-label">Countries</span></a>
+
+                </li>
+                <li>
+                    <a [routerLink]="['/admin/employee']" routerLinkActive="router-link-active"><i
+                            class="fa fa-group"></i> <span class="nav-label">Employees</span></a>
+                </li>
+                <!-- <li>
+                    <a [routerLink]="['/request-documents']" routerLinkActive="router-link-active"><i
+                            class="fa fa-user"></i> <span class="nav-label">Pending consumer's
+                            accounts</span></a>
+                </li> -->
+                <li>
+                    <a routerLinkActive="router-link-active" [routerLink]="['/consumer/index']"><i
+                            class="fa fa-group"></i> <span class="nav-label">Consumers'
+                            account</span></a>
+                </li>
+                <!-- <li>
+                    <a [routerLink]="['/admin/role']" routerLinkActive="router-link-active"><i
+                            class="fa fa-file-text-o"></i> <span class="nav-label">Roles & Premissions</span></a>
+                </li> -->
+                <li>
+                    <a [routerLink]="['/payment/index']" routerLinkActive="router-link-active"><i
+                            class="fa fa-pencil-square-o"></i> <span class="nav-label">Review payment receipt</span></a>
+                </li>
+
+                <li>
+                    <a [routerLink]="['/agreement/index']" routerLinkActive="router-link-active"><i
+                            class="fa fa-handshake-o"></i> <span class="nav-label">Service of agreement</span></a>
+                </li>
+                <li>
+                    <a [routerLink]="['/audit-plan/index']" routerLinkActive="router-link-active"><i
+                            class="fa fa-paper-plane"></i> <span class="nav-label">Audit plans</span></a>
+                </li>
+                <li>
+                    <a [routerLink]="['/audit-plan/decision-committee']" routerLinkActive="router-link-active"><i
+                            class="fa fa-comments"></i> <span class="nav-label">Decision committee</span></a>
+                </li>
+                <li>
+                    <a [routerLink]="['/certificate/index']" routerLinkActive="router-link-active"><i
+                            class="fa fa-certificate"></i> <span class="nav-label">Halal Certificates</span></a>
+                </li>
+                <li>
+                    <a [routerLink]="['/complaint/index']" routerLinkActive="router-link-active"><i
+                            class="fa fa-envelope"></i> <span class="nav-label">Complaint</span></a>
+                </li>
+                <li>
+                    <a [routerLink]="['/admin/configration']" routerLinkActive="router-link-active"><i
+                            class="fa fa fa-cog fa-spin"></i> <span class="nav-label">System Configration</span></a>
+                </li>
+                <!--  -->
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom gray-bg">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                    </a>
+
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li style="padding: 20px">
+                        <span class="m-r-sm text-muted welcome-message">Welcome to Halal Center Portal</span>
+                    </li>
+
+
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            <i class="fa fa-bell"></i> <span class="label label-primary">{{Notification.length}}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-alerts">
+                            <li *ngFor="let item of Notification;let i=index">
+
+                                <a *ngIf="i<=8" href="grid_options.html" class="dropdown-item">
+                                    <div>
+                                        {{item.Description}}
+                                    </div>
+                            <li class="dropdown-divider"></li>
+
+                            </a>
+
+
+                    </li>
+                    <li>
+                        <div class="text-center link-block">
+                            <a [routerLink]="['/admin/notification']" class="dropdown-item">
+                                <strong>See All Alerts</strong>
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </li>
+
+                </ul>
+                </li>
+
+                <li>
+                    <a (click)="signOut()">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+                </ul>
+
+            </nav>
+        </div>
+
+
+        <router-outlet></router-outlet>
+
+        <div class="footer">
+
+            <div>
+                <strong>{{'shared.copyright'|translate}}</strong> {{'shared.SFDA'|translate}} &copy; 2019
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,35 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+@import "~ngx-bootstrap/datepicker/bs-datepicker.css";
+
+@font-face {
+  /* font-family:'GE SS'; */
+  font-family: 'Ubuntu';
+  /* src:url('/src/assets/vendor/rtl/fonts/ge-ss-med.eot'); */
+  src: local('âک؛'), url('/assets/fonts/NeoSansArabicRegular.ttf') format('truetype');
+  font-weight: normal;
+}
+.ng-select { width: auto !important; max-width: 200px; min-width: 100%; }
+
+.ng-dropdown-panel { width: auto !important; max-width: 550px; min-width: 100%; }
+.income img{width:50px;height:50px}.outcom img{width:50px;height:50px;-webkit-transform:rotate(-180deg);transform:rotate(-180deg)}
+.bg-green{background-color:#11b637!important}.bg-red{background-color:#ef4950!important}
+.tree-node {
+  /* color: red; */
+  /* font-family:'GE SS'; */
+  font-family: 'Ubuntu';
+  /* src:url('/src/assets/vendor/rtl/fonts/ge-ss-med.eot'); */
+  src: local('âک؛'), url('/assets/fonts/NeoSansArabicRegular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+.notification {
+  z-index: 2px;
+}
+
+body .ui-corner-all {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 0px !important; 
+}

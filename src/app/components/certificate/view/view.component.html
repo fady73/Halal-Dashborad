@@ -1,0 +1,69 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Halal Certificate </h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>Admin </a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Halal certificate</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Halal Certificate</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="table-responsive">
+
+                            <table class="table table-stripped toggle-arrow-tiny sortable" id="customers">
+                                <thead>
+                                    <tr>
+                                        <th>Request ID</th>
+                                        <th *ngFor="let column of page.columns">
+                                            {{column.Title}}
+                                        </th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngIf="page.isLoading">
+                                        <td colspan="8">
+                                            <h2>Sorry no certificates found</h2>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="!page.isLoading">
+                                        <td class="padding-top-20">{{item.ID}}</td>
+                                        <td class="padding-top-20">{{item.ApplicationDate | date:'dd-MM-yyyy' }}</td>
+                                        <td class="padding-top-20">{{item.CompanyName}}</td>
+                                        <td class="padding-top-20">{{item.CompanyCountry}}</td>
+                                        <td class="padding-top-20">{{item.CompanyTypeName}}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-transparent">
+                                                    <a [href]="item.CertificateFilePath" target="_blank">
+                                                        <i class="fa fa-eye text-navy1"></i>
+                                                        <div class="text-navy1">View</div>
+                                                    </a>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

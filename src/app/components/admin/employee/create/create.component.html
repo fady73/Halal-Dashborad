@@ -1,0 +1,170 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10" id="submitted">
+    <h3>Employees </h3>
+    <ol class="breadcrumb">
+
+      <li class="breadcrumb-item">
+        <a>Admin</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a>Employees</a>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox ">
+        <div class="ibox-title">
+          <div class="clear-fix">
+            <div class="float-left">
+              <span *ngIf="model.ID==0 && !page.isEdit " class="panel-title">
+                <i *ngIf="!page.isEdit" class="fa fa-plus"></i>
+                {{'employee.title-create'|translate}}
+              </span>
+              <span *ngIf="model.ID > 0 || page.isEdit " class="panel-title">
+                <i class="fa fa-edit"></i>
+                &nbsp;
+                {{'employee.title-edit'|translate}}
+              </span>
+            </div>
+
+            <div class="float-right">
+              <button class="btn-sm btn btn-primary" type="button" [routerLink]="['/admin/employee/index']"
+                id="createcountry">
+                {{'shared.previous'|translate}} <span class="fa fa-backward"></span> </button>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="ibox-content">
+          <div *ngIf="!page.isPageLoaded" class="row text-center">
+            <h1 class="col-lg-12 text-center"><i class="blue fa fa-refresh fa-spin"></i></h1>
+          </div>
+          <form role="form" *ngIf="page.isPageLoaded" [formGroup]="page.form" (ngSubmit)="save()">
+            <div class="row">
+              <div class="form-group  col-md-4"
+                [class.has-error]="!controls.FirstName.valid && (controls.FirstName.dirty||controls.FirstName.touched)"
+                [class.has-success]="controls.FirstName.valid && (controls.FirstName.dirty||controls.FirstName.touched)">
+                <label class="control-label">{{'shared.first-name'|translate}}
+                  <span class="text text-danger">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="FirstName">
+                <div *ngIf="!controls.FirstName.valid && controls.FirstName.dirty" class="text text-danger">
+                  <p *ngIf="controls.FirstName.hasError('required')">
+                    {{'shared.validation.first-name-required'|translate}}</p>
+                  <p *ngIf="controls.FirstName.hasError('minlength')">{{'shared.validation.min-length'|translate}}
+                  </p>
+                  <p *ngIf="controls.FirstName.hasError('maxlength')">
+                    {{'shared.validation.shared.max-length'|translate}}</p>
+                </div>
+              </div>
+              <div class="form-group  col-md-4"
+                [class.has-error]="!controls.LastName.valid && controls.LastName.touched">
+                <label class="control-label">{{'shared.last-name'|translate}} <span
+                    class="text text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="LastName">
+                <div *ngIf="!controls.LastName.valid && controls.LastName.dirty" class="text text-danger">
+                  <p *ngIf="controls.LastName.hasError('required')">{{'shared.validation.last-name-required'|translate}}
+                  </p>
+                  <p *ngIf="controls.LastName.hasError('maxlength')">{{'shared.validation.shared.max-length'|translate}}
+                  </p>
+                </div>
+              </div>
+              <div class="form-group  col-md-4" [class.has-error]="!controls.Email.valid && controls.Email.touched">
+                <label class="control-label">{{'shared.email'|translate}} <span class="text text-danger">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="Email">
+                <div *ngIf="!controls.Email.valid && controls.Email.dirty" class="text text-danger">
+                  <div class="valid-label" *ngIf="controls.Email.hasError('required')">
+                    {{'shared.validation.email-required'|translate}}</div>
+                  <div class="valid-label" *ngIf="controls.Email.hasError('maxLength')">
+                    {{'shared.validation.max-50-char'|translate}}</div>
+                  <div class="valid-label" *ngIf="controls.Email.hasError('pattern')">
+                    {{'shared.validation.valid-email'|translate}}
+                  </div>
+                  <!-- <p *ngIf="controls.Email.hasError('required')">{{'shared.validation.required'|translate}}</p> -->
+                  <!-- <p *ngIf="controls.Email.hasError('maxlength')">{{'shared.validation.shared.max-length'|translate}} -->
+                  <!-- </p> -->
+                </div>
+              </div>
+              <div class="form-group  col-md-4" [class.has-error]="!controls.Phone.valid && controls.Phone.touched">
+                <label class="control-label">{{'shared.phone'|translate}} <span class="text text-danger">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="Phone">
+                <div *ngIf="!controls.Phone.valid && controls.Phone.dirty" class="text text-danger">
+                  <div class="valid-label" *ngIf="controls.Phone.hasError('pattern')">
+                    {{'shared.validation.invalid-phone'|translate}}</div>
+                  <div class="valid-label" *ngIf="controls.Phone.hasError('required')">
+                    {{'shared.validation.phone'|translate}}</div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="col-form-label " for="date_added"> {{'shared.Division'|translate}}</label>
+                  <select class=" form-control" formControlName="Division" [(ngModel)]="select">
+                    <option *ngFor="let item of division let i = index" [selected]="item.ID===select" [value]="item.ID">
+                      {{item.Name}}</option>
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="col-form-label " for="date_added"> Role</label>
+                  <select class=" form-control" formControlName="Role" [(ngModel)]="selectRole">
+                    <option *ngFor="let item of roles ; let i = index" [selected]="item.ID===selectRole"
+                      [value]="item.ID">
+                      {{item.Name}}</option>
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="form-group col-md-4">
+                <label class="control-label">{{'shared.status'|translate}}</label>
+                <label class="custom-check-box">
+                  <input type="checkbox" formControlName="IsActive" />
+                  <span class="checkmark appendcheck" id="IsActive"></span>
+                  <span> &nbsp;{{'shared.is-active'|translate}}</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- <div class="row">
+              <div class="form-group  col-md-6">
+                <label class="control-label">{{'role.title'|translate}}</label>
+                <div *ngFor="let item of roles" class="form-check">
+                  <input type="checkbox" [checked]="item.Selected" (change)="item.Selected=!item.Selected"
+                    class="form-check-input">
+                  <label class="form-check-label">&nbsp; {{item.Name}}</label>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="row">
+              <div class="col-md-12 form-actions pull-right">
+                <button type="submit" [disabled]="disabledSubmit()"
+                  class="btn btn-primary pull-right ">{{'shared.save'|translate}}
+                  <i [hidden]="page.isSaving" class="fa fa-check-square-o"></i>
+                  <i [hidden]="!page.isSaving" class="fa fa-refresh fa-spin"></i>
+                </button>
+              </div>
+            </div>
+
+
+          </form>
+
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

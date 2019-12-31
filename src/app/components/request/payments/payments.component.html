@@ -1,0 +1,82 @@
+<div class="row mt-4" *ngIf="!page.isLoading">
+    <div class="col-4">
+        <div class="agree">
+            <h3>Application fees
+                <span class="badge badge-warnging" *ngIf="payment1.Status == 0 ">{{payment1.StatusName}}</span>
+                <span class="badge badge-primary" *ngIf="payment1.Status == 1 ">{{payment1.StatusName}}</span>
+                <span class="badge badge-danger" *ngIf="payment1.Status == 2 ">{{payment1.StatusName}}</span>
+            </h3>
+            <span *ngIf="payment1.FilePath">
+
+            <p> Upload by consumer &nbsp;&nbsp; {{payment1.UploadByConsumerDate | date :'dd/MM/yyyy'}}</p>
+            <p *ngIf="!payment1.Confirmed"> Reject by admin &nbsp;&nbsp;
+                {{payment1.RejectedByAdminDate  | date :'dd/MM/yyyy'}}</p>
+            <!-- <p> upload by consumer &nbsp;&nbsp; {{payment1.UploadByConsumerDate}}</p> -->
+            <p *ngIf="payment1.Confirmed"> Confirm by admin &nbsp;&nbsp;
+                {{payment1.ConfirmedByAdminDate  | date :'dd/MM/yyyy'}}</p>
+
+            <a *ngIf="payment1.FilePath" class="btn btn-primary mb-3" [href]="payment1.FilePath" target="_blank"> <i
+                    class="fa fa-download text-white"></i>
+                <span class="text-white"> Download payments</span></a>
+            </span>
+                
+            <span *ngIf="!payment1.FilePath">
+                    <h4> There is no payment </h4>
+                    
+                        </span>
+        </div>
+
+    </div>
+    <div class="col-4 ">
+        <div class="agree">
+            <h3>audit fees
+                <span class="badge badge-warnging" *ngIf="payment2.Status == 0 ">{{payment2.StatusName}}</span>
+                <span class="badge badge-primary" *ngIf="payment2.Status == 1 ">{{payment2.StatusName}}</span>
+                <span class="badge badge-danger" *ngIf="payment2.Status == 2 ">{{payment2.StatusName}}</span>
+            </h3>
+            <span *ngIf="payment2.FilePath">
+
+            <p> Upload by consumer &nbsp;&nbsp; {{payment2.UploadByConsumerDate  | date :'dd/MM/yyyy'}}</p>
+            <p *ngIf="!payment2.Confirmed"> Reject by admin &nbsp;&nbsp;
+                {{payment2.RejectedByAdminDate  | date :'dd/MM/yyyy'}}</p>
+            <p *ngIf="payment2.Confirmed"> Confirm by admin &nbsp;&nbsp;
+                {{payment2.ConfirmedByAdminDate  | date :'dd/MM/yyyy'}}</p>
+
+            <a *ngIf="payment2.FilePath" class="btn btn-primary mb-3" [href]="payment2.FilePath" target="_blank"> <i
+                    class="fa fa-download text-white"></i>
+                <span class="text-white"> Download payments</span></a>
+            </span>
+                
+            <span *ngIf="!payment2.FilePath">
+                    <h4> There is no payment </h4>
+                    
+                        </span>
+        </div>
+
+    </div>
+    <div class="col-4 ">
+        <div class="agree">
+            <h3>certfication fees
+                <span class="badge badge-warnging" *ngIf="payment3.Status == 0 ">{{payment3.StatusName}}</span>
+                <span class="badge badge-primary" *ngIf="payment3.Status == 1 ">{{payment3.StatusName}}</span>
+                <span class="badge badge-danger" *ngIf="payment3.Status == 2 ">{{payment3.StatusName}}</span>
+            </h3>
+            <span *ngIf="payment3.FilePath">
+
+            <p> Upload by consumer &nbsp;&nbsp; {{payment2.UploadByConsumerDate  | date :'dd/MM/yyyy'}}</p>
+            <p *ngIf="!payment3.Confirmed"> Reject by admin &nbsp;&nbsp;
+                {{payment3.RejectedByAdminDate  | date :'dd/MM/yyyy'}}</p>
+            <p *ngIf="payment3.Confirmed"> Confirm by admin &nbsp;&nbsp;
+                {{payment3.ConfirmedByAdminDate  | date :'dd/MM/yyyy'}}</p>
+            <a *ngIf="payment3.FilePath" class="btn  btn-primary  mb-3" [href]="payment3.FilePath" target="_blank"> <i
+                    class="fa fa-download text-white"></i>
+                <span class="text-white"> Download payments</span></a>
+            </span>
+                
+            <span *ngIf="!payment2.FilePath">
+                    <h4> There is no payment </h4>
+                    
+                        </span>
+        </div>
+    </div>
+</div>

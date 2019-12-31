@@ -1,0 +1,441 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Consumer's accounts </h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>Admin </a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Consumer's accounts</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Consumer's accounts</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form" [formGroup]="page.seachForm">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label " for="date_added">Country</label>
+                                    <select class=" form-control" formControlName="CountryID">
+                                        <option value="null">All</option>
+                                        <option *ngFor="let item of countries" [value]="item.ID">{{item.Name}}</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label ">Company Name</label>
+                                    <input type="text" class="form-control" formControlName="Name">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label " for="date_added">Mobile</label>
+                                    <input type="text" class="form-control" formControlName="Phone">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label label1" for="status">Consumer Status</label>
+                                    <select class=" form-control status" formControlName="Status">
+                                        <option value="null">All</option>
+                                        <option *ngFor="let item of consumerStatus" [value]="item.ID">{{item.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group" id="data_1">
+                                    <label class="col-form-label label1" for="date_added">From date</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                            bsDatepicker type="text" formControlName="FromDate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label label1" for="date_modified"> To date</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input bsDatepicker type="text" formControlName="ToDate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row filter">
+                            <div class="col-sm-12">
+                                <button type="button" (click)="onSearchClicked()" class="btn btn-primary float-right">
+                                    <i class="fa fa-filter"></i>
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="table-responsive">
+
+                            <table class="table table-stripped toggle-arrow-tiny" data-page-size="15" id="customers">
+                                <thead>
+                                    <tr class='clickable-row' data-href=''>
+
+                                        <!-- <th data-hide="id">#</!-->
+                                        <th data-hide="id">Consumer ID</th>
+                                        <th data-hide="all">Registration date</th>
+                                        <th data-hide="name">Account Type</th>
+                                        <th data-hide="phone">First Name</th>
+                                        <th data-hide="phone">Last Name</th>
+
+                                        <th data-hide="all">Company Name</th>
+                                        <th data-hide="phone">Country</th>
+                                        <th data-hide="phone">Phone </th>
+
+                                        <th data-hide="id">Actions</th>
+                                        <!-- <th data-hide="id">Cancel</th> -->
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr [hidden]="!page.isLoading">
+                                        <td colspan="10">
+                                            <h1><i class="blue fa fa-refresh fa-spin"></i></h1>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="!page.isLoading && items.length==0">
+                                        <td colspan="10">
+                                            <h2>Sorry no consumer's found</h2>
+                                        </td>
+                                    </tr>
+                                    <tr *ngFor="let item of items | paginate : page.options;let i=index;">
+                                        <!-- <td class="padding-top-20">
+                                            {{page.options.itemsPerPage*(page.options.currentPage-1)+ i+1}}</td> -->
+                                        <td class="padding-top-20">{{item.ID}}</td>
+                                        <td class="padding-top-20">{{item.ApplicationDate |date:'dd-MM-yyyy'}} </td>
+                                        <td class="padding-top-20">{{item.TypeName}}</td>
+                                        <td class="padding-top-20">{{item.FirstName}}</td>
+                                        <td class="padding-top-20">{{item.LastName}}</td>
+                                        <td class="padding-top-20">{{item.CompanyName}}</td>
+                                        <td class="padding-top-20">{{item.CountryName}}</td>
+                                        <td class="padding-top-20">{{item.Phone}}</td>
+
+
+                                        <td>
+                                            <div class="btn-group">
+                                                <button (click)="showViewModal(item)" class="btn  btn-transparent">
+                                                    <i class="fa fa-eye text-navy" title="View"></i>
+                                                    <div class="text-navy">View</div>
+                                                </button>
+
+                                                <button *ngIf="item.Status==0" (click)="showApproveConfirmation(item)"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-check text-navy1"></i>
+                                                    <div class="text-navy1">Approve</div>
+                                                </button>
+                                                <button *ngIf="item.Status==0" (click)="showDeclineConfirmation(item)"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-times text-danger"></i>
+                                                    <div class="text-danger">Decline</div>
+                                                </button>
+                                                <button *ngIf="item.Status!=0" (click)="showCancelConfirmation(item)"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-trash text-danger"></i>
+                                                    <div class="text-danger">Delete</div>
+                                                </button>
+                                            </div>
+                                            <!-- <span class="view">
+                                                <a [routerLink]="['/consumer/edit',item.ID]"><i class="fa fa-eye"></i>
+                                                    <div>view</div>
+                                                </a></span>
+                                            <span (click)="showApproveConfirmation(item)" class="view"><i
+                                                    class="fa fa-check"></i>
+                                                <div>Approve</div>
+                                            </span>
+                                            <span (click)="showDeclineConfirmation(item)" class="view"><i
+                                                    class="fa fa-times"></i>
+                                                <div> Decline</div>
+                                            </span>
+                                            <span (click)="showCancelConfirmation(item)" class="view"><i
+                                                    class="fa fa-trash"></i>
+                                                <div> Delete</div>
+                                            </span> -->
+                                        </td>
+                                        <!-- <td><button (click)="showCancelConfirmation(item)" class="btn btn-xs btn-danger"
+                                                [disabled]="item.Status == 3">
+                                                <span class="label label-danger">Cancel
+                                                    consumer</span>
+                                            </button>
+                                        </td> -->
+
+                                    </tr>
+                                    <!------------------------------------------------------------------------>
+                                    <!--
+                                     <tr>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button (click)="showViewModal(item)" class="btn  btn-transparent">
+                                                    <i class="fa fa-eye text-navy" title="View"></i>
+                                                    <div class="text-navy">View</div>
+                                                </button>
+
+                                                <button  (click)="showApproveConfirmation(item)"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-check text-navy1"></i>
+                                                    <div class="text-navy1">Approve</div>
+                                                </button>
+                                                <button  (click)="showDeclineConfirmation(item)"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-times text-danger"></i>
+                                                    <div class="text-danger">Decline</div>
+                                                </button>
+                                                <button  (click)="showCancelConfirmation(item)"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-trash text-danger"></i>
+                                                    <div class="text-danger">Delete</div>
+                                                </button>
+                                            </div>
+                                            </td>
+                                     </tr>-->
+                                    <!--------------------------------------------------->
+
+                                </tbody>
+
+                                <tfoot>
+                                    <tr [hidden]="page.isLoading">
+                                        <td colspan="3" *ngIf="page.options.totalItems>0">
+                                            {{'shared.page'|translate}} {{page.options.currentPage}}
+                                            {{'shared.of'|translate}}
+                                            {{page.options.totalPages}}
+                                            - {{'shared.total-items'|translate}} : {{page.options.totalItems}}
+                                        </td>
+                                        <td colspan="7" class="text-right" *ngIf="page.options.totalItems>0">
+                                            <pagination-controls (pageChange)="getNextPrevData($event)" id='Pagination'
+                                                maxSize="10" directionLinks="true" autohide="true" previousLabel=""
+                                                nextLabel="">
+                                            </pagination-controls>
+
+                                        </td>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #cancelTemplate>
+    <div class="cancelTemplate">
+        <div class="modal-header ">
+            <h4 class="modal-title pull-left">{{'shared.cancel-confirmation.title'|translate}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body ">
+            <p> {{'shared.cancel-confirmation.message'|translate}}<br> <strong
+                    *ngIf="selectedItem">{{selectedItem.CompanyName}}</strong></p>
+
+        </div>
+        <div class="modal-footer text-center">
+
+            <button type="button" class="btn btn-outline btn-danger" (click)="modalRef.hide()"> &nbsp; &nbsp;&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{'shared.cancel'|translate}} &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;</button>
+            <button type="button" *ngIf="selectedItem" class="btn  btn-danger margin-h-10 "
+                (click)="remove(selectedItem);modalRef.hide();"> &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;{{'shared.yes'|translate}}&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #approveTemplate>
+
+    <div class="approveTemplate">
+        <div class="modal-header ">
+            <h4 class="modal-title pull-left">{{'shared.approve-confirmation.title'|translate}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p> {{'request.approve-confirm-message'|translate}}<br> <strong
+                    *ngIf="selectedItem">{{selectedItem.CompanyCountry}}</strong></p>
+        </div>
+
+        <div class="modal-footer text-center">
+            <!--  <button class="btn btn-sm btn-primary float-right m-t-n-xs" onclick="$('#modal-form2').modal('hide');" type="submit"id="close"><strong>Close</strong></button>-->
+
+
+            <button type="button" class="btn btn-outline btn-primary" (click)="modalRef.hide()">&nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp;{{'shared.cancel'|translate}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+            <button type="button" class="btn  btn-primary margin-h-10 "
+                (click)="approve(selectedItem);modalRef.hide();">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;{{'shared.yes'|translate}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</button>
+        </div>
+    </div>
+
+</ng-template>
+<ng-template #declineTemplate>
+    <div class="declineTemplate">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">{{'shared.decline-confirmation.title'|translate}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body ">
+            <p> {{'shared.decline-confirmation.message'|translate}}<br> <strong
+                    *ngIf="selectedItem">{{selectedItem.CompanyCountry}}</strong></p>
+
+
+        </div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn btn-outline btn-danger" (click)="modalRef.hide()"> &nbsp; &nbsp;&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{'shared.cancel'|translate}}&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;</button>
+            <button type="button" *ngIf="selectedItem" class="btn  btn-danger margin-h-10 "
+                (click)="approve(selectedItem);modalRef.hide();">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;{{'shared.yes'|translate}}&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #viewTemplate>
+    <!-- <div class="modal-header approveTemplate">
+        <h4 class="modal-title pull-left">{{'shared.approve-confirmation.title'|translate}}</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div> -->
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-9">
+                <h3> Application View</h3>
+            </div>
+            <div class="col-3">
+                <button type="button" class="close float-right" aria-label="Close" (click)="modalRef.hide()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Consumer ID</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.ID}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Registration date </p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.ApplicationDate | date:'dd-MM-yyyy'}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Account type</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.TypeName}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>First name</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.FirstName}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Last name</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.LastName}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Company name</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.CompanyName}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Company address</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.Address}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Company country</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.CountryName}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Phone number</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.Phone}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Email</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.Email}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <p>Account status</p>
+            </div>
+            <div class="col-6">
+                {{selectedItem.StatusName}}
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary pull-right" (click)="modalRef.hide()">&nbsp; &nbsp;&nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Close&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp;</button>
+    </div>
+</ng-template>

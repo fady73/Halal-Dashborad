@@ -1,0 +1,157 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-sm-4">
+    <h2>Submitted Audit report</h2>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a>Admin</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a>Submitted Audit report</a>
+      </li>
+
+    </ol>
+  </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox ">
+        <div class="ibox-title">
+          <div class="row">
+            <div class="col-lg-12">
+              <h5 class="padding-top-5">Halal Aduit report</h5>
+            </div>
+          </div>
+        </div>
+        <div class="ibox-content">
+
+          <div class="wizard text-center">
+
+            <label class="widget style1 navy-bg col-sm-3 text-center margin-left-30 widgetresponsive">Section 1 </label>
+            <label class=" widget style1 navy-bg col-sm-3 text-center margin-left-30 widgetresponsive">Section 2
+            </label>
+            <label class=" widget style1 gray-bg col-sm-3 text-center margin-left-30 widgetresponsive">Section 3
+            </label>
+
+          </div>
+
+
+          <br>
+          <br>
+
+          <form role="form" [formGroup]="page.form" *ngIf="page.isPageLoaded">
+
+
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">
+                <h3>Audit objectives
+                </h3>
+              </label>
+
+            </div>
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['MeetAllRequirements'].valid && page.form.controls['MeetAllRequirements'].touched">
+              <label class="control-label col-sm-3">Verify that the management system has planned to meet all
+                requirements of the audit specification *</label>
+
+              <textarea class="form-control col-sm-8 rounded-0" rows="5"
+                formControlName="MeetAllRequirements"></textarea>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['MeetAllRequirements'].valid && page.form.controls['MeetAllRequirements'].touched">
+                <p *ngIf="page.form.controls['MeetAllRequirements'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['AchieveObejectives'].valid && page.form.controls['AchieveObejectives'].touched">
+              <label class="control-label col-sm-3">Verify that the management system is designed to achieve the
+                objectives of the enterprise policy * </label>
+
+              <textarea class="form-control col-sm-8 rounded-0" rows="5"
+                formControlName="AchieveObejectives"></textarea>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['AchieveObejectives'].valid && page.form.controls['AchieveObejectives'].touched">
+                <p *ngIf="page.form.controls['AchieveObejectives'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['ComplyWithRequirements'].valid && page.form.controls['ComplyWithRequirements'].touched">
+              <label class="control-label col-sm-3">To assess the ability of the management system to comply with legal,
+                legislative and contractual requirements * </label>
+
+              <textarea class="form-control col-sm-8 rounded-0" rows="5"
+                formControlName="ComplyWithRequirements"></textarea>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['ComplyWithRequirements'].valid && page.form.controls['ComplyWithRequirements'].touched">
+                <p *ngIf="page.form.controls['ComplyWithRequirements'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['ConfirmPlannedAgreement'].valid && page.form.controls['ConfirmPlannedAgreement'].touched">
+              <label class="control-label col-sm-3"> To confirm the agreement planned for the second phase of the audit
+                * </label>
+
+              <textarea class="form-control col-sm-8 rounded-0" rows="5"
+                formControlName="ConfirmPlannedAgreement"></textarea>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['ConfirmPlannedAgreement'].valid && page.form.controls['ConfirmPlannedAgreement'].touched">
+                <p *ngIf="page.form.controls['ConfirmPlannedAgreement'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+
+
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-3">
+                <h3>Scope of audit
+                </h3>
+              </label>
+
+            </div>
+
+
+            <div class="form-group row margin-left-30"
+              [class.has-error]="!page.form.controls['AuditScope'].valid && page.form.controls['AuditScope'].touched">
+              <label class="control-label col-sm-3"> Has this scope been modified according to the results of this audit
+                * </label>
+              <textarea class="form-control col-sm-8 rounded-0" rows="5" formControlName="AuditScope"></textarea>
+              <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                *ngIf="!page.form.controls['AuditScope'].valid && page.form.controls['AuditScope'].touched">
+                <p *ngIf="page.form.controls['AuditScope'].hasError('required')">
+                  {{'shared.validation.required'|translate}}</p>
+              </div>
+            </div>
+
+
+            <div class="form-group row margin-left-30">
+              <label class="control-label col-sm-8">Note: If you modify the scope, the primary auditor reviews whether
+                the changes require a new contract review, for example. Audit time is sufficient, the audit team is
+                qualified for the new sector (s) within the scope of the audit </label>
+            </div>
+
+
+            <div class="row">
+              <div class="col-sm-12 mt-5">
+                <button type="submit" (click)="save()" [disabled]="disableSubmit()"
+                  class="btn btn-primary float-right margin-h-10 "> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Save & continue
+                  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

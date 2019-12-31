@@ -1,0 +1,48 @@
+<div class="row buttons mt-4">
+    <div class="col-3">
+        <button class="btn btn-primary btn-full-width" *ngIf="selectedItem.Status>=8" [routerLink]="['/audit-plan/view',requestID]"> View Audit
+            Plan</button>
+            <button class="btn btn-secondary btn-full-width" *ngIf="selectedItem.Status<8"> View Audit
+                    Plan</button>
+            <!-- *ngIf="item.StaffRequiredAction==9" -->
+    </div>
+    <!-- item.StaffRequiredAction==10" -->
+
+    <div class="col-3" *ngIf="item.NCRFilePath">
+        <a class="btn btn-primary btn-full-width" [href]="item.NCRFilePath" target="_blank"> Download NCR</a>
+    </div>
+    <div class="col-3" *ngIf="!item.NCRFilePath">
+            <a class="btn btn-secondary bt btn-full-width" target="_blank"> Download NCR</a>
+    </div>
+
+
+    <div class="col-3" >
+        <button *ngIf="item.NCRFilePath" class="btn btn-primary btn-full-width" [routerLink]="['/audit-plan/view-ncr',requestID]">
+            View NCR form</button>
+            <button *ngIf="!item.NCRFilePath"  class="btn btn-secondary btn-full-width">
+                    View NCR form</button>
+<!-- item.StaffRequiredAction==13" -->
+    </div>
+    <div class="col-3" >
+        <button   *ngIf="auditReport.AuditReportPDFFilePath"  class="btn btn-primary btn-full-width" [routerLink]="['/audit-plan/view-corrective-action',requestID]">
+            Review corrective action</button>
+            <button  *ngIf="!auditReport.AuditReportPDFFilePath" class="btn btn-secondary btn-full-width" >
+                    Review corrective action</button>
+    </div>
+
+
+    <!-- <div class="col-3">
+        <button class="btn btn-primary btn-full-width"> Review surveillance report</button>
+item.StaffRequiredAction==14
+    </div> -->
+    <div class="col-3" *ngIf="auditReport.AuditReportPDFFilePath">
+        <a class="btn btn-primary btn-full-width text-white" [href]="auditReport.AuditReportPDFFilePath"
+            target="_blank" > Review audit Report</a>
+
+    </div>
+    <div class="col-3" *ngIf="!auditReport.AuditReportPDFFilePath">
+            <a class="btn btn-secondary btn-full-width text-white"
+                target="_blank" > Review audit Report</a>
+    
+        </div>
+</div>

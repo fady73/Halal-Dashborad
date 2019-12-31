@@ -1,0 +1,799 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Submitted Audit report</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Submitted Audit report</a>
+            </li>
+          
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="padding-top-5">Halal Aduit report</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="wizard text-center">
+
+                        <label
+                            class="widget style1 navy-bg col-sm-3 text-center margin-left-30 widgetresponsive">Section 1
+                        </label>
+                        <label
+                            class=" widget style1 navy-bg col-sm-3 text-center margin-left-30 widgetresponsive">Section
+                            2 </label>
+                        <label
+                            class=" widget style1 navy-bg col-sm-3 text-center margin-left-30 widgetresponsive">Section
+                            3 </label>
+
+                    </div>
+
+
+                    <br>
+                    <br>
+
+                    <form role="form" [formGroup]="page.form" *ngIf="page.isPageLoaded" >
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-8">The mismatches detailed herein are handled by the
+                                institution's corrective action procedures, in accordance with the requirements of the
+                                relevant corrections to the audit standard, including procedures to analyze the cause of
+                                non-conformity and prevent recurrence and the complete records retained.
+                            </label>
+
+                        </div>
+
+                        <br>
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-8">Corrective action plans are submitted to close the
+                                non-conformity within seven days of the audit</label>
+
+                        </div>
+                        <br>
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-8">
+                                <h4>The following procedure applies to the mismatches detailed in the following table
+                                </h4>
+                            </label>
+
+
+                        </div>
+
+                        <div class="form-group row margin-left-30">
+                            <div class="table-responsive">
+                                <table class="table table-stripped table-borderless " id="customers">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>case of non-conformity</th>
+                                            <th>Corrective action</th>
+                                            <th>Approval of corrective action by audit team</th>
+                                            <th>Audit date </th>
+                                            <th>Reviewed and approved by </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of model.NSCs">
+                                            <td>
+                                                {{item.ID}}
+                                            </td>
+                                            <td> {{item.Description}}</td>
+                                            <td>{{item.CorrectiveAction}}</td>
+                                            <td> {{item.NCCloseStatusName}} </td>
+                                            <td>{{item.Date |date :'dd/MM/yyyy'}}</td>
+                                            <td>
+                                                {{item.AssessorName}}
+                                                <!-- <select class="form-control">
+                                                    <option selected></option>
+                                                    <option>2</option>
+
+                                                </select> -->
+                                            </td>
+                                        </tr>
+                                        <!-- 
+                                        <tr>
+                                            <td>
+                                                <input type="text" formControlName="CompanyAddress"
+                                                    class="form-control">
+                                            </td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td> <input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"> </td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td>
+                                                <select class="form-control">
+                                                    <option selected></option>
+                                                    <option>2</option>
+
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="text" formControlName="CompanyAddress"
+                                                    class="form-control">
+                                            </td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td> <input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"> </td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td>
+                                                <select class="form-control">
+                                                    <option selected></option>
+                                                    <option>2</option>
+
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" formControlName="CompanyAddress"
+                                                    class="form-control">
+                                            </td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td> <input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"> </td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td>
+                                                <select class="form-control">
+                                                    <option selected></option>
+                                                    <option>2</option>
+
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <input type="text" formControlName="CompanyAddress"
+                                                    class="form-control">
+                                            </td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td> <input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"> </td>
+                                            <td><input type="text" formControlName="CompanyAddress"
+                                                    class="form-control"></td>
+                                            <td>
+                                                <select class="form-control">
+                                                    <option selected></option>
+                                                    <option>2</option>
+
+                                                </select>
+                                            </td>
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-3">Halal requirements as per GSO 2055-1: 2015: </label>
+
+                        </div>
+
+                        <div class="form-group row col-sm-8  margin-left-30 ">
+                            <div class="table-responsive">
+                                <table class="table table-striped ">
+
+                                    <tbody>
+                                        <ng-template ngFor let-item [ngForOf]="model.AuditReportRequirements"
+                                            let-i="index">
+                                            <tr *ngIf="item.RequirementType == 0 ">
+                                                <td>
+                                                    {{item.RequirementName}}
+                                                </td>
+                                                <td> <label class="custom-radio-btn ">Yes
+                                                        <input [checked]="item.Found" (change)="onValidChanged(true ,i)"
+                                                            type="radio"
+                                                            name="yes-no-{{item.RequirementType}}-{{item.RequirementID}}" />
+                                                        <span class="checkmark"></span>
+                                                    </label></td>
+                                                <td> <label class="custom-radio-btn ">No
+                                                        <input [checked]="!item.Found"
+                                                            (change)="onValidChanged(false ,i)" type="radio"
+                                                            name="yes-no-{{item.RequirementType}}-{{item.RequirementID}}" />
+                                                        <span class="checkmark"></span>
+                                                    </label></td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                        <!-- <tr>
+                                            <td>
+                                           2.Packing materials
+                                            </td>
+                                            <td>   <label class="custom-radio-btn ">Yes
+                                                <input [value]="true" type="radio"
+                                                    name="yes-no-section-8" />
+                                                <span class="checkmark"></span>
+                                            </label></td>
+                                            <td>  <label class="custom-radio-btn ">No
+                                                <input [value]="true" type="radio"
+                                                    name="yes-no-section-8" />
+                                                <span class="checkmark"></span>
+                                            </label></td>
+                                           
+                                           
+                                        </tr>
+  
+                                        <tr>
+                                            <td>
+                                             3.Halal food outlets, handling and service facilities
+                                            </td>
+                                            <td>   <label class="custom-radio-btn ">Yes
+                                                <input [value]="true" type="radio"
+                                                    name="yes-no-section-8" />
+                                                <span class="checkmark"></span>
+                                            </label></td>
+                                            <td>  <label class="custom-radio-btn ">No
+                                                <input [value]="true" type="radio"
+                                                    name="yes-no-section-8" />
+                                                <span class="checkmark"></span>
+                                            </label></td>
+                                           
+                                           
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                             4.Storage, display and transportation
+                                            </td>
+                                            <td>   <label class="custom-radio-btn ">Yes
+                                                <input [value]="true" type="radio"
+                                                    name="yes-no-section-8" />
+                                                <span class="checkmark"></span>
+                                            </label></td>
+                                            <td>  <label class="custom-radio-btn ">No
+                                                <input [value]="true" type="radio"
+                                                    name="yes-no-section-8" />
+                                                <span class="checkmark"></span>
+                                            </label></td>
+                                           
+                                           
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                             5.Explanatory data
+                                            </td>
+                                            <td>   <label class="custom-radio-btn ">Yes
+                                                <input [value]="true" type="radio"
+                                                    name="yes-no-section-8" />
+                                                <span class="checkmark"></span>
+                                            </label></td>
+                                            <td>  <label class="custom-radio-btn ">No
+                                                <input [value]="true" type="radio"
+                                                    name="yes-no-section-8" />
+                                                <span class="checkmark"></span>
+                                            </label></td>
+                                           
+                                           
+                                        </tr>
+                                       
+                                       -->
+
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed-space"></div>
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-3">Management requirements
+                            </label>
+
+                        </div>
+
+                        <div class="form-group row col-sm-8  margin-left-30 ">
+                            <div class="table-responsive">
+                                <table class="table table-striped ">
+
+                                    <tbody>
+
+                                        <ng-template ngFor let-item [ngForOf]="model.AuditReportRequirements"
+                                            let-i="index">
+                                            <tr *ngIf="item.RequirementType == 1 ">
+                                                <td>
+                                                    {{item.RequirementName}}
+                                                </td>
+                                                <td> <label class="custom-radio-btn ">Yes
+                                                        <input [checked]="item.Found" (change)="onValidChanged(true ,i)"
+                                                            type="radio"
+                                                            name="yes-no-{{item.RequirementType}}-{{item.RequirementID}}" />
+                                                        <span class="checkmark"></span>
+                                                    </label></td>
+                                                <td> <label class="custom-radio-btn ">No
+                                                        <input [checked]="!item.Found"
+                                                            (change)="onValidChanged(false ,i)" type="radio"
+                                                            name="yes-no-{{item.RequirementType}}-{{item.RequirementID}}" />
+                                                        <span class="checkmark"></span>
+                                                    </label></td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                        <!-- <tr>
+                                            <td>
+                                                2.Legal Identity
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                3. Policy / Objectives of Halal
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                4.Responsibility and Roles
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                5.Management Review
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                6.Resources (temporary / human)
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                7.Communication (internal / external)
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed-space"></div>
+
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-3">Food safety requirements
+                            </label>
+
+                        </div>
+
+                        <div class="form-group row col-sm-8  margin-left-30 ">
+                            <div class="table-responsive">
+                                <table class="table table-striped ">
+
+                                    <tbody>
+
+                                        <ng-template ngFor let-item [ngForOf]="model.AuditReportRequirements"
+                                            let-i="index">
+                                            <tr *ngIf="item.RequirementType == 2 ">
+                                                <td>
+                                                    {{item.RequirementName}}
+                                                </td>
+                                                <td> <label class="custom-radio-btn ">Yes
+                                                        <input [checked]="item.Found" (change)="onValidChanged(true ,i)"
+                                                            type="radio"
+                                                            name="yes-no-{{item.RequirementType}}-{{item.RequirementID}}" />
+                                                        <span class="checkmark"></span>
+                                                    </label></td>
+                                                <td> <label class="custom-radio-btn ">No
+                                                        <input [checked]="!item.Found"
+                                                            (change)="onValidChanged(false ,i)" type="radio"
+                                                            name="yes-no-{{item.RequirementType}}-{{item.RequirementID}}" />
+                                                        <span class="checkmark"></span>
+                                                    </label></td>
+
+
+                                            </tr>
+                                        </ng-template>
+
+                                        <!-- <tr>
+                                            <td>
+                                                2.A multi-disciplinary team, assign the team leader, Team specialization
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                3. Characteristics of products (specification of the final product, raw
+                                                material properties, PM properties) and end-use
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                4.Flow Chart / Check Flow Chart
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                5.Risk analysis
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                6.CCP /Critical Limit / HACCP plan
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                7.CCP control
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                8.Corrective action / non-conformity control including customer
+                                                complaint
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr> -->
+
+                                        <!-- 
+                                        <tr>
+                                            <td>
+                                                9.Verification (internal audit, testing, etc.), / verification of
+                                                control procedures
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                10.Documentation (control documents and records)
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                11.Tracking system
+                                            </td>
+                                            <td> <label class="custom-radio-btn ">Yes
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+                                            <td> <label class="custom-radio-btn ">No
+                                                    <input [value]="true" type="radio" name="yes-no-section-8" />
+                                                    <span class="checkmark"></span>
+                                                </label></td>
+
+
+                                        </tr>
+
+ -->
+
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed-space"></div>
+
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-3">Pre-program (Health Requirements)
+                            </label>
+
+                        </div>
+
+                        <div class="form-group row col-sm-8  margin-left-30 ">
+                            <div class="table-responsive">
+                                <table class="table table-striped ">
+
+                                    <tbody>
+                                        <ng-template ngFor let-item [ngForOf]="model.AuditReportRequirements"
+                                            let-i="index">
+                                            <tr *ngIf="item.RequirementType == 3 ">
+                                                <td>
+                                                    {{item.RequirementName}}
+                                                </td>
+                                                <td> <label class="custom-radio-btn ">Yes
+                                                        <input [checked]="item.Found" (change)="onValidChanged(true ,i)"
+                                                            type="radio"
+                                                            name="yes-no-{{item.RequirementType}}-{{item.RequirementID}}" />
+                                                        <span class="checkmark"></span>
+                                                    </label></td>
+                                                <td> <label class="custom-radio-btn ">No
+                                                        <input [checked]="!item.Found"
+                                                            (change)="onValidChanged(false ,i)" type="radio"
+                                                            name="yes-no-{{item.RequirementType}}-{{item.RequirementID}}" />
+                                                        <span class="checkmark"></span>
+                                                    </label></td>
+
+
+                                            </tr>
+                                        </ng-template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed-space"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-3"> strength point * </label>
+                            <textarea class="form-control col-sm-8 rounded-0" rows="5"
+                                formControlName="StrengthPoints"></textarea>
+                        </div>
+
+                        <div class="form-group row margin-left-30">
+                            <label class="control-label col-sm-3">Recommendation * </label>
+                            <div class=" col-sm-8">
+                                <label class="custom-radio-btn ">Approve
+                                    <input value="0" formControlName="Recommendation" type="radio"
+                                        id="yes-no-section-8-0" />
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <label class="control-label col-sm-3"> </label>
+                            <div class=" col-sm-8">
+                                <label class="custom-radio-btn ">Decline
+                                    <input value="1" formControlName="Recommendation" type="radio"
+                                        id="yes-no-section-8-1" />
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+
+
+                            <label class="control-label col-sm-3"> </label>
+
+                            <label class="custom-radio-btn margin-left-15">Others:
+                                <input value="2" formControlName="Recommendation" type="radio"
+                                    id="yes-no-section-8-2" />
+                                <span class="checkmark"></span>
+                            </label>
+                            &nbsp; &nbsp; &nbsp;
+                            <input class="form-control col-sm-6  " formControlName="Notes" type="text">
+                        
+                        </div>
+                        
+                        <div class="col-sm-2 file-upload up-files padding-top-15 form-group">
+                            <!-- <label class="text-navy">or</label> -->
+                            <label class=" btn btn-primary">
+                                <i class="fa fa-plus"></i>
+                                <!-- Uplaod files -->
+                                {{'shared.upload-files'|translate}}
+                                <input  type="file" multiple class="bg-primary"
+                                    accept=".doc, .docx,.pdf" #myInput
+                                    (change)="onFileChanged($event)" />
+                            </label>
+                        </div>
+                        <div class="row mtop-60"
+                        *ngIf="model.AuditPdfAttachments && model.AuditPdfAttachments.length>0">
+                        <div class="file-uploaded offset-sm-3 col-sm-6">
+                            <br /><b class="text-navy">{{'shared.uploaded-files'|translate}}</b>
+                            <br />
+                            <div class="col-sm-12"
+                                *ngFor="let item of model.AuditPdfAttachments;let i=index">
+                                <span class="col-sm-1">
+                                    <i class="fa fa-file"></i>
+                                </span>
+                                <span class="col-sm-6">
+                                    <a href="{{item.FilePath}}"
+                                        target="_blank">{{item.FileName}}</a>
+                                </span>
+                                <span class="col-sm-2">
+                                    <!-- *ngIf="!canEdit" -->
+                                    <i  (click)="removeAttachment(i)"
+                                        class="fa fa-trash"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="row">
+                            <div class="col-sm-12 mt-5">
+                                <button type="submit" (click)="save()" [disabled]="disableSubmit()"
+                                    class="btn btn-primary float-right margin-h-10 "> &nbsp; &nbsp; &nbsp; &nbsp;
+                                    &nbsp;&nbsp; Submit &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

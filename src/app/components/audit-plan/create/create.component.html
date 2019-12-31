@@ -1,0 +1,863 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Submitted Audit plan</h2>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Submitted Audit plan</a>
+            </li>
+
+        </ol>
+    </div>
+
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div *ngIf="page.isPageLoaded" class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="padding-top-5">Halal Aduit plan</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row" *ngIf="model.ModificationReasons">
+
+
+                        <div class=" col-sm-8 " id="daft">
+                            <p>
+                                {{model.ModificationReasons}}
+                            </p>
+                        </div>
+
+                        <div class="btn-group-vertical col-sm-3 groubbutton">
+                            <!-- {{item.Version}} -->
+                            <select #inputVersionID (change)="onVersionChanged(inputVersionID.value)"
+                                class="btn btn-primary">
+                                <option *ngFor="let item of versions;let i=index" [value]="item.Version"
+                                    class="btn btn-primary padding-top-5" [selected]="item.Version==selectedVersion">
+                                    <span *ngIf="i<(this.versions.length-1)">
+                                        version {{item.Version}} read only </span>
+                                    <span *ngIf="i==(this.versions.length-1)">
+                                        version {{item.Version}} editable </span>
+                                </option>
+                            </select>
+                            <!-- <button type="button" class="btn btn-primary">Version 2 (editable)    
+                                <i class="fa fa-angle-down fa-lg"></i></button>
+                                <button type="button" class="btn btn-primary">Version 1 (readOnly)</button>
+           -->
+                        </div>
+
+                    </div>
+
+
+                    <br> <br>
+
+                    <form *ngIf="this.selectedVersion<(this.versions.length )" [formGroup]="page.form" role="form">
+                        <div class="form-group row">
+                            <!-- {{model|json}} -->
+                            <label class="control-label col-sm-3">Application title * </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" value="Halal Aduit Plan" type="text" readOnly="true">
+                            </div>
+                        </div>
+
+                        <div class="form-group row ">
+                            <label class="control-label col-sm-3">consumer name * </label>
+                            <div class="col-sm-8">
+                                <input class="form-control " formControlName="ConsumerName" type="text" readOnly="true">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Address * </label>
+                            <div class="col-sm-8">
+                                <input class="form-control " formControlName="Address" type="text" readOnly="true">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed-space"></div>
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['VisitNumber'].valid && page.form.controls['VisitNumber'].touched">
+                            <label class="control-label col-sm-3">Visit number * </label>
+                            <input class="form-control col-sm-8" formControlName="VisitNumber" placeholder="12345"
+                                type="text" [readOnly]="true">
+
+
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="date_modified"> Audit date *</label>
+
+                            <fieldset [disabled]="true" class="col-sm-4">
+
+                                <input bsDatepicker [readonly]="true" type="text" formControlName="AuditDate"
+                                    class="form-control col-sm-12" placeholder="7/4/2020" readOnly="true">
+                            </fieldset>
+                            <span class="col-sm-2 m-t-5"><i class="fa fa-calendar  fa-2x text-navy"></i></span>
+
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Lead auditor * </label>
+
+                            <div class="col-sm-8">
+                                <!-- {{leadAuditors | json}} -->
+                                <ng-select [disabled]="true" [items]="employees" bindLabel="Name" bindValue="ID"
+                                    [multiple]="true" placeholder="Add staff member name" [(ngModel)]="leadAuditors"
+                                    [ngModelOptions]="{standalone: true} " readOnly="true">
+                                </ng-select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <label class="control-label col-sm-3">Team member * </label>
+
+                            <div class="col-sm-8">
+                                <ng-select [disabled]="true" [items]="employees" bindLabel="Name" bindValue="ID"
+                                    [multiple]="true" placeholder="Add staff member name" [(ngModel)]="teamMembers"
+                                    [ngModelOptions]="{standalone: true}" readOnly="true">
+                                </ng-select>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Halal islamic affairs expert * </label>
+
+                            <div class="col-sm-8">
+
+                                <ng-select [disabled]="true" [items]="employees" bindLabel="Name" bindValue="ID"
+                                    [multiple]="true" placeholder="Add staff member name" [(ngModel)]="affairsExperts"
+                                    [ngModelOptions]="{standalone: true}" readOnly="true">
+                                </ng-select>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row" *ngIf="model.AdditionalAttendees.length>0">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9">
+                                <div class="table-responsive">
+                                    <!-- {{model.AdditionalAttendees|json}} -->
+                                    <table class="table  table-bordered audittabel">
+                                        <thead>
+                                            <tr>
+                                                <th>Staff Member
+                                                </th>
+                                                <th>Role
+                                                </th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr *ngFor="let item of model.AdditionalAttendees;let i=index;">
+
+                                                <td>
+                                                    <input type="text" readonly [value]="item.EmployeeName"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="text" [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="item.Role" readOnly="true" class="form-control">
+                                                </td>
+
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Audit Language * </label>
+
+                            <div class="col-sm-3">
+                                <fieldset [disabled]="true">
+
+                                    <label class="custom-radio-btn col-12">Arabic
+                                        <input formControlName="AuditLanguage" [value]="0" type="radio"
+                                            readOnly="true" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </fieldset>
+                            </div>
+                            <div class="col-sm-3">
+                                <fieldset [disabled]="true">
+                                    <label class="custom-radio-btn col-12">English
+                                        <input formControlName="AuditLanguage" [value]="1" type="radio"
+                                            readOnly="true" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </fieldset>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['Standards'].valid && page.form.controls['Standards'].touched">
+                            <label class="control-label col-sm-3">Standards (optional) </label>
+                            <div class="col-sm-8">
+                                <textarea formControlName="Standards" class="form-control  rounded-0"
+                                    placeholder="Write here ...." rows="5" [readOnly]="true"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['Scope'].valid && page.form.controls['Scope'].touched">
+                            <label class="control-label col-sm-3">Audit scope <i>*</i> </label>
+                            <div class="col-sm-8">
+                                <textarea formControlName="Scope" class="form-control  rounded-0"
+                                    placeholder="Write here ...." rows="5" [readOnly]="true"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['Objectives'].valid && page.form.controls['Objectives'].touched">
+                            <label class="control-label col-sm-3">Audit objective (optional) </label>
+                            <div class="col-sm-8">
+                                <textarea formControlName="Objectives" class="form-control  rounded-0"
+                                    placeholder="Write here ...." rows="5" [readOnly]="true"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed-space"></div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table  table-bordered audittabel">
+                                        <thead>
+                                            <tr>
+                                                <th>Date
+                                                </th>
+                                                <th>Time
+                                                </th>
+                                                <th>Auditor
+                                                </th>
+                                                <th>Organizational and Functional Units / Processes and Activities
+                                                </th>
+                                                <th>Key contacts
+                                                </th>
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+
+                                                    <input type="date" [ngModel]="visit.Date | date:'yyyy-MM-dd'"
+                                                        required [ngModelOptions]="{standalone: true}"
+                                                        (ngModelChange)="visit.Date = $event" [disabled]="true"
+                                                        class="form-control" readOnly="true">
+
+                                                </td>
+                                                <td>
+                                                    <input type="time" [ngModel]="visit.Date | date:'HH:mm'" required
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        (ngModelChange)="visit.Time = $event" [disabled]="true"
+                                                        class="form-control" readOnly="true">
+                                                </td>
+
+                                                <td>
+                                                    <select class="form-control" [disabled]="true"
+                                                        [(ngModel)]="visit.AuditorID"
+                                                        [ngModelOptions]="{standalone: true}" readOnly="true">
+                                                        <option *ngFor="let item of employees" [value]="item.ID">
+                                                            {{item.Name}}</option>
+
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.Activities"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control"
+                                                        [disabled]="true" readOnly="true">
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.KeyContacts"
+                                                        [ngModelOptions]="{standalone: true}" [disabled]="true"
+                                                        class="form-control" readOnly="true">
+                                                </td>
+                                                <td class="custom-th " >
+                                                    <button type="button" readOnly="true" (click)="addVisit()"
+                                                        [disabled]="true"
+                                                        class="btn btn-primary1 btn-circle-primary btn-add">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                    <label style="color:black;    white-space: nowrap;">Click to add</label>
+
+                                                </td>
+
+                                            </tr>
+                                            <tr *ngFor="let visit of model.Visits; let i=index">
+                                                <td>
+
+                                                    <input type="date" [ngModel]="visit.Date | date:'yyyy-MM-dd'"
+                                                        required [ngModelOptions]="{standalone: true}" [disabled]="true"
+                                                        (ngModelChange)="visit.Date = $event" readOnly="true"
+                                                        class="form-control">
+
+                                                </td>
+                                                <td>
+                                                    <input readOnly="true" type="time"
+                                                        [ngModel]="visit.Date | date:'HH:mm'" required
+                                                        [ngModelOptions]="{standalone: true}" [disabled]="true"
+                                                        (ngModelChange)="visit.Time = $event" class="form-control">
+                                                </td>
+
+                                                <td>
+                                                    <select readOnly="true" class="form-control"
+                                                        [(ngModel)]="visit.AuditorID" [disabled]="true"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                        <option *ngFor="let item of employees" [value]="item.ID">
+                                                            {{item.Name}}</option>
+
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <input readOnly="true" type="text" [(ngModel)]="visit.Activities"
+                                                        [disabled]="true" [ngModelOptions]="{standalone: true}"
+                                                        class="form-control">
+                                                </td>
+
+                                                <td>
+                                                    <input readOnly="true" type="text" [(ngModel)]="visit.KeyContacts"
+                                                        [disabled]="true" [ngModelOptions]="{standalone: true}"
+                                                        class="form-control">
+                                                </td>
+
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <br>
+                        <div class="m-xl-5">
+                            <h3>Notes to clients:</h3>
+
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small> Times are approximate
+                                    and will be confirmed at the opening meeting prior to commencement of the audit.
+                                </small></h3>
+
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small> SFDA auditors reserve
+                                    the right to change or add to the elements listed before or during the audit
+                                    depending on the results of on-site investigation.
+                                </small></h3>
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small> A private place for
+                                    preparation, review and conferencing is requested for the auditor’s use.
+                                </small></h3>
+
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small>Please provide a light
+                                    working lunch on-site each audit day.
+                                </small></h3>
+
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small> Your contract with
+                                    SFDA is an integral part of this audit plan and details confidentiality
+                                    arrangements, audit scope, information on follow up activities and any reporting
+                                    requirements.
+
+                                </small></h3>
+
+
+
+                        </div>
+
+                        <br>
+                        <br>
+                        <br>
+
+                    </form>
+                    <form *ngIf="this.selectedVersion==(this.versions.length )" [formGroup]="page.form" role="form">
+                        <div class="form-group row">
+                            <!-- {{model|json}} -->
+                            <label class="control-label col-sm-3">Application title * </label>
+                            <input class="form-control col-sm-8" value="Halal Aduit Plan" type="text" readOnly="true">
+                        </div>
+
+                        <div class="form-group row ">
+                            <label class="control-label col-sm-3">consumer name * </label>
+                            <input class="form-control col-sm-8" formControlName="ConsumerName" type="text"
+                                readOnly="true">
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Address * </label>
+                            <input class="form-control col-sm-8" formControlName="Address" type="text" readOnly="true">
+                        </div>
+
+                        <div class="hr-line-dashed-space"></div>
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['VisitNumber'].valid && page.form.controls['VisitNumber'].touched">
+                            <label class="control-label col-sm-3">Visit number * </label>
+                            <div class="col-sm-8">
+                                <input class="form-control" formControlName="VisitNumber" placeholder="12345"
+                                    type="text" [readOnly]="selectedVersion!=model.Version">
+                            </div>
+
+                            <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                                *ngIf="!page.form.controls['VisitNumber'].valid && page.form.controls['VisitNumber'].touched">
+                                <p *ngIf="page.form.controls['VisitNumber'].hasError('required')">
+                                    {{'shared.validation.required'|translate}}</p>
+                                <p *ngIf="page.form.controls['VisitNumber'].hasError('maxlength')">
+                                    {{'shared.validation.max-9-char'|translate}}</p>
+                                <p *ngIf="page.form.controls['VisitNumber'].hasError('pattern')">
+                                    {{'shared.validation.number-only'|translate}}</p>
+                                <p *ngIf="page.form.controls['VisitNumber'].hasError('min')">
+                                    {{'shared.validation.required'|translate}}</p>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3" for="date_modified"> Audit date *</label>
+
+                            <fieldset [disabled]="selectedVersion!=model.Version" class="col-sm-4">
+
+                                <input bsDatepicker [readonly]="selectedVersion!=model.Version" type="text"
+                                    formControlName="AuditDate" class="form-control col-sm-12" (click)="today()" placeholder="7/4/2020">
+                            </fieldset>
+                            <span class="col-sm-2 m-t-5"><i class="fa fa-calendar  fa-2x text-navy"></i></span>
+                            <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                                *ngIf="!page.form.controls['AuditDate'].valid && page.form.controls['AuditDate'].touched||timeError">
+                                <p class="pl-3" *ngIf="page.form.controls['AuditDate'].errors||timeError">
+                                    {{'shared.validation.daterequired'|translate}}</p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Lead auditor * </label>
+
+                            <div class="col-sm-8">
+                                <!-- {{leadAuditors | json}} -->
+                                <ng-select [disabled]="selectedVersion!=model.Version" [items]="employees"
+                                    bindLabel="Name" bindValue="ID" [multiple]="true"
+                                    placeholder="Add staff member name" [(ngModel)]="leadAuditors"
+                                    [ngModelOptions]="{standalone: true}" >
+                                </ng-select>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                            <label class="control-label col-sm-3">Team member * </label>
+
+                            <div class="col-sm-8">
+                                <ng-select [disabled]="selectedVersion!=model.Version" [items]="employees"
+                                    bindLabel="Name" bindValue="ID" [multiple]="true"
+                                    placeholder="Add staff member name" [(ngModel)]="teamMembers"
+                                    [ngModelOptions]="{standalone: true}" >
+                                </ng-select>
+
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Halal islamic affairs expert * </label>
+
+                            <div class="col-sm-8">
+
+                                <ng-select [disabled]="selectedVersion!=model.Version" [items]="employees"
+                                    bindLabel="Name" bindValue="ID" [multiple]="true"
+                                    placeholder="Add staff member name" [(ngModel)]="affairsExperts"
+                                    [ngModelOptions]="{standalone: true}" >
+                                </ng-select>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Additional Attendees and Roles (optional) </label>
+
+                            <div class="col-sm-3">
+
+                                <select [disabled]="selectedVersion!=model.Version" #inputEmployeeID
+                                    class="form-control" required>
+                                    <option value="" disabled selected>Add staff member name </option>
+                                    <option *ngFor="let item of employees" [value]="item.ID">{{item.Name}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <input placeholder="Type Role" #inputRole class="form-control" type="text"
+                                    [disabled]="selectedVersion!=model.Version">
+
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" [disabled]="selectedVersion!=model.Version"
+                                    class="btn btn-primary1 btn-circle-primary btn-add padding-top-5"
+                                    (click)="addAttendee(inputEmployeeID.value,inputRole.value)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <label>&nbsp; &nbsp;Click to add</label>
+                            </div>
+                           
+
+
+
+                        </div>
+                        <div class="row" *ngIf="model.AdditionalAttendees.length>0">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9">
+                                <div class="table-responsive">
+                                    <!-- {{model.AdditionalAttendees|json}} -->
+                                    <table class="table  table-bordered audittabel">
+                                        <thead>
+                                            <tr>
+                                                <th>Staff Member
+                                                </th>
+                                                <th>Role
+                                                </th>
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr *ngFor="let item of model.AdditionalAttendees;let i=index;">
+
+                                                <td>
+                                                    <input type="text" readonly [value]="item.EmployeeName"
+                                                        class="form-control">
+                                                </td>
+                                                <td>
+                                                    <input type="text" [ngModelOptions]="{standalone: true}"
+                                                        [(ngModel)]="item.Role" class="form-control">
+                                                </td>
+                                                <td class="custom-th ">
+
+                                                    <a class="btn btn-transparent"
+                                                        [class.anchor-disabled]="selectedVersion!=model.Version"
+                                                        (click)="removeAttendee(i)">
+                                                        <i class="fa  fa-trash text-navy fa-2x "></i>
+
+                                                    </a>
+
+
+
+
+
+
+                                                </td>
+
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-sm-3">Audit Language * </label>
+
+                            <div class="col-sm-3">
+                                <fieldset [disabled]="selectedVersion!=model.Version">
+
+                                    <label class="custom-radio-btn col-12">Arabic
+                                        <input formControlName="AuditLanguage" [value]="0" type="radio" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </fieldset>
+                            </div>
+                            <div class="col-sm-3">
+                                <fieldset [disabled]="selectedVersion!=model.Version">
+                                    <label class="custom-radio-btn col-12">English
+                                        <input formControlName="AuditLanguage" [value]="1" type="radio" />
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </fieldset>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['Standards'].valid && page.form.controls['Standards'].touched">
+                            <label class="control-label col-sm-3">Standards (optional) </label>
+
+                            <textarea formControlName="Standards" class="form-control col-sm-8 rounded-0"
+                                placeholder="Write here ...." rows="5"
+                                [readOnly]="selectedVersion!=model.Version"></textarea>
+                            <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                                *ngIf="!page.form.controls['Standards'].valid && page.form.controls['Standards'].touched">
+                                <p *ngIf="page.form.controls['Standards'].hasError('maxlength')">
+                                    {{'shared.validation.max-255-char'|translate}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['Scope'].valid && page.form.controls['Scope'].touched">
+                            <label class="control-label col-sm-3">Audit scope <i>*</i></label>
+
+                            <textarea formControlName="Scope" class="form-control col-sm-8 rounded-0"
+                                placeholder="Write here ...." rows="5"
+                                [readOnly]="selectedVersion!=model.Version"></textarea>
+                            <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                                *ngIf="!page.form.controls['Scope'].valid && page.form.controls['Scope'].touched">
+                                <p *ngIf="page.form.controls['Scope'].hasError('maxlength')">
+                                    {{'shared.validation.max-255-char'|translate}}</p>
+                                    <p *ngIf="page.form.controls['Scope'].hasError('required')">
+                                        {{'shared.validation.required'|translate}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['Objectives'].valid && page.form.controls['Objectives'].touched">
+                            <label class="control-label col-sm-3">Audit objective (optional) </label>
+
+                            <textarea formControlName="Objectives" class="form-control col-sm-8 rounded-0"
+                                placeholder="Write here ...." rows="5"
+                                [readOnly]="selectedVersion!=model.Version"></textarea>
+                            <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                                *ngIf="!page.form.controls['Objectives'].valid && page.form.controls['Objectives'].touched">
+                                <p *ngIf="page.form.controls['Objectives'].hasError('maxlength')">
+                                    {{'shared.validation.max-255-char'|translate}}</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group row"
+                            [class.has-error]="!page.form.controls['AdditionalNote'].valid && page.form.controls['AdditionalNote'].touched">
+                            <label class="control-label col-sm-3">Additional note (optional) </label>
+
+                            <textarea formControlName="AdditionalNote" class="form-control col-sm-8 rounded-0"
+                                placeholder="Write here ...." rows="5"
+                                [readOnly]="selectedVersion!=model.Version"></textarea>
+                            <div class="text text-danger offset-sm-3 col-sm-9 padding-none"
+                                *ngIf="!page.form.controls['AdditionalNote'].valid && page.form.controls['AdditionalNote'].touched">
+                                <p *ngIf="page.form.controls['AdditionalNote'].hasError('maxlength')">
+                                    {{'shared.validation.max-255-char'|translate}}</p>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed-space"></div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="table-responsive">
+                                    <table class="table  table-bordered audittabel">
+                                        <thead>
+                                            <tr>
+                                                <th>Date
+                                                </th>
+                                                <th>Time
+                                                </th>
+                                                <th>Auditor
+                                                </th>
+                                                <th>Organizational and Functional Units / Processes and Activities
+                                                </th>
+                                                <th>Key contacts
+                                                </th>
+
+
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+
+                                                    <input type="date" [ngModel]="visit.Date | date:'yyyy-MM-dd'"
+                                                        required [ngModelOptions]="{standalone: true}"
+                                                        (ngModelChange)="visit.Date = $event"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        class="form-control">
+
+                                                </td>
+                                                <td>
+                                                    <input type="time" [ngModel]="visit.Date | date:'HH:mm'" required
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        (ngModelChange)="visit.Time = $event"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        class="form-control">
+                                                </td>
+
+                                                <td>
+                                                    <select (click)="check()" class="form-control"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        [(ngModel)]="visit.AuditorID"
+                                                        [ngModelOptions]="{standalone: true}">
+
+                                                        <option *ngFor="let item of employes" [value]="item.ID">
+                                                            {{item.Name}}</option>
+
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.Activities"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control"
+                                                        [disabled]="selectedVersion!=model.Version">
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.KeyContacts"
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        class="form-control">
+                                                </td>
+                                                <td class="custom-th ">
+                                                    <button type="button" (click)="addVisit()"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        class="btn btn-primary1 btn-circle-primary btn-add margin-top-5">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                    <label style="color:black;    white-space: nowrap;">Click to add</label>
+                                                </td>
+                                               
+
+                                            </tr>
+                                            <tr *ngFor="let visit of model.Visits; let i=index">
+                                                <td>
+
+                                                    <input type="date" [ngModel]="visit.Date | date:'yyyy-MM-dd'"
+                                                        required [ngModelOptions]="{standalone: true}"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        (ngModelChange)="visit.Date = $event" class="form-control">
+
+                                                </td>
+                                                <td>
+                                                    <input type="time" [ngModel]="visit.Date | date:'HH:mm'" required
+                                                        [ngModelOptions]="{standalone: true}"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        (ngModelChange)="visit.Time = $event" class="form-control">
+                                                </td>
+
+                                                <td  >
+                                                    <select (click)="check()" class="form-control"  [(ngModel)]="visit.AuditorID"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        [ngModelOptions]="{standalone: true}">
+                                                        <option *ngFor="let item of employes" [value]="item.ID">
+                                                            {{item.Name}}</option>
+
+                                                    </select>
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.Activities"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+
+                                                <td>
+                                                    <input type="text" [(ngModel)]="visit.KeyContacts"
+                                                        [disabled]="selectedVersion!=model.Version"
+                                                        [ngModelOptions]="{standalone: true}" class="form-control">
+                                                </td>
+                                                <td class="custom-th ">
+                                                    <a (click)="removeVisit(i)"
+                                                        [class.anchor-disabled]="selectedVersion!=model.Version"
+                                                        class="btn btn-transparent">
+                                                        <i class="fa  fa-trash text-navy fa-2x "></i>
+                                                    </a>
+                                                </td>
+                                                
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <br>
+                        <div class="m-xl-5">
+                            <h3>Notes to clients:</h3>
+
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small> Times are approximate
+                                    and will be confirmed at the opening meeting prior to commencement of the audit.
+                                </small></h3>
+
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small> SFDA auditors reserve
+                                    the right to change or add to the elements listed before or during the audit
+                                    depending on the results of on-site investigation.
+                                </small></h3>
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small> A private place for
+                                    preparation, review and conferencing is requested for the auditor’s use.
+                                </small></h3>
+
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small>Please provide a light
+                                    working lunch on-site each audit day.
+                                </small></h3>
+
+                            <h3> <small> <i class="fa fa-circle fa-xs"></i></small> &nbsp; <small> Your contract with
+                                    SFDA is an integral part of this audit plan and details confidentiality
+                                    arrangements, audit scope, information on follow up activities and any reporting
+                                    requirements.
+
+                                </small></h3>
+
+
+
+                        </div>
+
+                        <br>
+                        <br>
+                        <br>
+
+
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-sm-12 mt-5">
+                                <button (click)="save()" [disabled]="disableSubmit()" type="submit"
+                                    class="btn btn-primary float-right margin-h-10 ">
+                                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Submit &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                                    &nbsp;
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

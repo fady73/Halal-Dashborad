@@ -1,0 +1,285 @@
+{
+  "approve-cancel":"Approve Cancellation",
+  "approve-decline":"Decline",
+  "approve-confirm":" Confirm Request",
+  "modification-fees":"Modification Fees",
+  "approve-modification":"Approve Modification",
+  
+  "shared": {
+    "change-employee-password":"Change employee password",
+    
+    "assign": "Assign",
+    "Department":"Department",
+    "Division":"Division",
+    "FeesDaily":"Daily fees",
+    "first":"Choose Employee division",
+    "assign-task-to-employee": "Assign the task to staff member.",
+    "lang": "عربي",
+    "notifications":"notifications",
+    "login": "Login",
+    "log-out": "Log out",
+    "yes": "Yes",
+    "no": "No",
+    "name": "Name",
+    "status": "Status",
+    "code": "Code",
+    "last-name": "Last name ",
+    "first-name": "First name ",
+    "or": "Or",
+    "of": "of",
+    "phone": "Phone number",
+    "active": "Active",
+    "not-active": "Not active ",
+    "is-active": "Is active",
+    "new": "Create new",
+    "save": "Save",
+    "cancel": "cancel",
+    "page": "Page",
+    "name-arabic": "Name Arabic",
+    "name-english": "Name English",
+    "total-items": "Total items",
+    "previous": "Previous",
+    "next": "Next",
+    "success": "your request has been finished successfully",
+    "copyright": "Copyrights",
+    "SFDA": "All rights are reserved for SFDA Halal Center Platform ",
+    "sign-up": "Create an account",
+    "profile": "Profile",
+    "email": "E-mail",
+    "email-placeholder": "Enter your email",
+    "password": "Password",
+    "password-placeholder": "Enter your password",
+    "uploaded-files": "Uploaded files",
+    "upload-files": "Upload files",
+    "upload-msg": "Drop files here or click to upload. \n   Maximum file size is 2 MB \n PDF format only",
+    "upload-certificate-msg": "Drop files here or click to upload. \n   Maximum file size is 5 MB \n PDF format only",
+    "delete-confirmation": {
+      "yes-all": "Yes all ",
+      "yes": "Yes",
+      "cancel": "cancel",
+      "message": "Are you sure you will complete the deletion completely ??"
+    },
+    "confirmative": {
+      "title": "Service of agreement",
+      "upload": "Upload signed agreement",
+      "upload-msg": "Drop files here or click to upload. \n   Maximum file size is 5 MB",
+      "message": "Here you can upload your NCR file"
+    },
+    "payment-confirmation": {
+      "title": "Confirm payment",
+      "message": "Are you sure you want to confirm this payment ??"
+    },
+    "approve-confirmation": {
+      "title": "Approve request",
+      "message": "Are you sure you will complete the approve process ??"
+    },
+    "decline-confirmation": {
+      "title": "Decline request",
+      "message": "Are you sure you want to decline this account ??"
+    },
+    "cancel-confirmation": {
+      "title": "Delete request",
+      "message": "Are you sure you want to delete this account ??"
+    },
+    "validation": {
+      "today":"The date can't be older than today",
+      "required": "This field is required",
+      "arabic-name-required": "Arabic name is required",
+      "name-required": "Name is required",
+      "english-name-required": "English name is required",
+      "email-required": "E-mail is required",
+      "password-required": "Password is required",
+      "new-password-required": "New password is required",
+      "current-password-required": "Current password is required",
+      "first-name-required": "First name is required",
+      "last-name-required": "Last name is required",
+      "phone": "Phone number is required",
+      "invalid-phone": "Invalid phone number",
+      "number-only": "Please enter only numbers",
+      "max-50-char": "Please enter at max 50 characters",
+      "max-9-char": "Please enter at max 9 characters",
+      "max-255-char": "Please enter at max 255 characters",
+      "max-100-char": "Please enter at max 100 characters",
+      "min-8-char": "Please enter at least 8 characters",
+      "valid-email": "Please enter a valid e-mail format",
+      "confirm-password-valid": "Password field must match 'confirm password'",
+      "company-country-required": "Company country is required",
+      "company-address-required": "Company address is required",
+      "company-name-required": "Company name is required",
+      "account-type-required": "Account type is required",
+      "daterequired": "Please enter a future date only"
+    }
+  },
+  "role": {
+    "title": "Roles",
+    "title-create": "Add role",
+    "title-edit": "Edit role"
+  },
+  "country": {
+    "title": "Country",
+    "title-create": "Add Country",
+    "title-edit": "Edit Country "
+  },
+  "verification": {
+    "msg": "A verification code has been sent to the email",
+    "title": "Verify your account",
+    "verify": "Verify",
+    "resend": "Resend code"
+  },
+  "sign-in": {
+    "forgot-password": "Forgot password?",
+    "have-account": "Do not have an account?"
+  },
+  "forgot-password": {
+    "title": "Forgot password .."
+  },
+  "change-password": {
+    "title": "Change Password",
+    "current": "Current password",
+    "enter-current": "Enter current password",
+    "new": "New password",
+    "confirm": "Confirm password",
+    "enter-new": "Enter new password",
+    "reset": "Reset password",
+    "password-min-length":"password minimum length is 6 ",
+    "password-max-length":"password maximum length is 30 "
+  },
+  "agreement": {
+    "title": "Service of agreement",
+    "upload-title": "Send service of agreement",
+    "submit": "Send the agreement"
+  },
+  "reset-password": {
+    "title": "Reset password .. ",
+    "new": "New password",
+    "enter-new": "Enter new password",
+    "reset": "Reset password"
+  },
+  "employee": {
+    "title": "Employee",
+    "title-create": "Add employee  ",
+    "title-edit": "Edit employee",
+    "main-data": "Main data ",
+    "code": "Code ",
+    "gender": "Gender",
+    "marital-status": "Marital status ",
+    "birth-date": "Birth date ",
+    "national-id": "National id ",
+    "contact-info": "Contact info ",
+    "governorate": "Governorate"
+  },
+  "sign-up": {
+    "title": "Create new account",
+    "first-name": "First name",
+    "last-name": "Last name",
+    "phone-number": "Phone number",
+    "account-type": "Account type",
+    "company-name": "Company name",
+    "company-address": "Company address",
+    "company-country": "Company country",
+    "confirm-password": "Confirm password",
+    "register": "Register",
+    "already-have": "Already have an account?"
+  },
+  "layout": {
+    "welcome": "Welcome to Halal Center Portal",
+    "home": "Home",
+    "request": "Requests",
+    "all-request": "All requests",
+    "new-request": "New request"
+  },
+  "request": {
+    "approve-confirm-message": "Are you sure you want to approve this account ?",
+    "title": "New request",
+    "all": "Requests",
+    "new": "New",
+    "form": "New request form",
+    "save": "Save & continue",
+    "cancel": "Cancel",
+    "prev": "Previous",
+    "details": "Company Details",
+    "certification": "Certification (s)",
+    "finish": "Finish",
+    "company-details": {
+      "title": "Company/Organization Details",
+      "company-name": "Company name",
+      "company-name-required": "Company name is required",
+      "company-address": "Company address",
+      "company-address-required": "Company address is required",
+      "address-for-invoice": "Address for invoice",
+      "trade-number": "Trade license number",
+      "postal-code": "Postal Code",
+      "part-group": "The company is part of a group",
+      "management-representation": "Management representative ",
+      "position": "Position",
+      "food-safety-manager": "Food safety manager",
+      "email": "E-mail",
+      "phone": "Phone number",
+      "same-as-address": "Same as address",
+      "part-of-group": "Part of group"
+    },
+    "certifications": {
+      "title": "Certification (s) Required",
+      "select": "Select any of the below certificates ",
+      "description": "Enter certificate description",
+      "indicate": "Please indicate below",
+      "third-party": "Does your company already have third party certification ?",
+      "results": " Results of any previous Halal's audit(s) you have received (Optional)"
+    },
+    "scope-processes": {
+      "title": "Scope/Processes",
+      "scope-of-registration": "Please define the scope of registration E.g. product produced",
+      "attach-file": "Please complete this question in detail or attach/send supporting information",
+      "exclusions": "Exclusions: Are there any local activities that are not included within the scope of the certification? ",
+      "describe-exclusion": " Please describe the exclusions (if any )",
+      "outsourced": "Give details if any specialist operations or services carried out by a sub constractor (Outsourced)",
+      "consultancy": "Give details if any consultancy relating to the management system to be certified has been provided",
+      "production-lines": "Total number of production lines",
+      "HACCP": "Number and type of HACCP study",
+      "row-materials": "List of row materials ",
+      "check": "Please check off any of the following that apply to your business (optional)",
+      "other-production": "Any other information on production lines",
+      "time-scale": "Please indicate if you have a time scale(s) for the following (optional)",
+      "employees-num": "Total number of employees (working on production lines of Halal products only)",
+      "permanent-emp": "Permanent employees",
+      "temp-emp": "Temporary employees",
+      "num-shift": "No. of Shifts",
+      "seasonal-product": " In case of seasonal product(s),please indicate the period(s) of production for each category of product including number of employees (permanent & temporary) included in the scope",
+      "production-floor": "Production floor area",
+      "revenue": "Gross annual turnover (Revenue) of your business (Required for SQF applicants only )($) (optional)",
+      "additional-sites": " If additional sites, provide details (optional)",
+      "site-name": "Site/Company name",
+      "address": "Address",
+      "products": "Products or activities",
+      "num-staff": "Number of staff",
+      "documentation": "Documentation at this is site same as the main office ?",
+      "same-system": "Does it follow the same system ? "
+    },
+    "operations": {
+      "title": "Operations",
+      "brief-details": "Please provide brief details about your operation, So that we can provide a more accurate quate and be better prepared for the audit.",
+      "include": "Please include the following:",
+      "diagram": "  A) Process diagram of your whole operation and submit it with this form.",
+      "diagram-process": "This Should include main process and aspect of your operations.",
+      "equipments": " B) A list of main equipments utilized.",
+      "other-sites": " C) A list of other sites utilized such as off-site warehouse, processing facilities, storage & transport"
+    },
+    "appendix-one": {
+      "classification": "Classification of Hala product/service categories",
+      "tick-products": "Please indicate with tick products (Internal use only if indicate in proposal work sheet no need to submit this part)",
+      "code": "Category codes",
+      "categories": "Categories",
+      "sector": "Example of sector",
+      "tick": "Tick"
+    },
+    "sales": {
+      "title": "Sales",
+      "indicate": "For the products you wish certified, please indicate the intended countries for marketing and sales"
+    },
+    "visit-cost": {
+      "title": "Visit cost",
+      "team-visit-cost": "Will the facility provide the Technical team visit costs Arrangements",
+      "apologize": "If you apologize for making the previous arrangements the cost of the technical team visit shell be aded to the finanical offer plus 20% service charges on the customer invoice finish"
+    }
+  }
+}

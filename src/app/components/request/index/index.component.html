@@ -1,0 +1,1002 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10" id="submitted">
+    <h3>Submitted form </h3>
+    <ol class="breadcrumb">
+
+      <li class="breadcrumb-item">
+        <a>Admin</a>
+      </li>
+      <li class="breadcrumb-item active">
+        <a>Submitted form</a>
+      </li>
+    </ol>
+  </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox ">
+        <div class="ibox-title">
+          <h5>Submitted Forms</h5>
+
+        </div>
+        <div class="ibox-content">
+          <div class="form" [formGroup]="page.seachForm">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="col-form-label " for="date_added">Country</label>
+                  <select class=" form-control" formControlName="CountryID">
+                    <option value="null">All</option>
+                    <option *ngFor="let item of countries" [value]="item.ID">{{item.Name}}</option>
+                  </select>
+
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="col-form-label " for="date_added">Company</label>
+                  <select class=" form-control" formControlName="CompanyID" required>
+                    <option value="null" disabled selected>Enter company name :</option>
+                    <option *ngFor="let item of companies" [value]="item.ID">{{item.Name}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="col-form-label " for="date_added">Request Type</label>
+                  <select class=" form-control" formControlName="TypeID">
+                    <option value="null">All</option>
+                    <option *ngFor="let item of requestTypes" [value]="item.ID">{{item.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="col-form-label label1" for="status">Request Status</label>
+                  <select class=" form-control status" formControlName="StatusID">
+                    <option value="null">All</option>
+                    <option *ngFor="let item of requestStatus" [value]="item.ID">{{item.Name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group" id="data_1">
+                  <label class="col-form-label label1" for="date_added">From date</label>
+                  <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input bsDatepicker type="text"
+                      formControlName="FromDate" class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label class="col-form-label label1" for="date_modified"> To date</label>
+                  <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    <input bsDatepicker type="text" formControlName="ToDate" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row filter">
+              <div class="col-sm-12">
+                <button type="button" (click)="OnSearchClicked()" class="btn btn-primary float-right">
+                  <i class="fa fa-filter"></i>
+                  Filter
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="table-responsive">
+
+              <table class="table table-stripped toggle-arrow-tiny" id="customers">
+                <thead>
+                  <tr class='clickable-row' data-href=''>
+
+                    <!-- <th data-hide="id">#</th> -->
+                    <th>Request ID</th>
+                    <!-- <th data-hide="id">Request ID</th> -->
+                    <th>Submission date</th>
+                    <th>Company name</th>
+                    <th>Company country</th>
+                    <th>Request type</th>
+                    <th>Request status</th>
+                    <th>Staff member</th>
+                    <th>Assign</th>
+                    <th>Actions</th>
+                    <th>Action required</th>
+
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr [hidden]="!page.isLoading">
+                    <td colspan="10">
+                      <h1><i class="blue fa fa-refresh fa-spin"></i></h1>
+                    </td>
+                  </tr>
+                  <tr [hidden]="page.isLoading" *ngFor="let item of items | paginate : page.options;let i=index;">
+
+                    <td class="padding-top-15">{{item.ID}}</td>
+
+
+                    <td class="padding-top-15">{{item.ApplicationDate |date:'dd-MM-yyyy'}} </td>
+                    <td class="padding-top-15">{{item.CompanyName}}</td>
+                    <td class="padding-top-15">{{item.CompanyCountry}}</td>
+                    <td class="padding-top-15">{{item.CompanyTypeName}}</td>
+                    <td class="padding-top-15">{{item.StatusName}}</td>
+                    <td class="padding-top-15">
+                      <!-- {{item.AssignedEmployee}} -->
+                      <span>
+                        <div *ngFor="let emp of item.AssignedEmployees;let i=index;">
+                          {{emp.EmployeeName}}
+                          &nbsp;
+                          <span (click)="unAssign(emp,item,i)"><i class="fa fa-times">
+                            </i></span>
+                        </div>
+                      </span>
+                    </td>
+                    <td> <button [disabled]="!canAssignEmployee" (click)="showAssignConfirmation(item)"
+                        class="btn btn-transparent p-lg-2">
+                        <i class="fa fa-plus text-navy"></i>
+                        <span class="text-navy"> Assign</span>
+                      </button> </td>
+
+                    <td>
+                      <div class="btn-group">
+
+                        <button [routerLink]="['/request/view',item.ID]" class="btn  btn-transparent">
+                          <i class="fa fa-eye text-navy" title="View"></i>
+                          <div>
+                            <span class="text-navy"> View</span>
+                          </div>
+
+                        </button>
+
+
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="btn-group" *ngIf="item.RequestCancellationStatus==1">
+
+                        <a class="btn btn-xs btn-primary margin-top-5" data-toggle="modal"
+                          (click)="showApproveConfirmation(item)">
+                          <span class="label label-primary">Cancellation Request</span>
+                        </a>
+                      </div>
+                      <div class="btn-group" *ngIf="item.RequestCancellationStatus==2">
+
+                        <a class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">Request Cancellated</span>
+                        </a>
+                      </div>
+
+                      <div class="btn-group"
+                        *ngIf="item.RequestCancellationStatus==0||item.RequestCancellationStatus==3">
+                        <a *ngIf="item.StaffRequiredAction==2" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/request-documents/review', item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        &nbsp;
+                        <a *ngIf="item.StaffRequiredAction==3" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/agreement/edit', item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==4" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/agreement/confirm',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==5" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/payment/confirm',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==19" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]=" ['/request/edit',item.ID]"> <span
+                            class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==6" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/request-documents/view',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==7" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/audit-plan/create',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+
+
+                        <a *ngIf="item.StaffRequiredAction==8"
+                          class="btn btn-xs btn-primary margin-top-5 upload-notification"
+                          [routerLink]="['/audit-plan/create',item.ID]">
+                          <span class="label label-primary">
+                            {{item.StaffRequiredActionName}}
+                            <span class="badge badge-action badge-danger ">!</span>
+                          </span>
+
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==9" class="btn btn-xs btn-primary margin-top-5"
+                          data-toggle="modal" (click)="showConfirmativeTemplate(item)">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==10" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/audit-plan/submit-ncr',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==12" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/payment/confirm',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}
+                          </span>
+                        </a>
+
+                        <a *ngIf="item.StaffRequiredAction==13" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/audit-plan/view-audit-plan',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==14" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/audit-plan/submit-audit-report-section1',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==15 && item.CertificateDate ==null"
+                          class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/audit-plan/decision-committee-confirm',item.ID]">Approve Request</a>
+                        <a *ngIf="item.StaffRequiredAction==15 && item.CertificateDate !=null"
+                          class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/surveillance-audit-plan/decision-committee-confirm',item.ID]">Approve
+                          Request</a>
+
+                        <a *ngIf="item.StaffRequiredAction==16" [routerLink]="['/certificate/upload',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+
+                        <a *ngIf="item.StaffRequiredAction==17" [routerLink]="['/certificate/view',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+
+                        <a *ngIf="item.StaffRequiredAction==20" [routerLink]="['/payment/confirm',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+
+                        <a *ngIf="item.StaffRequiredAction==21" [routerLink]="['/audit-plan/edit-ncr',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+
+                        &nbsp;
+
+                        <a *ngIf="item.StaffRequiredAction==22" [routerLink]="['/payment/confirm',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==32" [routerLink]="['/payment/confirm',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==23" [routerLink]="['/appeal/index',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+
+                        <a *ngIf="item.StaffRequiredAction==24" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/payment/confirm',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==25" [routerLink]="['/surveillance/edit',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <!-- &nbsp; -->
+                        <!-- *ngIf="item.StaffRequiredAction==24"
+                                                <a class="btn btn-xs btn-primary margin-top-5" data-toggle="modal"
+                                                    (click)="showCommissionTemplate(item)">
+                                                    <span class="label label-primary">submit monthly report</span>
+                                                </a> -->
+
+                        <a *ngIf="item.StaffRequiredAction==27" [routerLink]="['/payment/confirm',item.ID]"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                     
+                        <a *ngIf="item.StaffRequiredAction==28" [routerLink]="['/payment/confirm',item.ID]"
+                        class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                        <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                      </a>
+
+
+                        <a *ngIf="item.StaffRequiredAction==29" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/request/logo-request',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}
+                          </span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==30" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/payment/confirm',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}
+                          </span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==31&&item.CompanyType==1"
+                          (click)="showRecognitionRequestModificationTemplate(item)"
+                          class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+
+                        <a *ngIf="item.StaffRequiredAction==31&&item.CompanyType==0"
+                        (click)="showRegularRequestModificationTemplate(item)"
+                        class="btn btn-xs btn-primary margin-top-5" data-toggle="modal">
+                        <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                      </a>
+
+                        <a *ngIf="item.StaffRequiredAction==33 || item.StaffRequiredAction==34 "
+                          class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/surveillance-audit-plan/create',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <a *ngIf="item.StaffRequiredAction==35" class="btn btn-xs btn-primary margin-top-5"
+                          [routerLink]="['/audit-plan/create',item.ID]">
+                          <span class="label label-primary">{{item.StaffRequiredActionName}}</span>
+                        </a>
+                        <div class="btn-group" *ngIf="item.CertificateDate !=null">
+                          <button type="button" class="btn btn-xs btn-primary margin-top-5 dropdown-toggle"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action
+                          </button>
+                          <div class="dropdown-menu">
+
+                            <a *ngIf="item.CertificateDate !=null&&item.Status!=20" class="dropdown-item  btn-primary"
+                              (click)="showWithdrawRequestTemplate(item)">Withdraw the certificate</a>
+                            <a (click)="showResumeCertificatetemplate(item)" *ngIf="item.Status==20"
+                              class="dropdown-item  btn-primary">Resume the certiface</a>
+                            <a *ngIf="item.Status!=21&&item.CertificateDate !=null" class="dropdown-item  btn-primary"
+                              (click)="showSuspendRequestTemplate(item)">Suspend the
+                              certificate</a>
+                            <a *ngIf="item.Status!=4&&item.RequestCancellationStatus!=1&&item.CertificateDate!=null"
+                              class="dropdown-item  btn-primary" (click)="showCancelRequestTemplate(item)">Cancel the
+                              certificate</a>
+                            <!-- <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a> -->
+                          </div>
+                        </div>
+
+                      </div>
+                    </td>
+
+                  </tr>
+                  <!------------------------------------------------------------------------>
+
+
+
+
+                  <!-- <tr>
+                                       
+                                        <td class="padding-top-15">123</td>
+
+
+                                        <td class="padding-top-15">8/7/2019 </td>
+                                        <td class="padding-top-15">My2solutions</td>
+                                        <td class="padding-top-15">Assuit</td>
+                                        <td class="padding-top-15">certification issus</td>
+                                        <td class="padding-top-15">StatusName</td>
+                                        <td class="padding-top-15">AssignedEmployee</td>
+                                        <td> <button (click)="showAssignConfirmation(item)"
+                                                class="btn btn-transparent p-lg-2">
+                                                <i class="fa fa-plus text-navy"></i>
+                                                <span class="text-navy"> Assign</span>
+                                            </button> </td>
+
+                                        <td>
+                                            <div class="btn-group">
+                                                
+                                                <button [routerLink]="['/request/edit',1]"
+                                                    class="btn  btn-transparent">
+                                                    <i class="fa fa-eye text-navy" title="View"></i>
+                                                    <div>
+                                                        <span class="text-navy"> View</span>
+                                                    </div>
+
+                                                </button>
+
+
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                           
+                                            <a 
+                                            class="btn btn-xs btn-primary margin-top-5"
+                                            data-toggle="modal" (click)="showApproveConfirmation(item)">
+                                            <span class="label label-primary">Non-confirmative findings?</span>
+                                        </a>
+                                            
+
+                                            
+                                        </td>
+
+                                    </tr> -->
+
+
+
+
+
+                </tbody>
+
+                <tfoot>
+                  <tr [hidden]="page.isLoading">
+                    <td colspan="3" *ngIf="page.options.totalItems>0">
+                      {{'shared.page'|translate}} {{page.options.currentPage}}
+                      {{'shared.of'|translate}}
+                      {{page.options.totalPages}}
+                      - {{'shared.total-items'|translate}} : {{page.options.totalItems}}
+                    </td>
+                    <td colspan="7" class="text-right" *ngIf="page.options.totalItems>0">
+                      <pagination-controls (pageChange)="getNextPrevData($event)" id='Pagination' maxSize="10"
+                        directionLinks="true" autohide="true" previousLabel="" nextLabel="">
+                      </pagination-controls>
+
+                    </td>
+                  </tr>
+
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+
+
+
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #employeeTemplate>
+  <div class="modal-header approveTemplate">
+    <h4 class="modal-title pull-left">{{'shared.assign-task-to-employee'|translate}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <div class="form-group row">
+      <!-- {{selectedItem.AssignedEmployeeID}} -->
+      <label class="col-sm-3 control-label padding-less">Member name * </label>
+      <select [(ngModel)]="selectedItem.AssignedEmployeeID" class=" form-control col-sm-8">
+        <option *ngFor="let item of employees" [value]="item.ID">{{item.Name}}</option>
+      </select>
+      <!-- <div class="col-sm-8">
+                <ng-select [items]="employees" bindLabel="Name" bindValue="ID" [multiple]="true"
+                    [(ngModel)]="selectedItem.AssignedEmployees">
+                </ng-select>
+            </div> -->
+    </div>
+
+    <br />
+    <button type="button" *ngIf="selectedItem" class="btn btn-primary margin-h-10 pull-right"
+      (click)="assign(selectedItem);modalRef.hide();">{{'shared.assign'|translate}}</button>
+    <!-- <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button> -->
+  </div>
+</ng-template>
+<ng-template #cancelTemplate>
+
+  <div class="modal-body text-center">
+    <p> {{'shared.cancel-confirmation.message'|translate}}<br> <strong
+        *ngIf="selectedItem">{{selectedItem.CompanyName}}</strong></p>
+    <button type="button" *ngIf="selectedItem" class="btn btn-default"
+      (click)="cancel();modalRef.hide();">{{'shared.yes'|translate}}</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button>
+  </div>
+</ng-template>
+
+
+<ng-template #confirmativeTemplate>
+  <div class="confirmativeTemplate">
+    <div class="modal-header ">
+      <h4 class="modal-title pull-left">non-confirmative findings</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body ">
+      <p>Is there any non-confirmative findings ? </p>
+
+      <label class="custom-radio-btn" (change)="onNonConfirmativeChaged();">&nbsp;<strong>Yes</strong>
+        <input type="radio" value="true" [checked]="hasNonConfirmative" name="yes-no-1" />
+        <span class="checkmark"></span>
+      </label>
+      <ngx-dropzone *ngIf="hasNonConfirmative" label="{{'shared.confirmative.upload-msg'|translate}}"
+        class="offset-1 col-sm-10 agreement-dropzone" [accept]="'application/pdf'" [multiple]="false"
+        (filesAdded)="uploadNCRFile($event)" #dropzone>
+      </ngx-dropzone>
+
+      <div class="offset-1 col-sm-11 padding-top-20" *ngIf="NCRFile.FileName">
+        <br>
+        <span>
+          <a>{{NCRFile.FileName}}</a>
+        </span>
+        &nbsp; &nbsp;
+        <span>
+          <i (click)="removeNCRFile()" class="fa fa-trash  custom-trash fa-lg"></i>
+        </span>
+      </div>
+      <br>
+      <label class="custom-radio-btn" (change)="onNonConfirmativeChaged();">&nbsp;<strong>No</strong>
+        <input type="radio" value="true" [checked]="!hasNonConfirmative" name="yes-no-1" />
+        <span class="checkmark"></span>
+      </label>
+
+    </div>
+    <div class="modal-footer text-center">
+      <button [disabled]="hasNonConfirmative && !NCRFile.FileName" type="button" class="btn  btn-primary margin-h-10"
+        (click)="saveNCRFile();modalRef.hide();">&nbsp; &nbsp; &nbsp;
+        Submit &nbsp; &nbsp;&nbsp;</button>
+
+    </div>
+  </div>
+</ng-template>
+
+
+
+<ng-template #approveTemplate>
+  <div class="confirmativeTemplate">
+    <div class="modal-header ">
+      <h4 class="modal-title pull-left">{{'approve-cancel'|translate}} </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+
+        <div class="col-sm-12 ">
+          <div class="form-group">
+            <label>{{selectedItem.CustomerCancellationReasons}}</label></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <!--  <button class="btn btn-sm btn-primary float-right m-t-n-xs" onclick="$('#modal-form2').modal('hide');" type="submit"id="close"><strong>Close</strong></button>-->
+      <button type="button" class="btn btn-sm btn-outline  btn-primary float-right m-t-n-xs"
+        (click)="Decline();modalRef.hide();" data-dismiss="modal"> &nbsp; &nbsp;
+        &nbsp;{{'approve-decline'|translate}} &nbsp; &nbsp;
+        &nbsp;</button>
+      <button type="button" class="btn btn-sm btn-primary float-right m-t-n-xs" (click)="cancel();modalRef.hide();"
+        data-dismiss="modal">&nbsp; &nbsp; &nbsp;
+        {{'approve-confirm'|translate}} &nbsp; &nbsp;
+        &nbsp;</button>
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #regularModificationApproveTemplate>
+  <div class="confirmativeTemplate">
+    <div class="modal-header ">
+      <h4 class="modal-title pull-left">{{'approve-modification'|translate}} </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="text-center">
+          <h1 *ngIf="!isRecognitionModificationLoaded" align="center"><i class="blue fa fa-refresh fa-spin"></i>
+          </h1>
+        </div>
+        <div class="col-sm-12 " *ngIf="isRecognitionModificationLoaded">
+          <div class="halal-table">
+            <div class="table-responsive">
+              <table class=" table table-striped form-group" id="subtable" data-page-size="15">
+                <thead>
+                  <tr class="appendix-th" style="border-bottom: 2px solid #eae4e4;">
+                    <th>{{'request.appendix-one.code'|translate}}</th>
+                    <th> {{'request.appendix-one.categories'|translate}}</th>
+                    <th>{{'request.appendix-one.sector'|translate}}</th>
+                    <th>{{'request.appendix-one.tick'|translate}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr class="fixheight" *ngFor="let item of productCategoryItems"
+                    style="border-bottom: 2px solid #eae4e4;background-color:white!important">
+                    <td class="A" style="padding: 20px !important;">{{item.CategoryCode}}</td>
+                    <td class="text-center">{{item.CategoryName}}</td>
+                    <td class="text-center">
+                      {{item.Scope}}
+                    </td>
+
+                    <td>
+                      <label>
+                        <!-- {{item.IsSelected}} -->
+                        <input type="checkbox" [checked]="item.IsSelected" disabled="true" readonly />
+                        <span class="label-text"></span>
+                      </label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12"
+          *ngIf="isRecognitionModificationLoaded&&recognitionRequestModificationModel.Attachments.length>0">
+          <h1>
+            {{'shared.uploaded-files'|translate}}
+          </h1>
+          <div class="row">
+            <div class="col-sm-6" *ngFor="let file of recognitionRequestModificationModel.Attachments">
+              <a href="{{ file.FilePath }}" download>{{file.FileName}}</a>
+              <a class="btn btn-transparent" href="{{ file.FilePath }}" target="_blank">
+                <i class="fa fa-download text-muted"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-sm-12">
+          <form role="form"*ngIf="isRecognitionModificationLoaded">
+            <div class="form-group row"><label class="col-sm-6 col-form-label">The
+                    scope
+                    of registration </label>
+                <label class="col-sm-6 col-form-label">
+                    <textarea class="form-control border-none " rows="3" readonly="true"
+                        [innerHTML]="regularModificationModel.RegistrationScope"></textarea>
+                </label>
+                <!-- <label
+                    class="col-sm-6">{{scopeProcessesViewModel.RegistrationScope}}
+                </label> -->
+            </div>
+
+            <div class="hr-line-dashed"></div>
+        
+           
+            <div class="form-group row"><label class="col-sm-6">Product family(ies)
+                    and
+                    product types*</label>
+                <label *ngIf="regularModificationModel.ProductFamilies.length == 0 "
+                    class="col-sm-6">None</label>
+            </div>
+            <div class="form-group"
+                *ngIf="regularModificationModel.ProductFamilies.length > 0 ">
+                <label class="col-sm-6 listProduct"
+                    *ngFor="let item of regularModificationModel.ProductFamilies">
+                    <div class="productHeader">{{item.Name}}</div>
+                    <div *ngFor="let type of item.ProductTypes;let i=index">
+                        <div *ngIf="i % 2 == 0 " class="productEven">
+                            {{type.Name}}
+                        </div>
+                        <div *ngIf="i % 2 != 0 " class="productOdd">
+                            {{type.Name}}
+                        </div>
+                    </div>
+                </label>
+            </div>
+
+
+            <!-- <div class="form-group"><label class="col-sm-12">Product family(ies) and
+                    product types*</label>
+                <label class="col-sm-6" class="listProduct">
+                    <div class="productHeader">Enter product family</div>
+                    <div class="productOdd">mmmmm</div>
+                    <div class="productEven">mmmmm</div>
+                    <div class="productOdd">mmmmmmmm</div>
+                    <div class="productEven">mmmmmmmm</div>
+
+                </label>
+            </div> -->
+            <div class="hr-line-dashed"></div>
+            <div class="form-group row"><label class="col-sm-6">Total number of
+                    production lines </label>
+                <label
+                    class="col-sm-6">{{regularModificationModel.TotalProductionLinesNumber}}</label>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class="form-group row"><label
+                    class="col-sm-6 col-form-label">Number and type of
+                    HACCP
+                    study</label>
+                <label class="col-sm-6 col-form-label">
+                    <textarea class="form-control border-none " rows="3" readonly="true"
+                        [innerHTML]="regularModificationModel.HACCPStudyTypeAndNumber"></textarea>
+                </label>
+                <!-- <label
+                    class="col-sm-6">{{scopeProcessesViewModel.HACCPStudyTypeAndNumber}}</label> -->
+            </div>
+
+            <div class="hr-line-dashed"></div>
+           
+         
+        
+           
+
+       
+        </form>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group row">
+            <label class="control-label col-sm-3">{{ 'modification-fees'|translate }}</label>
+            <input class="form-control col-sm-12" type="number" min="0" [(ngModel)]="fees" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <!--  <button class="btn btn-sm btn-primary float-right m-t-n-xs" onclick="$('#modal-form2').modal('hide');" type="submit"id="close"><strong>Close</strong></button>-->
+      <button [disabled]="!(fees>0)" type="button" class="btn btn-sm   btn-primary float-right m-t-n-xs"
+        (click)="regularModificationRequest();" data-dismiss="modal"> &nbsp; &nbsp;
+        &nbsp;{{'approve-confirm'|translate}} &nbsp; &nbsp;
+        &nbsp;</button>
+      <button type="button" class="btn btn-sm btn-outline btn-primary float-right m-t-n-xs" (click)="modalRef.hide();"
+        data-dismiss="modal">&nbsp; &nbsp; &nbsp;
+        {{'shared.cancel'|translate}} &nbsp; &nbsp;
+        &nbsp;</button>
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #recognitionModificationApproveTemplate>
+  <div class="confirmativeTemplate">
+    <div class="modal-header ">
+      <h4 class="modal-title pull-left">{{'approve-modification'|translate}} </h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="text-center">
+          <h1 *ngIf="!isRecognitionModificationLoaded" align="center"><i class="blue fa fa-refresh fa-spin"></i>
+          </h1>
+        </div>
+        <div class="col-sm-12 " *ngIf="isRecognitionModificationLoaded">
+          <div class="halal-table">
+            <div class="table-responsive">
+              <table class=" table table-striped form-group" id="subtable" data-page-size="15">
+                <thead>
+                  <tr class="appendix-th" style="border-bottom: 2px solid #eae4e4;">
+                    <th>{{'request.appendix-one.code'|translate}}</th>
+                    <th> {{'request.appendix-one.categories'|translate}}</th>
+                    <th>{{'request.appendix-one.sector'|translate}}</th>
+                    <th>{{'request.appendix-one.tick'|translate}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr class="fixheight" *ngFor="let item of productCategoryItems"
+                    style="border-bottom: 2px solid #eae4e4;background-color:white!important">
+                    <td class="A" style="padding: 20px !important;">{{item.CategoryCode}}</td>
+                    <td class="text-center">{{item.CategoryName}}</td>
+                    <td class="text-center">
+                      {{item.Scope}}
+                    </td>
+
+                    <td>
+                      <label>
+                        <!-- {{item.IsSelected}} -->
+                        <input type="checkbox" [checked]="item.IsSelected" disabled="true" readonly />
+                        <span class="label-text"></span>
+                      </label>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12"
+          *ngIf="isRecognitionModificationLoaded&&recognitionRequestModificationModel.Attachments.length>0">
+          <h1>
+            {{'shared.uploaded-files'|translate}}
+          </h1>
+          <div class="row">
+            <div class="col-sm-6" *ngFor="let file of recognitionRequestModificationModel.Attachments">
+              <a href="{{ file.FilePath }}" download>{{file.FileName}}</a>
+              <a class="btn btn-transparent" href="{{ file.FilePath }}" target="_blank">
+                <i class="fa fa-download text-muted"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group row">
+            <label class="control-label col-sm-3">{{ 'modification-fees'|translate }}</label>
+            <input class="form-control col-sm-12" type="number" min="0" [(ngModel)]="fees" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <!--  <button class="btn btn-sm btn-primary float-right m-t-n-xs" onclick="$('#modal-form2').modal('hide');" type="submit"id="close"><strong>Close</strong></button>-->
+      <button [disabled]="!(fees>0)" type="button" class="btn btn-sm   btn-primary float-right m-t-n-xs"
+        (click)="recogntionModificationRequest();" data-dismiss="modal"> &nbsp; &nbsp;
+        &nbsp;{{'approve-confirm'|translate}} &nbsp; &nbsp;
+        &nbsp;</button>
+      <button type="button" class="btn btn-sm btn-outline btn-primary float-right m-t-n-xs" (click)="modalRef.hide();"
+        data-dismiss="modal">&nbsp; &nbsp; &nbsp;
+        {{'shared.cancel'|translate}} &nbsp; &nbsp;
+        &nbsp;</button>
+
+    </div>
+  </div>
+</ng-template>
+<ng-template #cancelRequestTemplate>
+  <div class="modal-header ">
+    <h4 class="modal-title pull-left">Confirm cancellation of halal certificate action </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-left">
+    <form [formGroup]="cancelForm" *ngIf="isReasonsLoaded">
+      <div class="form-group row ">
+        <h3 class="col-sm-12">Cancellation is recommended for the following reasons: </h3>
+        <select class="form-control col-sm-12" formControlName="ActionReason">
+          <option *ngFor="let c of finalActionReasonsList" [value]="c.ID" selected> {{ c.Name }}</option>
+        </select>
+        <!-- <div class="col-sm-6" *ngFor="let m of finalActionReasonsList">
+          <label class="radio-s " for="m.ID">
+            <input type="radio" id="m.ID" value="" name="ActionReason" formControlName="ActionReason" />
+            <span class="label-text">{{ m.Name }}</span>
+          </label>
+        </div> -->
+      </div>
+      <div class="form-group row ">
+        <h3 class="col-sm-4">Reason</h3>
+        <textarea class="form-control col-sm-12" formControlName="Reason" rows="3"></textarea>
+      </div>
+      <div class="form-group row ">
+        <h3 class="col-sm-4">
+          Recommended by
+        </h3>
+        <select class="form-control col-sm-6" formControlName="EmployeeID">
+          <option *ngFor="let c of employees" [value]="c.ID" selected> {{ c.Name }}</option>
+        </select>
+      </div>
+      <div class="form-group row ">
+
+        <h3 class="col-sm-4">
+          Date
+        </h3>
+        <input type="date" [min]="minDate" class="form-control col-sm-6" formControlName="Date">
+      </div>
+    </form>
+    <hr>
+    <button [disabled]="!cancelForm.valid||isSaving" type="button" *ngIf="selectedItem" class="btn btn-default"
+      (click)="cancelRequest();modalRef.hide();">Confirm</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button>
+  </div>
+</ng-template>
+
+<ng-template #withdrawRequestTemplate>
+  <div class="modal-header ">
+    <h4 class="modal-title pull-left">Confirm withdrawal of halal certificate action </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-left">
+    <form [formGroup]="withdrawForm" *ngIf="isReasonsLoaded">
+      <div class="form-group row ">
+        <h3 class="col-sm-12">Withdrawal is recommended for the following reasons: </h3>
+        <select class="form-control col-sm-12" formControlName="ActionReason">
+          <option *ngFor="let c of finalActionReasonsList" [value]="c.ID" selected> {{ c.Name }}</option>
+        </select>
+        <!-- <div class="col-sm-6" *ngFor="let m of finalActionReasonsList">
+            <label class="radio-s " for="m.ID">
+              <input type="radio" id="m.ID" value="" name="ActionReason" formControlName="ActionReason" />
+              <span class="label-text">{{ m.Name }}</span>
+            </label>
+          </div> -->
+      </div>
+      <div class="form-group row ">
+        <h3 class="col-sm-4">Reason</h3>
+        <textarea class="form-control col-sm-12" formControlName="Reason" rows="3"></textarea>
+      </div>
+      <div class="form-group row ">
+        <h3 class="col-sm-4">
+          Recommended by
+        </h3>
+        <select class="form-control col-sm-6" formControlName="EmployeeID">
+          <option *ngFor="let c of employees" [value]="c.ID" selected> {{ c.Name }}</option>
+        </select>
+      </div>
+      <div class="form-group row ">
+
+        <h3 class="col-sm-4">
+          Date
+        </h3>
+        <input type="date" [min]="minDate" class="form-control col-sm-6" formControlName="Date">
+      </div>
+    </form>
+    <hr>
+    <button [disabled]="!withdrawForm.valid||isSaving" type="button" *ngIf="selectedItem" class="btn btn-default"
+      (click)="withdrawRequest();modalRef.hide();">Confirm</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button>
+  </div>
+</ng-template>
+
+
+<ng-template #suspendRequestTemplate>
+  <div class="modal-header ">
+    <h4 class="modal-title pull-left">Confirm suspension of halal certificate action </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-left">
+    <form [formGroup]="suspendForm" *ngIf="isReasonsLoaded">
+      <div class="form-group row ">
+        <h3 class="col-sm-12">Suspension is recommended for the following reasons: </h3>
+        <select class="form-control col-sm-12" formControlName="ActionReason">
+          <option *ngFor="let c of finalActionReasonsList" [value]="c.ID" selected> {{ c.Name }}</option>
+        </select>
+        <!-- <div class="col-sm-6" *ngFor="let m of finalActionReasonsList">
+              <label class="radio-s " for="m.ID">
+                <input type="radio" id="m.ID" value="" name="ActionReason" formControlName="ActionReason" />
+                <span class="label-text">{{ m.Name }}</span>
+              </label>
+            </div> -->
+      </div>
+      <div class="form-group row ">
+        <h3 class="col-sm-4">Reason</h3>
+        <textarea class="form-control col-sm-12" formControlName="Reason" rows="3"></textarea>
+      </div>
+      <div class="form-group row ">
+        <h3 class="col-sm-4">
+          Recommended by
+        </h3>
+        <select class="form-control col-sm-6" formControlName="EmployeeID">
+          <option *ngFor="let c of employees" [value]="c.ID" selected> {{ c.Name }}</option>
+        </select>
+      </div>
+      <div class="form-group row ">
+
+        <h3 class="col-sm-4">
+          Suspension Start Date
+        </h3>
+        <input type="date" (change)="changeSuspendStartDate()" [min]="minDate" class="form-control col-sm-6"
+          formControlName="SuspensionStartDate">
+      </div>
+      <div class="form-group row ">
+        <h3 class="col-sm-4">
+          Suspension End Date
+        </h3>
+        <input type="date" [min]="suspendMinEndDate" [max]="suspendMaxEndDate" class="form-control col-sm-6"
+          formControlName="SuspensionEndDate">
+      </div>
+    </form>
+    <hr>
+    <button [disabled]="!suspendForm.valid||isSaving" type="button" *ngIf="selectedItem" class="btn btn-default"
+      (click)="suspendRequest();modalRef.hide();">Confirm</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button>
+  </div>
+</ng-template>
+
+
+
+<ng-template #resumeCertificateTemplate>
+  <div class="modal-body text-center">
+    <p> Are you sure you want to resume this certificate?<br></p>
+    <hr>
+    <button type="button" *ngIf="selectedItem" class="btn btn-default"
+      (click)="resumeCertificate();modalRef.hide();">{{'shared.yes'|translate}}</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.cancel'|translate}}</button>
+  </div>
+</ng-template>

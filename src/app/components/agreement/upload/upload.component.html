@@ -1,0 +1,68 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-6">
+        <h3>{{'agreement.upload-title'|translate}}</h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item ">
+                <a>{{'agreement.title'|translate}}</a>
+            </li>
+            <li class="breadcrumb-item ">
+                <a><strong>{{'agreement.upload-title'|translate}}</strong></a>
+            </li>
+
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h5 class="padding-top-5">{{'agreement.upload-title'|translate}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <br><br>
+                    <div class="row padding-top-30">
+                        <div class="col-sm-12">
+                            <ngx-dropzone label="{{'shared.upload-msg'|translate}}" class="offset-1 col-sm-10"
+                                [accept]="'application/pdf'" [multiple]="false" (filesAdded)="onFileChanged($event)"
+                                #dropzone class="agreement-dropzone">
+                            </ngx-dropzone>
+                        </div>
+
+                        <br><br>
+                        <div class="offset-1 col-sm-11 padding-top-20" *ngIf="isUploaded">
+                            <span>
+                                <a>{{model.FileName}}</a>
+                            </span>
+                            &nbsp; &nbsp;
+                            <span>
+                                <i (click)="removeAttachment()" class="fa fa-trash  custom-trash fa-lg"></i>
+                            </span>
+                        </div>
+
+                        <br>
+                        <div class="col-sm-12 padding-top-30">
+                            <div class="offset-sm-6 col-sm-6" *ngIf="model.FileName.length>0">
+
+                                <button type="reset" (click)="reset()" class="btn btn-primary-outline margin-h-10 ">
+                                    &nbsp;&nbsp; {{'shared.cancel'|translate}} &nbsp;&nbsp;</button>
+                                <button type="button" (click)="save()" [disabled]="isSaving"
+                                    class="btn btn-primary margin-h-10 ">{{'agreement.submit'|translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

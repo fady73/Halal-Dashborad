@@ -1,0 +1,129 @@
+<div class="col-md-12 customRow">
+  <div class="panel panel-default">
+    <div class="box-header">
+      <h2 class="blue" *ngIf="model.ID==0 && !page.isEdit " class="panel-title">
+        <i *ngIf="!page.isEdit" class="fa fa-plus"></i>
+        
+        {{'job.title-create'|translate}}
+      </h2>
+      <h2 class="blue" *ngIf="model.ID>0 || page.isEdit " class="panel-title">
+        <i class="fa fa-edit"></i>
+        &nbsp;
+        {{'job.title-edit'|translate}}
+      </h2>
+      <div class="box-icon pull-left">
+        <i *ngIf="page.isPageLoaded && !disabledSubmit()" (click)="save()" class="icon fa fa-save tip" data-placement="left"
+          title="{{'shared.save'|translate}} shift+s"></i>
+        <a *ngIf="page.isPageLoaded && page.isEdit" [routerLink]="['/hr/job/create']">
+          <i class="icon fa fa-file tip" data-placement="left" title="{{'shared.add'|translate}}"></i>
+        </a>
+
+        <i *ngIf="page.isPageLoaded && page.isEdit" (click)="showDeleteConfirmation()" class="icon fa fa-trash-o tip"
+          data-placement="left" title="{{'shared.delete'|translate}} shift+d"></i>
+        <a [routerLink]="['/hr/job']">
+          <i class="icon fa fa-arrow-left tip" data-placement="left" title="{{'shared.back'|translate}} ESC"></i>
+        </a>
+
+
+      </div>
+
+    </div>
+
+    <div class="panel-body">
+      <div *ngIf="!page.isPageLoaded" class="row" align="center">
+        <h1><i class="blue fa fa-refresh fa-spin"></i></h1>
+      </div>
+      <div class="row" *ngIf="page.isPageLoaded">
+        <div class="col-lg-12">
+          <div *ngIf="page.resultViewModel">
+            <div *ngIf="page.resultViewModel.Success" class="alert alert-success">
+              <strong>{{page.resultViewModel.Message}}</strong>
+            </div>
+            <div *ngIf="!page.resultViewModel.Success" class="alert alert-danger">
+              <strong>{{page.resultViewModel.Message}}</strong>
+            </div>
+          </div>
+
+          <form role="form" [formGroup]="page.form" (ngSubmit)="save()">
+            <div class="row">
+
+              <div class="form-group  col-md-3" [class.has-error]="!controls['BranchID'].valid && (controls['BranchID'].dirty||controls['BranchID'].touched)"
+                [class.has-success]="controls['BranchID'].valid && (controls['BranchID'].dirty||controls['BranchID'].touched)">
+                <label class="control-label">{{'shared.branch'|translate}}</label>
+                <select class="form-control" formControlName="BranchID">
+                  <option *ngFor="let item of branches" [value]="item.ID">{{item.Name}}</option>
+                </select>
+                <div *ngIf="!controls['BranchID'].valid && controls['BranchID'].dirty" class="text text-danger">
+                  <p *ngIf="controls['BranchID'].hasError('required')">{{'shared.validation.required'|translate}}</p>
+                  <p *ngIf="controls['BranchID'].hasError('minlength')">{{'shared.validation.min-length'|translate}}</p>
+                  <p *ngIf="controls['BranchID'].hasError('maxlength')">{{'shared.validation.shared.max-length'|translate}}</p>
+                </div>
+              </div>
+              <div class="form-group  col-md-3" [class.has-error]="!controls['Code'].valid && (controls['Code'].dirty||controls['Code'].touched)"
+                [class.has-success]="controls['Code'].valid && (controls['Code'].dirty||controls['Code'].touched)">
+                <label class="control-label">{{'shared.code'|translate}}</label>
+                <input type="text" class="form-control" formControlName="Code">
+                <div *ngIf="!controls['Code'].valid && controls['Code'].dirty" class="text text-danger">
+                  <p *ngIf="controls['Code'].hasError('required')">{{'shared.validation.required'|translate}}</p>
+                  <p *ngIf="controls['Code'].hasError('minlength')">{{'shared.validation.min-length'|translate}}</p>
+                  <p *ngIf="controls['Code'].hasError('maxlength')">{{'shared.validation.shared.max-length'|translate}}</p>
+                </div>
+              </div>
+              <div class="form-group  col-md-3" [class.has-error]="!controls.NameArabic.valid && controls.NameArabic.touched">
+                <label class="control-label">{{'shared.name-arabic'|translate}} <span class="text text-danger">*</span></label>
+                <input type="text" class="form-control" formControlName="NameArabic">
+                <div *ngIf="!controls.NameArabic.valid && controls.NameArabic.dirty" class="text text-danger">
+                  <p *ngIf="controls.NameArabic.hasError('required')">{{'shared.validation.required'|translate}}</p>
+                  <p *ngIf="controls.NameArabic.hasError('maxlength')">{{'shared.validation.shared.max-length'|translate}}</p>
+                </div>
+              </div>
+              <div class="form-group  col-md-3" [class.has-error]="!controls.NameEnglish.valid && controls.NameEnglish.touched">
+                <label class="control-label">{{'shared.name-english'|translate}} <span class="text text-danger">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="NameEnglish">
+                <div *ngIf="!controls.NameEnglish.valid && controls.NameEnglish.dirty" class="text text-danger">
+                  <p *ngIf="controls.NameEnglish.hasError('required')">{{'shared.validation.required'|translate}}</p>
+                  <p *ngIf="controls.NameEnglish.hasError('maxlength')">{{'shared.validation.shared.max-length'|translate}}</p>
+                </div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="form-group  col-md-3">
+                <label class="control-label">{{'shared.status'|translate}}</label>
+                <div class="form-check">
+                  <input formControlName="IsActive" type="checkbox" class="form-check-input" id="IsActive">
+                  <label class="form-check-label" for="IsActive">&nbsp; {{'shared.is-active'|translate}}</label>
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="row">
+              <div class="col-md-6  form-actions pull-right">
+                <button type="submit" [disabled]="disabledSubmit()" class="btn btn-primary pull-right ">{{'shared.save'|translate}}
+                  <i [hidden]="page.isSaving" class="fa fa-check-square-o"></i>
+                  <i [hidden]="!page.isSaving" class="fa fa-refresh fa-spin"></i>
+                </button>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+      <!-- /.row (nested) -->
+    </div>
+    <!-- /.panel-body -->
+  </div>
+  <!-- /.panel -->
+</div>
+<!-- /.col-lg-12 -->
+<ng-template #deleteTemplate>
+  <div class="modal-body text-center">
+    <p> {{'shared.delete-confirmation.message'|translate}}</p>
+    <button type="button" class="btn btn-default" (click)="delete()">{{'shared.delete-confirmation.yes'|translate}}</button>
+    <button type="button" class="btn btn-primary" (click)="modalRef.hide()">{{'shared.delete-confirmation.cancel'|translate}}</button>
+  </div>
+</ng-template>

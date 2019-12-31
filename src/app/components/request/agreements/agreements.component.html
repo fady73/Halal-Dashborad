@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6 text-center mt-4 agree">
+        <h3>Signed service of agreements
+            <span class="badge badge-warnging" *ngIf="item.Status == 0">{{item.StatusName}}</span>
+            <span class="badge badge-primary" *ngIf="item.Status == 1">{{item.StatusName}}</span>
+            <span class="badge badge-danger" *ngIf="item.Status == 2">{{item.StatusName}}</span>
+        </h3>
+        <span *ngIf="item.AgreementPDFFilePath">
+        <p> Upload by consumor :&nbsp;&nbsp; {{item.UploadByConsumer | date :'dd/MM/yyyy'}}</p>
+        <p> Reject by admin :&nbsp;&nbsp;{{item.RejectedByAdminDate | date :'dd/MM/yyyy'}}</p>
+        <p> Upload by consumor :&nbsp;&nbsp;{{item.UploadByConsumer | date :'dd/MM/yyyy'}}</p>
+        <a class="btn btn-primary mb-3" [href]="item.AgreementPDFFilePath" target="_blank"> <i
+                class="fa fa-download text-white"></i>
+            <span class="text-white"> Download agreements</span></a>
+            </span>
+            <span *ngIf="!item.AgreementPDFFilePath">
+                    <h4> There is no service of agreements</h4>
+                    
+                        </span>
+    </div>
+    <div class="col-3"></div>
+</div>

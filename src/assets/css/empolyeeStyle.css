@@ -1,0 +1,127 @@
+ /* Country */
+
+
+.clear-fix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#search
+{
+  margin-top: 11%;
+}
+#ch
+{
+  
+  margin-left: 25%;
+  
+}
+
+#createcountry
+{
+  margin-left: 93%;
+}
+
+#centerth
+{
+  margin-left: 25%;
+}
+
+#Active
+{
+  margin-left: 3%;
+}
+
+
+#customers {
+    
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #customers > td, #customers > th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-weight: bold;
+   
+  }
+  
+  #customers tr:nth-child(odd){background-color: #f2f2f2;}
+  #customers tr:nth-child(even){background-color: white;}
+  
+  
+  
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: rgb(26, 179, 148);
+    color: white;
+    text-align: center;
+    font-weight: bold ;
+    
+  }
+    
+  
+  #customers > tbody > tr >td  > label{
+
+    margin-left: 25%;
+  }
+  #customers > tbody > tr >td{
+
+    text-align: center;
+  }
+
+   
+  #customers > tbody > tr:nth-child(2n) > td > input{
+    background-color:white;
+    border: none;
+    
+  }
+  
+  #customers > tbody > tr:nth-child(2n+1) > td > input{
+    background-color:transparent;
+    border: none ;
+   
+  }
+   
+  #customers > tbody > tr:nth-child(2n) > td > select{
+    background-color:white;
+    border: none;
+    
+  }
+  
+  #customers > tbody > tr:nth-child(2n+1) > td > select{
+    background-color:transparent;
+    border: none ;
+   
+  }
+  
+  .float-left {
+    float: left!important;
+    margin-top: 7px;
+    margin-left: 10px;
+}
+.float-right {
+    float: right!important;
+    margin-top: 7px;
+    margin-right: 10px;
+}
+#user{
+padding-right: 10px;
+}
+.clear-fix > div > span{
+font-size: 14px;
+color: #1bb394;
+}
+
+.fa-trash
+{
+  color:red;
+}
+
+
+
+
+

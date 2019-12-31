@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+
+            <div class="ibox-content">
+
+                <div class="row" *ngIf="isPageLoaded">
+                    <div *ngIf="model.Notes" class="col-lg-11 col-md-11 col-sm-11 col-11 draft">
+                        <p>{{model.Notes}} </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="documents">
+                            <thead>
+                                <tr>
+                                    <th>Document name </th>
+                                    <th>Download files</th>
+
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="request-document">
+                                <tr *ngIf="!isPageLoaded">
+                                    <td colspan="4">
+                                        <h4 class="text-center ">Sorry no documents found</h4>
+                                    </td>
+                                </tr>
+                                <tr *ngFor="let item of model.Documents">
+                                    <td style="width:50%" class="padding-top-15">
+                                        {{item.RequiredDocumentID}} - {{item.RequiredDocumentName}}
+                                    </td>
+                                    <td class="padding-top-5">
+                                        <div *ngFor="let file of item.Attachments">
+                                            <a target="_blank" (click)="openNewTab(file.FilePath)"><i
+                                                    class="fa fa-download">
+                                                </i>
+                                                Download file
+                                            </a>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <input [(ngModel)]="item.Notes" [readOnly]="item.Valid" type="text"
+                                            class="form-control notes" placeholder="Add note here ...">
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <!-- <div class="custom-control custom-checkbox">
+                        <label class="custom-check-box" for="final-notes">
+                            <input [checked]="model.IsFinalNoteSelected"
+                                (change)="model.IsFinalNoteSelected=!model.IsFinalNoteSelected;" type="checkbox"
+                                id="final-notes" class="custom-control-input" />
+                            <span class="checkmark appendcheck" id="IsActive"></span>
+                            <span> Add final notes</span>
+                        </label>
+                    </div> -->
+
+
+
+                <!-- <div class="form-group row" *ngIf="model.IsFinalNoteSelected">
+                        <div class="offset-sm-1 col-sm-7">
+                            <textarea [(ngModel)]="model.Notes" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div> -->
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>

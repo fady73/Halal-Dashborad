@@ -1,0 +1,13 @@
+h3{
+    color: #1ab394 !important
+}
+.agree{
+    border: 1px #1ab394 solid;
+    padding:6px;
+    text-align: center
+}
+.agree .badge 
+{
+    border-radius: 9%;
+
+}

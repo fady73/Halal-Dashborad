@@ -1,0 +1,305 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Complaint</h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a> Complaint</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Complaint </h5>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="form" [formGroup]="page.seachForm">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label " for="date_added">Country</label>
+                                    <select class=" form-control" formControlName="CountryID">
+                                        <option value="null">All</option>
+                                        <option *ngFor="let item of countries" [value]="item.ID">{{item.Name}}</option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label " for="date_added">Company</label>
+                                    <select class=" form-control" formControlName="CompanyID">
+                                        <option value="null">All</option>
+                                        <option value="null" disabled selected>Enter company name :</option>
+                                        <option *ngFor="let item of companies" [value]="item.ID">{{item.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label " for="date_added">Request Type</label>
+                                    <select class=" form-control" formControlName="TypeID">
+                                        <option value="null">All</option>
+                                        <option *ngFor="let item of requestTypes" [value]="item.ID">{{item.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label label1" for="status">Request Status</label>
+                                    <select class=" form-control status" formControlName="StatusID">
+                                        <option value="null">All</option>
+                                        <option *ngFor="let item of requestStatus" [value]="item.ID">{{item.Name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group" id="data_1">
+                                    <label class="col-form-label label1" for="date_added">From date</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input
+                                            bsDatepicker type="text" formControlName="FromDate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="col-form-label label1" for="date_modified"> To date</label>
+                                    <div class="input-group date">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input bsDatepicker type="text" formControlName="ToDate" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row filter">
+                            <div class="col-sm-12">
+                                <button type="button" (click)="OnSearchClicked()" class="btn btn-primary float-right">
+                                    <i class="fa fa-filter"></i>
+                                    Filter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="table-responsive">
+
+                            <table class="table table-stripped toggle-arrow-tiny" id="customers">
+                                <thead>
+                                    <tr>
+                                        <!-- <th>#</!-->
+                                        <!-- <th>Payment ID</th> -->
+                                        <th>ComplaintID</th>
+                                       
+                                        <th>Company name</th>
+                                        <th>content</th>
+                                        <!-- <th>Assigned Employee</th> -->
+                                        <!-- <th>Payment Type</th> -->
+                                        <!-- <th>Complaint status</th> -->
+                                        <th>file</th>
+                                        <th>Actions</th>
+                                     
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr [hidden]="page.isLoading"
+                                        *ngFor="let item of items| paginate : page.options;let i=index;">
+                                        <!-- <td>{{page.options.itemsPerPage*(page.options.currentPage-1)+ i+1}}</td> -->
+
+                                        <!-- <td>{{item.ID}}</td> -->
+                                        <td>{{item.ID}}</td>
+
+                                
+                                        <td>{{item.CompanyName}}</td>
+                                        <td>{{item.Content}}</td>
+                                        <!-- <td>{{item.AssignedEmployee}}</td> -->
+                                        <!-- <td>{{item.PaymentType}}</td> -->
+                                        <!-- <td>{{item.ComplaintStatus}}</td> -->
+                                        <td>
+                                            <a *ngIf="item.ComplaintDocuments.length>0" class="btn btn-transparent" target="_blank"
+                                                [href]="item.ComplaintDocuments[0].FilePath">
+                                                <i class="fa fa-download text-muted"></i>
+                                                <span class="text-muted"> Download file</span>
+                                            </a>
+                                            <!-- <a class="btn btn-transparent">
+                                                <i class="fa fa-download text-muted"></i>
+                                                <span class="text-muted"> Download recepit</span>
+                                            </a> -->
+                                        </td>
+
+                                        <td>
+                                            <!-- *ngIf="(!(hide&&PostData.RequestID==item.RequestID))&&item.CommitteeDecision==null" -->
+                                            <div class="btn-group">
+                                                <button *ngIf="item.ComplaintStatus==0" (click)="showApproveConfirmation(item)" data-toggle="modal"
+                                                   href="#modal-form-approve"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-check text-navy1"></i>
+                                                    <div class="text-navy1">Approve</div>
+                                                </button>
+
+                                                <button *ngIf="item.ComplaintStatus==0" (click)="showDeclineConfirmation(item)"data-toggle="modal"
+                                                     href="#modal-form-decline"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-times text-danger"></i>
+                                                    <div class="text-danger">Decline</div>
+                                                </button>
+
+                                                <!-- *ngIf="item.CommitteeDecision.ApproveStatus==0&&item.CommitteeDecision!=null" -->
+                                                <!-- <p *ngIf="item.CommitteeDecision.ApproveStatus!=null">slkdksjd</p> -->
+                                                <!-- <button [(ngModel)]="item.CommitteeDecision"
+                                                    *ngIf="item.CommitteeDecision!=null " [disabled]="true"
+                                                    class="btn btn-transparent">
+                                                    <span [(ngModel)]="item.CommitteeDecision.ApproveStatus"
+                                                        *ngIf="item.CommitteeDecision.ApproveStatus==0">
+                                                        <i class="fa fa-check text-navy1"></i>
+                                                        <span class="text-navy"> Approved</span>
+
+                                                    </span>
+                                                    <span [(ngModel)]="item.CommitteeDecision.ApproveStatus"
+                                                        *ngIf="item.CommitteeDecision.ApproveStatus==1">
+                                                        <i class="fa fa-times text-danger"></i>
+                                                        <span class="text-danger"> Rejected</span>
+                                                    </span>
+                                                </button> -->
+
+                                                <button *ngIf="item.ComplaintStatus==1  "
+                                                    [disabled]="true" class="btn btn-transparent">
+                                                    <span>
+                                                        <i class="fa fa-check text-navy1"></i>
+                                                        <span class="text-navy"> Approved</span>
+                                                    </span>
+                                                </button>
+
+                                                <button *ngIf="item.ComplaintStatus==2  "
+                                                    [disabled]="true" class="btn btn-transparent">
+                                                    <span>
+                                                        <i class="fa fa-check text-danger"></i>
+                                                        <span class="text-danger"> Declined</span>
+                                                    </span>
+                                                </button>
+
+                                            </div>
+                                        </td>
+
+                                    
+                                    </tr>
+
+                                    <!------------------------------------------------------------------------>
+
+                                </tbody>
+                                <tfoot>
+                                    <tr [hidden]="page.isLoading">
+                                        <td colspan="3" *ngIf="page.options.totalItems>0">
+                                            {{'shared.page'|translate}} {{page.options.currentPage}}
+                                            {{'shared.of'|translate}}
+                                            {{page.options.totalPages}}
+                                            - {{'shared.total-items'|translate}} : {{page.options.totalItems}}
+                                        </td>
+                                        <td colspan="8" class="text-right" *ngIf="page.options.totalItems>0">
+                                            <pagination-controls (pageChange)="getNextPrevData($event)" id='Pagination'
+                                                maxSize="10" directionLinks="true" autohide="true" previousLabel=""
+                                                nextLabel="">
+                                            </pagination-controls>
+
+                                        </td>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #approveTemplate>
+
+    <div class="approveTemplate">
+        <div class="modal-header ">
+            <h4 class="modal-title pull-left">{{'shared.approve-confirmation.title'|translate}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form  [formGroup]="form">
+        <div class="modal-body">
+            <p> {{'request.approve-confirm-message'|translate}}<br> <strong
+                    *ngIf="selectedItem">{{selectedItem.CompanyCountry}}</strong></p>
+
+                    <div class=" col-sm-12">
+                        <textarea type="text" rows="3"
+                        class="form-control" formControlName="Comment"  ></textarea>
+             
+                 </div>
+        </div>
+
+        <div class="modal-footer text-center">
+            <!--  <button class="btn btn-sm btn-primary float-right m-t-n-xs" onclick="$('#modal-form2').modal('hide');" type="submit"id="close"><strong>Close</strong></button>-->
+
+
+            <button type="button" class="btn btn-outline btn-primary" (click)="modalRef.hide()">&nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp;{{'shared.cancel'|translate}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+            <button type="button" class="btn  btn-primary margin-h-10 "
+                (click)="approve(selectedItem);modalRef.hide();">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;{{'shared.yes'|translate}}&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;</button>
+        </div>
+    </form>
+    </div>
+
+</ng-template>
+<ng-template #declineTemplate>
+    <div class="declineTemplate">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">{{'shared.decline-confirmation.title'|translate}}</h4>
+            <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form  [formGroup]="formd">
+        <div class="modal-body ">
+            <p> {{'shared.decline-confirmation.message'|translate}}<br> <strong
+                    *ngIf="selectedItem">{{selectedItem.CompanyCountry}}</strong></p>
+                    <div class=" col-sm-12">
+                        <textarea type="text" rows="3"
+                        class="form-control" formControlName="Comment"  ></textarea>
+             
+                 </div>
+
+        </div>
+        <div class="modal-footer text-center">
+            <button type="button" class="btn btn-outline btn-danger" (click)="modalRef.hide()"> &nbsp; &nbsp;&nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{'shared.cancel'|translate}}&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;</button>
+            <button type="button" *ngIf="selectedItem" class="btn  btn-danger margin-h-10 "
+                (click)="decline(selectedItem);modalRef.hide();">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;{{'shared.yes'|translate}}&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+        </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,0 +1,327 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>View NCR</h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>View NCR</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>View NCR</h5>
+
+                </div>
+                <div class="ibox-content" [formGroup]="page.form" *ngIf="page.isPageLoaded">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary collbtn " data-toggle="collapse"
+                                aria-expanded="true" data-target="#demo">
+                                <h2 class="float-left">Section1</h2><i
+                                    class="fa fa-angle-down fa-2x rotate-icon float-right"></i> <br><br>
+                                <h3 class="float-left">Submit NCR-General Section</h3>
+                            </button>
+                            <div id="demo" class="collapse">
+                                <br>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3 "> Main title </label>
+
+                                    <input class="form-control col-sm-8" value="On-site Assement informations"
+                                        type="text" readOnly="true">
+                                </div>
+
+                                <div class="form-group row ">
+                                    <label class="control-label col-sm-3">Title 2 </label>
+                                    <input class="form-control col-sm-8" value="Initial assement GSO.2055.1" type="text"
+                                        readOnly="true">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">No.of Application </label>
+                                    <input class="form-control col-sm-8" formControlName="Number" type="text"
+                                        readOnly="true">
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Name of Company </label>
+                                    <input class="form-control col-sm-8" formControlName="CompanyName" type="text"
+                                        readOnly="true">
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Company Address </label>
+                                    <input class="form-control col-sm-8" formControlName="CompanyAddress" type="text"
+                                        readOnly="true">
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Assessment dates</label>
+                                    <div class="col-sm-8 widgeline">
+
+                                        <span *ngFor="let item of model.AssessmentDates"
+                                            class=" widget style1 navy-bg margin-h-5 ">
+                                            &nbsp;&nbsp;{{item | date:'dd/MM/yyyy'}}
+                                            &nbsp;&nbsp;</span>
+                                        <!-- &nbsp; <span class="label label-primary label-bs ">&nbsp;&nbsp;30/9/2019&nbsp;&nbsp;</span> -->
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Lead auditor </label>
+
+                                    <div class="col-sm-8 widgeline">
+                                        <span *ngFor="let item of model.LeadAuditors;let i=index"
+                                            class="widget style1 navy-bg margin-h-5 "> &nbsp;
+                                            {{item.EmployeeName}} &nbsp; </span>
+                                    </div>
+
+                                    <!-- <div class="col-sm-2 btn-group" *ngFor="let item of model.LeadAuditors;let i=index">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="removeLeadAuditor(i)">x</button>
+                                        <span class="label label-primary label-large padding-top-15"> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+
+                                    </div> -->
+
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Technical auditor </label>
+                                    <div class="col-sm-8 widgeline">
+                                        <span *ngFor="let item of model.TechnicalAuditors;let i=index"
+                                            class="widget style1 navy-bg margin-h-5 "> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+                                    </div>
+                                    <!-- <div class="col-sm-2 btn-group"
+                                        *ngFor="let item of model.TechnicalAuditors;let i=index">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="removeTechnicalAuditor(i)">x</button>
+                                        <span class="label label-primary label-large padding-top-15"> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+                                    </div> -->
+                                </div>
+
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Halal islamic affairs expert </label>
+
+                                    <div class="col-sm-8 widgeline">
+                                        <span *ngFor="let item of model.AffairsExperts;let i=index"
+                                            class="widget style1 navy-bg margin-h-5 "> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+                                    </div>
+
+                                    <!-- <div class="col-sm-2 btn-group"
+                                        *ngFor="let item of model.AffairsExperts;let i=index">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="removeAffairsExpert(i)">x</button>
+                                        <span class="label label-primary label-large padding-top-15"> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+
+                                    </div> -->
+
+
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Technical expert </label>
+
+                                    <div class="col-sm-2 btn-group"
+                                        *ngFor="let item of model.TechnicalExperts;let i=index">
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="removeTechnicalExpert(i)">x</button>
+                                        <span class="label label-primary label-large padding-top-15"> &nbsp;
+                                            {{item.EmployeeName}} &nbsp;</span>
+
+                                    </div>
+
+
+
+                                </div>
+
+
+
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-3">Reminder for Assessment Team (optional)
+                                    </label>
+
+                                    <textarea class="form-control col-sm-8 rounded-0" [value]="model.AssessmentTeam"
+                                        readOnly="true" rows="5"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary collbtn " data-toggle="collapse"
+                                aria-expanded="true" data-target="#demo1">
+                                <h2 class="float-left">Section2</h2><i
+                                    class="fa fa-angle-down fa-2x rotate-icon float-right"></i> <br><br>
+                                <h3 class="float-left">Submit NCR- Initial Section</h3>
+                            </button>
+                            <div id="demo1" class="collapse">
+                                <br>
+                                <!-- <div class="row"> -->
+                                <div class="col-sm-12">
+                                    <div class="table-responsive">
+                                        <table class="table  table-bordered audittabel">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date
+                                                    </th>
+                                                    <th>auditor
+                                                    </th>
+                                                    <th>standard Clause(s)
+                                                    </th>
+                                                    <th>Description of non-conformity
+                                                    </th>
+                                                    <th>Analysis of the extent/ effect
+                                                    </th>
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+
+                                                        <input type="date" [ngModel]="NCSItem.Date | date:'yyyy-MM-dd'"
+                                                            required [ngModelOptions]="{standalone: true}"
+                                                            readonly="true" (ngModelChange)="visit.Date = $event"
+                                                            class="form-control">
+
+                                                    </td>
+
+
+                                                    <td>
+                                                        <select class="form-control" [(ngModel)]="NCSItem.AssessorID"
+                                                            [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                                            <option *ngFor="let item of employees" [value]="item.ID">
+                                                                {{item.Name}}</option>
+
+                                                        </select>
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="text" readonly="true"
+                                                            [(ngModel)]="NCSItem.StandardClause"
+                                                            [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="text" readonly="true"
+                                                            [(ngModel)]="NCSItem.Description"
+                                                            [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" readonly="true"
+                                                            [(ngModel)]="NCSItem.Analysis"
+                                                            [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    </td>
+                                                    <td class="custom-th ">
+                                                        <button type="button" [disabled]="true" (click)="addNCS()"
+                                                            *ngIf="model.NCSs.length == 0"
+                                                            class="btn btn-primary1 btn-circle-primary btn-add">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+                                                <tr *ngFor="let visit of model.NCSs; let i=index">
+                                                    <td>
+
+                                                        <input type="date" readonly="true"
+                                                            [ngModel]="visit.Date | date:'yyyy-MM-dd'" required
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            (ngModelChange)="visit.Date = $event" class="form-control">
+
+                                                    </td>
+
+
+                                                    <td>
+                                                        <select class="form-control" [(ngModel)]="visit.AssessorID"
+                                                            [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                                            <option *ngFor="let item of employees" [value]="item.ID">
+                                                                {{item.Name}}</option>
+
+                                                        </select>
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="text" readonly="true"
+                                                            [(ngModel)]="visit.StandardClause"
+                                                            [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    </td>
+
+                                                    <td>
+                                                        <input type="text" readonly="true"
+                                                            [(ngModel)]="visit.Description"
+                                                            [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" readonly="true" [(ngModel)]="visit.Analysis"
+                                                            [ngModelOptions]="{standalone: true}" class="form-control">
+                                                    </td>
+
+                                                    <td class="custom-th ">
+                                                        <button (click)="removeNCS(i)" [disabled]="true"
+                                                            class="btn btn-transparent">
+                                                            <i class="fa  fa-trash text-navy fa-2x "></i>
+                                                        </button>
+                                                    </td>
+                                                    <td class="custom-th " 
+                                                        *ngIf="i == model.NCSs.length - 1 ">
+                                                        <button type="button" (click)="addNCS()" [disabled]="true"
+                                                            class="btn btn-primary1 btn-circle-primary btn-add margin-top-5">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                                <!-- </div> -->
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

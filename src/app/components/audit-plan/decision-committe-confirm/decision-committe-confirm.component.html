@@ -1,0 +1,200 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10" id="submitted">
+        <h3>Decision committee </h3>
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item">
+                <a>Admin</a>
+            </li>
+            <li class="breadcrumb-item active">
+                <a>Decision committee</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" id="appendix-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Decision committee</h5>
+
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="table-responsive">
+
+                            <table class="table table-stripped toggle-arrow-tiny" id="customers">
+                                <thead>
+                                    <tr>
+                                        <th>RequestID</th>
+                                        <th>Payment date</th>
+                                        <th>Company name</th>
+                                        <th>Company country</th>
+                                        <th>Request status</th>
+                                        <th>Audit report</th>
+                                        <th>Actions</th>
+                                        <th>write note</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr [hidden]="page.isLoading">
+                                        <td>{{item.RequestID}}</td>
+                                        <td>{{item.PaymentDate |date:'dd-MM-yyyy'}} </td>
+                                        <td>{{item.CompanyName}}</td>
+                                        <td>{{item.CompanyCountry}}</td>
+                                        <!-- <td>{{item.AssignedEmployee}}</td> -->
+                                        <!-- <td>{{item.PaymentType}}</td> -->
+                                        <td>{{item.RequestStatusName}}</td>
+                                        <td>
+                                            <a class="btn btn-transparent" target="_blank"
+                                                [href]="item.AuditReportPDFFilePath">
+                                                <i class="fa fa-download text-muted"></i>
+                                                <span class="text-muted"> Download file</span>
+                                            </a>
+                                            <!-- <a class="btn btn-transparent">
+                                                <i class="fa fa-download text-muted"></i>
+                                                <span class="text-muted"> Download recepit</span>
+                                            </a> -->
+                                        </td>
+
+                                        <td>
+                                            <!-- *ngIf="(!(hide&&PostData.RequestID==item.RequestID))&&item.CommitteeDecision==null" -->
+                                            <div class="btn-group">
+                                                <button (click)="SetItem(item)" data-toggle="modal"
+                                                    *ngIf="item.StaffRequiredAction == 15 " href="#modal-form-approve"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-check text-navy1"></i>
+                                                    <div class="text-navy1">Approve</div>
+                                                </button>
+
+                                                <button (click)="SetItem(item)" data-toggle="modal"
+                                                    *ngIf="item.StaffRequiredAction == 15 " href="#modal-form-decline"
+                                                    class="btn btn-transparent">
+                                                    <i class="fa fa-times text-danger"></i>
+                                                    <div class="text-danger">Decline</div>
+                                                </button>
+
+                                                <button *ngIf="item.ApproveStatus==0 && item.StaffRequiredAction != 15 "
+                                                    [disabled]="true" class="btn btn-transparent">
+                                                    <span>
+                                                        <i class="fa fa-check text-navy1"></i>
+                                                        <span class="text-navy"> Approved</span>
+                                                    </span>
+                                                </button>
+
+                                                <button *ngIf="item.ApproveStatus==1 && item.StaffRequiredAction != 15 "
+                                                    [disabled]="true" class="btn btn-transparent">
+                                                    <span>
+                                                        <i class="fa fa-check text-danger"></i>
+                                                        <span class="text-danger"> Declined</span>
+                                                    </span>
+                                                </button>
+
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <!-- <form> -->
+                                            <input *ngIf="item.Note!=null" type="text" [disabled]="true"
+                                                [(ngModel)]="item.Note ">
+                                            <input *ngIf="item.Note==null" [disabled]="item.StaffRequiredAction != 15"
+                                                type="text" (keyup)="onKey($event)" placeholder="Your comment here....">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+
+                    <div id="modal-form-approve" class="modal inmodal fade" role="dialog" tabindex="-1"
+                        aria-hidden="true">
+                        <div class="modal-dialog approveTemplate">
+                            <div class="modal-content ">
+                                <div class="modal-header">
+
+                                    <button type="button" class="close " data-dismiss="modal"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title pull-left">Approve Application </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+
+                                        <div class="col-sm-12 ">
+
+                                            <form role="form">
+                                                <div class="form-group"><label>Are you sure you want to approve on this
+                                                        application ? </label></div>
+
+
+
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <!--  <button class="btn btn-sm btn-primary float-right m-t-n-xs" onclick="$('#modal-form2').modal('hide');" type="submit"id="close"><strong>Close</strong></button>-->
+                                    <button type="button"
+                                        class="btn btn-sm btn-outline  btn-primary float-right m-t-n-xs"
+                                        data-dismiss="modal">No, Cancel</button>
+                                    <button (click)="ShowDone(0)" type="button"
+                                        class="btn btn-sm btn-primary float-right m-t-n-xs" data-dismiss="modal">Yes,
+                                        Approve</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="modal-form-decline" class="modal inmodal fade" aria-hidden="true">
+                        <div class="modal-dialog">
+
+                            <div class="modal-content">
+                                <div class="modal-header">
+
+                                    <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">&times;</button>
+                                    <h3 class="modal-title pull-left">Decline application </h3>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+
+
+                                        <form role="form">
+                                            <div class="form-group"><label>Are you sure you want to decline this
+                                                    application ? </label></div>
+
+
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer float-right col-sm-12">
+                                    <!--  <button class="btn btn-sm btn-primary float-right m-t-n-xs" onclick="$('#modal-form2').modal('hide');" type="submit"id="close"><strong>Close</strong></button>-->
+                                    <button type="button" class="btn btn-sm btn-outline btn-danger float-right m-t-n-xs"
+                                        data-dismiss="modal">No, Cancel</button>
+                                    <button (click)="ShowDone(1)" type="button"
+                                        class="btn btn-sm btn-danger float-right m-t-n-xs" data-dismiss="modal">Yes,
+                                        Decline</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
